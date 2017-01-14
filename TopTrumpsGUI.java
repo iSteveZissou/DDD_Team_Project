@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.*;
 
 /**
  * Main GUI class to display initial start scree
@@ -13,7 +12,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	/** Instance variable and class constants */
 
 	private JButton newGame, reportButton, exitButton;
-	
+	private JPanel pan, pan2, pan3;
 
 	/**
 	 * Contructor to add all the components to the frame
@@ -26,6 +25,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// call layout method
+		
 		this.layOut();
 
 	}
@@ -34,6 +34,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	 */
 	public void layOut(){
 
+	
 		JPanel pan = new JPanel();
 		JPanel pan2 = new JPanel();
 		JPanel pan3 = new JPanel();
@@ -66,6 +67,8 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	 */
 	public void startGame(){
 
+		Gameplay nGame = new Gameplay();
+
 	}
 	/**
 	 * Listen and act on button press events
@@ -75,11 +78,14 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 
 		if (e.getSource()==newGame){
 			//start new Game
+			this.startGame();
+			this.setVisible(false);
 			System.out.println("New Game Begins");
 		}
 
 		else if (e.getSource()==reportButton){
-			System.out.println("Generate report");		}
+			System.out.println("Generate report");		
+		}
 
 		else if (e.getSource()==exitButton){
 			System.exit(0);
