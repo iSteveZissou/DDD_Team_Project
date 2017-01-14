@@ -10,6 +10,6 @@ public class TeamProject{
  */
 	public static void main (String [] args ){
 
-		
+		TopTrumpsGUI gui = new TopTrumpsGUI();
 	}
 }
