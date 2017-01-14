@@ -1,0 +1,5 @@
+# Compiled source #
+###################
+
+# Ignore all .class files
+*.class
