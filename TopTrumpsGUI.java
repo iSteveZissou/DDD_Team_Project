@@ -41,6 +41,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		newGame = new JButton("NEW GAME");
 		newGame.addActionListener(this);
 		reportButton = new JButton("REPORT");
+		reportButton.addActionListener(this);
 		exitButton = new JButton("EXIT");
 		exitButton.addActionListener(this);
 
@@ -60,6 +61,8 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	}
 	/**
 	 * Method to start the main game
+	 * ?? read in input file and instantiate deck
+	 * ?? or put file input in the Gameplay Class??
 	 */
 	public void startGame(){
 
@@ -75,7 +78,10 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 			System.out.println("New Game Begins");
 		}
 
-		if (e.getSource()==exitButton){
+		else if (e.getSource()==reportButton){
+			System.out.println("Generate report");		}
+
+		else if (e.getSource()==exitButton){
 			System.exit(0);
 		}
 
