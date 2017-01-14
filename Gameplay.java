@@ -10,6 +10,7 @@ public class Gameplay extends JFrame{
 
 	/** Instance variables */
 	private JPanel pan;
+	private JButton play;
 
 	/**
 	 * constructor for GameplayGUI
@@ -33,6 +34,8 @@ public class Gameplay extends JFrame{
 	 */
 	public void layoutComponents(){
 
+		// This is all pretty much just placeholders for now
+		
 		JLabel welcome = new JLabel(" Welcome to Top Trumps!!");
 		welcome.setFont(new Font("Comic Sans", Font.PLAIN, 24));
 
@@ -41,6 +44,11 @@ public class Gameplay extends JFrame{
 		//pan.setBackground(Color.magenta);
 		this.add(pan, "North");
 		pan.add(welcome);
+
+		play = new JButton("Play!");
+		JPanel pan2 = new JPanel();
+		this.add(pan2, "Center");
+		pan2.add(play);
 
 	}
 
