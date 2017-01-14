@@ -12,7 +12,7 @@ public class Gameplay extends JFrame{
 	private JPanel pan;
 
 	/**
-	 * constructor to add components
+	 * constructor for GameplayGUI
 	 * [parameters can be added as needed]
 	 */
 	public Gameplay(){

@@ -15,7 +15,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	private JPanel pan, pan2, pan3;
 
 	/**
-	 * Contructor to add all the components to the frame
+	 * Contructor for TopTrumpsGUI
 	 */
 	public TopTrumpsGUI(){
 
@@ -30,6 +30,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 
 	}
 	/**
+	 * Add components
 	 * Lay out the components
 	 */
 	public void layOut(){
