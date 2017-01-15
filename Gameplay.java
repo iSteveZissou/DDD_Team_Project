@@ -146,6 +146,7 @@ public class Gameplay extends JFrame{
 		eastPan.add(p3);
 		eastPan.add(score3);
 
+
 		JLabel p4 = new JLabel(" Player 4 ");
 		p4.setFont(new Font("Courier", Font.BOLD, 16));
 		pan3.add(p4);
@@ -155,6 +156,10 @@ public class Gameplay extends JFrame{
 		p5.setFont(new Font("Courier", Font.BOLD, 16));
 		eastPan.add(p5);
 		eastPan.add(score5);
+
+
+		p5.setEnabled(false);
+		score5.setEnabled(false);
 
 		this.bottomPanel();
 		//Bottom panel used for the player/user
@@ -231,6 +236,7 @@ public class Gameplay extends JFrame{
 		JOptionPane.showMessageDialog(null, jBox, "Players", JOptionPane.PLAIN_MESSAGE);
 		String s = ( String) jBox.getSelectedItem();
 		noPlayers = Integer.parseInt(s);
+
 
 		System.out.println("Number of players: "+ noPlayers);
 
