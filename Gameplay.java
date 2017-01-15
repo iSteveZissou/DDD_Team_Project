@@ -107,6 +107,16 @@ public class Gameplay extends JFrame{
 
 		centerPan.add(cards);
 
+		boolean test = true;
+		if (test){
+			cat1.setEnabled(false);
+			cat2.setEnabled(false);
+			cat3.setEnabled(false);
+			cat4.setEnabled(false);
+			cat5.setEnabled(false);
+
+		}
+
 		// pan3.setBackground(Color.gray);
 		// eastPan.setBackground(Color.gray);
 
