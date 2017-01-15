@@ -26,7 +26,6 @@ public class Gameplay extends JFrame{
 		this.setLocation(200, 200);
 		this.setTitle("Top Trumps!");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
 		this.setVisible(true);
 		this.layoutComponents();
 
@@ -34,6 +33,7 @@ public class Gameplay extends JFrame{
 
 	/**
 	 * layout all the components
+	 * Will move into seperate helper methods*****!
 	 *  
 	 */
 	public void layoutComponents(){
@@ -43,9 +43,8 @@ public class Gameplay extends JFrame{
 		JLabel welcome = new JLabel("Top Trumps!!");
 		welcome.setFont(new Font("Courier", Font.PLAIN, 24));
 
-
+		// Layout for top of panel
 		pan = new JPanel();
-		//pan.setBackground(Color.magenta);
 		this.add(pan, "North");
 		pan.add(welcome);
 		pan.setBackground(Color.cyan);
@@ -55,22 +54,25 @@ public class Gameplay extends JFrame{
 		this.add(pan3, "West");
 
 		GridLayout grid2 = new GridLayout(5, 2);
-		
+		GridLayout cGrid = new GridLayout(10, 1);
 		
 		JPanel eastPan = new JPanel(grid2);
 		this.add (eastPan, "East");
 		
 		
-		JLabel lab = new JLabel("Communal pile: ");
+		// Center Panel layout
+		JTextArea tArea = new JTextArea(10, 30);
+		//tArea.setEditable(false);
+		tArea.setBackground(Color.cyan);
 
+		JLabel comPile = new JLabel("Communal pile: ");
 
 		JPanel centerPan = new JPanel();
 		this.add(centerPan, "Center");
-		centerPan.add(lab);
+		centerPan.add(tArea);
 
-		JLabel p1 = new JLabel("User");
-		//pan3.add(p1);
-
+		/* Contains the layout for the east and west panels with all the 
+		information for each player*/
 		JLabel p2 = new JLabel(" Player 2 ");
 		pan3.add(p2);
 		p2.setFont(new Font("Courier", Font.BOLD, 16));
@@ -79,9 +81,6 @@ public class Gameplay extends JFrame{
 		JLabel score4 = new JLabel("  Score: ");
 		JLabel score5 = new JLabel("  Score: ");
 		pan3.add(score2);
-
-
-		// welcome.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
 
 		JLabel p3 = new JLabel(" Player 3 ");
 		p3.setFont(new Font("Courier", Font.BOLD, 16));
@@ -98,10 +97,11 @@ public class Gameplay extends JFrame{
 		eastPan.add(p5);
 		eastPan.add(score5);
 
-		// for testing
-		String descrip = "T-Rex";
 
-		//Bottom panel
+		//Bottom panel used for the player/user
+		
+		String descrip = "T-Rex";
+		// for testing ^^^
 		play = new JButton("Play!");
 		JPanel pan2 = new JPanel();
 		JLabel cat = new JLabel("Categories:");
@@ -111,7 +111,7 @@ public class Gameplay extends JFrame{
 		card.setEditable(false);
 
 		this.add(pan2, "South");
-				pan2.add(topCard);
+		pan2.add(topCard);
 		pan2.add(card);
 		pan2.add(cat);
 
@@ -120,6 +120,12 @@ public class Gameplay extends JFrame{
 		pan2.add(jcom);
 		pan2.add(play);
 		pan2.setBackground(Color.cyan);
+
+
+		// End of round result test
+		JLabel result = new JLabel("YOU WIN!!");
+		result.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		centerPan.add(result);
 
 
 	}
