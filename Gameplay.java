@@ -1,6 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
 
+import javax.swing.border.*;
+
 /**
  * GUI to display the gameplay interface
  * 
@@ -54,7 +56,7 @@ public class Gameplay extends JFrame{
 		this.add(pan3, "West");
 
 		GridLayout grid2 = new GridLayout(5, 2);
-		GridLayout cGrid = new GridLayout(10, 1);
+		GridLayout cGrid = new GridLayout(7, 1);
 		
 		JPanel eastPan = new JPanel(grid2);
 		this.add (eastPan, "East");
@@ -67,9 +69,56 @@ public class Gameplay extends JFrame{
 
 		JLabel comPile = new JLabel("Communal pile: ");
 
-		JPanel centerPan = new JPanel();
+		JPanel centerPan = new JPanel(cGrid);
 		this.add(centerPan, "Center");
-		centerPan.add(tArea);
+
+		//centerPan.add(tArea);
+
+
+		// test of card display
+		centerPan.setBackground(Color.cyan);
+
+		JRadioButton cat1 = new JRadioButton("Height");
+		JRadioButton cat2 = new JRadioButton("Weight");
+		JRadioButton cat3 = new JRadioButton("Length");
+		JRadioButton cat4 = new JRadioButton("Ferocity");
+		JRadioButton cat5 = new JRadioButton("Intelligence");
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(cat1);
+		group.add(cat2);
+		group.add(cat3);
+		group.add(cat4);
+		group.add(cat5);
+
+		centerPan.setBorder(new TitledBorder(new EtchedBorder(), "Top Card"));
+		JLabel description = new JLabel(" T -Rex!");
+		description.setFont(new Font("Courier", Font.BOLD, 18));
+
+		centerPan.add(description);
+		centerPan.add(cat1);
+		centerPan.add(cat2);
+		centerPan.add(cat3);
+		centerPan.add(cat4);
+		centerPan.add(cat5);
+
+		JLabel cards = new JLabel("  Cards:    ");
+		cards.setFont(new Font("Courier", Font.PLAIN, 14));
+
+		centerPan.add(cards);
+
+		// pan3.setBackground(Color.gray);
+		// eastPan.setBackground(Color.gray);
+
+
+
+
+
+
+
+
+
+		// test of card display
 
 		/* Contains the layout for the east and west panels with all the 
 		information for each player*/
@@ -97,35 +146,64 @@ public class Gameplay extends JFrame{
 		eastPan.add(p5);
 		eastPan.add(score5);
 
+		this.bottomPanel();
+		//Bottom panel used for the player/user
+		
+		// String descrip = "T-Rex";
+		// // for testing ^^^
+		// play = new JButton("Play!");
+		// JPanel pan2 = new JPanel();
+		// JLabel cat = new JLabel("Categories:");
+		// JLabel topCard = new JLabel("Top Card:");
+		// JTextField card = new JTextField(descrip.length());
+		// card.setText(descrip);
+		// card.setEditable(false);
+
+		// this.add(pan2, "South");
+		// pan2.add(topCard);
+		// pan2.add(card);
+		// pan2.add(cat);
+
+		// String [] testString = {"height: 9", "weight: 5", "length: 7"};
+		// JComboBox<String> jcom = new JComboBox<String>(testString);
+		// pan2.add(jcom);
+		// pan2.add(play);
+		// pan2.setBackground(Color.cyan);
+
+
+		// // End of round result test
+		// JLabel result = new JLabel("YOU WIN!!");
+		// result.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		// //centerPan.add(result);
+		// //
+		
+
+
+
+	}
+	/**
+	 * Bottom panel alternative layout
+	 */
+	public void bottomPanel(){
+
 
 		//Bottom panel used for the player/user
 		
-		String descrip = "T-Rex";
-		// for testing ^^^
 		play = new JButton("Play!");
-		JPanel pan2 = new JPanel();
-		JLabel cat = new JLabel("Categories:");
-		JLabel topCard = new JLabel("Top Card:");
-		JTextField card = new JTextField(descrip.length());
-		card.setText(descrip);
-		card.setEditable(false);
-
-		this.add(pan2, "South");
-		pan2.add(topCard);
-		pan2.add(card);
-		pan2.add(cat);
-
-		String [] testString = {"height: 9", "weight: 5", "length: 7"};
-		JComboBox<String> jcom = new JComboBox<String>(testString);
-		pan2.add(jcom);
-		pan2.add(play);
-		pan2.setBackground(Color.cyan);
-
+		JPanel bottomPan = new JPanel();
+		JLabel communal = new JLabel("Communal pile:      ");
+		this.add(bottomPan, "South");
+		bottomPan.add(communal);
+		bottomPan.add(play);
+		bottomPan.setBackground(Color.cyan);
 
 		// End of round result test
 		JLabel result = new JLabel("YOU WIN!!");
 		result.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
-		centerPan.add(result);
+		//centerPan.add(result);
+		//
+		
+
 
 
 	}
