@@ -11,12 +11,16 @@ public class Gameplay extends JFrame{
 	/** Instance variables */
 	private JPanel pan;
 	private JButton play;
+	private int noPlayers;
 
 	/**
 	 * constructor for GameplayGUI
 	 * [parameters can be added as needed]
 	 */
 	public Gameplay(){
+
+		// helper method to get number of players
+		this.noPlayer();
 
 		this.setSize(500, 300);
 		this.setLocation(200, 200);
@@ -83,6 +87,25 @@ public class Gameplay extends JFrame{
 		player5.add(p5);
 
 
+	}
+
+	/**
+	 * Helper method to get the number of players for a game
+	 * Launches JOptionPane with JCombo
+	 * @return noPlayers - the number of players
+	 */
+	public int noPlayer(){
+
+		String[] players = { "2", "3", "4", "5", };
+		JComboBox<String> jBox  = new JComboBox <String>(players);
+		
+		JOptionPane.showMessageDialog(null, jBox, "Players", JOptionPane.PLAIN_MESSAGE);
+		String s = ( String) jBox.getSelectedItem();
+		noPlayers = Integer.parseInt(s);
+
+		System.out.println("Number of players: "+ noPlayers);
+
+		return noPlayers;
 	}
 
 

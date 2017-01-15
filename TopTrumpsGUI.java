@@ -71,6 +71,17 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		Gameplay nGame = new Gameplay();
 
 	}
+
+	/**
+	 * generate new report
+	 */
+	public void report(){
+
+		Report r = new Report();
+
+	}
+
+
 	/**
 	 * Listen and act on button press events
 	 * @param e the event
@@ -85,6 +96,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		}
 
 		else if (e.getSource()==reportButton){
+			this.report();
 			System.out.println("Generate report");		
 		}
 
