@@ -73,21 +73,28 @@ public class Gameplay extends JFrame{
 
 		JLabel p2 = new JLabel(" Player 2 ");
 		pan3.add(p2);
+		p2.setFont(new Font("Courier", Font.BOLD, 16));
 		JLabel score2 = new JLabel("  Score: ");
 		JLabel score3 = new JLabel("  Score: ");
 		JLabel score4 = new JLabel("  Score: ");
 		JLabel score5 = new JLabel("  Score: ");
 		pan3.add(score2);
 
+
+		// welcome.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+
 		JLabel p3 = new JLabel(" Player 3 ");
+		p3.setFont(new Font("Courier", Font.BOLD, 16));
 		eastPan.add(p3);
 		eastPan.add(score3);
 
 		JLabel p4 = new JLabel(" Player 4 ");
+		p4.setFont(new Font("Courier", Font.BOLD, 16));
 		pan3.add(p4);
 		pan3.add(score4);
 
 		JLabel p5 = new JLabel(" Player 5 ");
+		p5.setFont(new Font("Courier", Font.BOLD, 16));
 		eastPan.add(p5);
 		eastPan.add(score5);
 
