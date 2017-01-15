@@ -40,8 +40,8 @@ public class Gameplay extends JFrame{
 
 		// This is all pretty much just placeholders for now
 		
-		JLabel welcome = new JLabel(" Welcome to Top Trumps!!");
-		welcome.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		JLabel welcome = new JLabel("Top Trumps!!");
+		welcome.setFont(new Font("Courier", Font.PLAIN, 24));
 
 
 		pan = new JPanel();
