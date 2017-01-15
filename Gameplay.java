@@ -71,23 +71,23 @@ public class Gameplay extends JFrame{
 		JLabel p1 = new JLabel("User");
 		//pan3.add(p1);
 
-		JLabel p2 = new JLabel("Player 2");
+		JLabel p2 = new JLabel(" Player 2 ");
 		pan3.add(p2);
-		JLabel score2 = new JLabel("Score: ");
-		JLabel score3 = new JLabel("Score: ");
-		JLabel score4 = new JLabel("Score: ");
-		JLabel score5 = new JLabel("Score: ");
+		JLabel score2 = new JLabel("  Score: ");
+		JLabel score3 = new JLabel("  Score: ");
+		JLabel score4 = new JLabel("  Score: ");
+		JLabel score5 = new JLabel("  Score: ");
 		pan3.add(score2);
 
-		JLabel p3 = new JLabel("Player 3");
+		JLabel p3 = new JLabel(" Player 3 ");
 		eastPan.add(p3);
 		eastPan.add(score3);
 
-		JLabel p4 = new JLabel("Player 4");
+		JLabel p4 = new JLabel(" Player 4 ");
 		pan3.add(p4);
 		pan3.add(score4);
 
-		JLabel p5 = new JLabel("Player 5");
+		JLabel p5 = new JLabel(" Player 5 ");
 		eastPan.add(p5);
 		eastPan.add(score5);
 
