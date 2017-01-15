@@ -61,7 +61,7 @@ public class Gameplay extends JFrame{
 		
 		
 		// Center Panel layout
-		JTextArea tArea = new JTextArea(10, 30);
+		JTextArea tArea = new JTextArea(10, 25);
 		//tArea.setEditable(false);
 		tArea.setBackground(Color.cyan);
 
