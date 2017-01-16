@@ -1,20 +1,17 @@
 import java.awt.*;
 import javax.swing.*;
-
 import javax.swing.border.*;
-
-import javax.swing.JOptionPane;
+import java.awt.event.*;
 
 /**
  * GUI to display the gameplay interface
  * 
  */
-
-public class Gameplay extends JFrame{
+public class Gameplay extends JFrame implements ActionListener{
 
 	/** Instance variables */
 	private JPanel pan;
-	private JButton play;
+	private JButton playButton;
 	private int noPlayers;
 	private final int maxPlayer = 5;
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5;
@@ -23,6 +20,7 @@ public class Gameplay extends JFrame{
 	 * constructor for GameplayGUI
 	 * [parameters can be added as needed]
 	 */
+	
 	public Gameplay(){
 
 		// helper method to get number of players
@@ -33,7 +31,11 @@ public class Gameplay extends JFrame{
 		this.setTitle("Top Trumps!");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setVisible(true);
+
+		// Layout all the components
 		this.layoutComponents();
+		this.centerLayout();
+		this.bottomPanel();
 
 	}
 
@@ -60,7 +62,6 @@ public class Gameplay extends JFrame{
 		this.add(pan3, "West");
 
 		GridLayout grid2 = new GridLayout(5, 2);
-		GridLayout cGrid = new GridLayout(7, 2); // 1 col originally
 		
 		JPanel eastPan = new JPanel(grid2);
 		this.add (eastPan, "East");
@@ -71,15 +72,58 @@ public class Gameplay extends JFrame{
 		//tArea.setEditable(false);
 		tArea.setBackground(Color.cyan);
 
-		JLabel comPile = new JLabel("Communal pile: ");
+		/* Contains the layout for the east and west panels with all the 
+		information for each player*/
+		p2 = new JLabel(" Player 2 ");
+		pan3.add(p2);
+		p2.setFont(new Font("Courier", Font.BOLD, 16));
+		score2 = new JLabel("  Score: ");
+		score3 = new JLabel("  Score: ");
+		score4 = new JLabel("  Score: ");
+		score5 = new JLabel("  Score: ");
+		pan3.add(score2);
 
+		p3 = new JLabel(" Player 3 ");
+		p3.setFont(new Font("Courier", Font.BOLD, 16));
+		eastPan.add(p3);
+		eastPan.add(score3);
+
+		p4 = new JLabel(" Player 4 ");
+		p4.setFont(new Font("Courier", Font.BOLD, 16));
+		pan3.add(p4);
+		pan3.add(score4);
+
+		p5 = new JLabel(" Player 5 ");
+		p5.setFont(new Font("Courier", Font.BOLD, 16));
+		eastPan.add(p5);
+		eastPan.add(score5);
+
+
+		if (noPlayers < maxPlayer){
+			p5.setEnabled(false);
+			score5.setEnabled(false);
+		}
+		if (noPlayers < maxPlayer-1){
+			p4.setEnabled(false);
+			score4.setEnabled(false);
+		}
+		if (noPlayers < maxPlayer - 2){
+			p3.setEnabled(false);
+			score3.setEnabled(false);
+		}
+		
+	}
+	
+	/**
+	 * Lay out all the components of the centre panel
+	 */
+	public void centerLayout(){
+
+
+		JLabel comPile = new JLabel("Communal pile: ");
+		GridLayout cGrid = new GridLayout(7, 2); // 1 col originally
 		JPanel centerPan = new JPanel(cGrid);
 		this.add(centerPan, "Center");
-
-		//centerPan.add(tArea);
-
-
-		// test of card display
 		centerPan.setBackground(Color.cyan);
 
 		int s = 9;
@@ -128,27 +172,13 @@ public class Gameplay extends JFrame{
 		centerPan.add(val4);
 		centerPan.add(cat5);
 		centerPan.add(val5);
-		
-
-
-		// first version
-		// centerPan.add(description);
-		// centerPan.add(cat1);
-		// centerPan.add(cat2);
-		// centerPan.add(cat3);
-		// centerPan.add(cat4);
-		// centerPan.add(cat5);
-		
-
+	
 		JLabel cards = new JLabel("  Cards:    ");
 		cards.setFont(new Font("Courier", Font.PLAIN, 14));
-
 		centerPan.add(cards);
 
 
-
-
-		// RadioButton disabled
+		// RadioButtons disabled for test
 
 		boolean test = true;
 		if (test){
@@ -157,102 +187,7 @@ public class Gameplay extends JFrame{
 			cat3.setEnabled(false);
 			cat4.setEnabled(false);
 			cat5.setEnabled(false);
-
 		 }
-
-
-
-
-		// pan3.setBackground(Color.gray);
-		// eastPan.setBackground(Color.gray);
-
-
-
-
-
-		// test of card display
-
-		/* Contains the layout for the east and west panels with all the 
-		information for each player*/
-		p2 = new JLabel(" Player 2 ");
-		pan3.add(p2);
-		p2.setFont(new Font("Courier", Font.BOLD, 16));
-		score2 = new JLabel("  Score: ");
-		score3 = new JLabel("  Score: ");
-		score4 = new JLabel("  Score: ");
-		score5 = new JLabel("  Score: ");
-		pan3.add(score2);
-
-		p3 = new JLabel(" Player 3 ");
-		p3.setFont(new Font("Courier", Font.BOLD, 16));
-		eastPan.add(p3);
-		eastPan.add(score3);
-
-
-		p4 = new JLabel(" Player 4 ");
-		p4.setFont(new Font("Courier", Font.BOLD, 16));
-		pan3.add(p4);
-		pan3.add(score4);
-
-		p5 = new JLabel(" Player 5 ");
-		p5.setFont(new Font("Courier", Font.BOLD, 16));
-		eastPan.add(p5);
-		eastPan.add(score5);
-
-
-		if (noPlayers < maxPlayer){
-			p5.setEnabled(false);
-			score5.setEnabled(false);
-
-		}
-		if (noPlayers < maxPlayer-1){
-			p4.setEnabled(false);
-			score4.setEnabled(false);
-
-		}
-		if (noPlayers < maxPlayer - 2){
-			p3.setEnabled(false);
-			score3.setEnabled(false);
-
-		}
-
-
-		
-
-		this.bottomPanel();
-		//Bottom panel used for the player/user
-		
-		// String descrip = "T-Rex";
-		// // for testing ^^^
-		// play = new JButton("Play!");
-		// JPanel pan2 = new JPanel();
-		// JLabel cat = new JLabel("Categories:");
-		// JLabel topCard = new JLabel("Top Card:");
-		// JTextField card = new JTextField(descrip.length());
-		// card.setText(descrip);
-		// card.setEditable(false);
-
-		// this.add(pan2, "South");
-		// pan2.add(topCard);
-		// pan2.add(card);
-		// pan2.add(cat);
-
-		// String [] testString = {"height: 9", "weight: 5", "length: 7"};
-		// JComboBox<String> jcom = new JComboBox<String>(testString);
-		// pan2.add(jcom);
-		// pan2.add(play);
-		// pan2.setBackground(Color.cyan);
-
-
-		// // End of round result test
-		// JLabel result = new JLabel("YOU WIN!!");
-		// result.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
-		// //centerPan.add(result);
-		// //
-		
-
-
-
 	}
 	/**
 	 * Bottom panel alternative layout
@@ -262,22 +197,18 @@ public class Gameplay extends JFrame{
 
 		//Bottom panel used for the player/user
 		
-		play = new JButton("Play!");
+		playButton = new JButton("Play!");
+		playButton.addActionListener(this);
 		JPanel bottomPan = new JPanel();
 		JLabel communal = new JLabel("Communal pile:      ");
 		this.add(bottomPan, "South");
 		bottomPan.add(communal);
-		bottomPan.add(play);
+		bottomPan.add(playButton);
 		bottomPan.setBackground(Color.cyan);
 
 		// End of round result test
 		JLabel result = new JLabel("YOU WIN!!");
 		result.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
-		
-		//
-		
-
-
 
 	}
 
@@ -286,27 +217,32 @@ public class Gameplay extends JFrame{
 	 * Launches JOptionPane with JCombo
 	 * @return noPlayers - the number of players
 	 */
-	public int noPlayer(){
+	private void noPlayer(){
 
 		String[] players = { "2", "3", "4", "5", };
 		JComboBox<String> jBox  = new JComboBox <String>(players);
 		
-		int a = (int)JOptionPane.showMessageDialog(null, jBox, "Players", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(null, jBox, 
+			"Players", JOptionPane.PLAIN_MESSAGE);
 		String s = ( String) jBox.getSelectedItem();
 		noPlayers = Integer.parseInt(s);
-
-
 		System.out.println("Number of players: "+ noPlayers);
 
-
-
-		return noPlayers;
 	}
 
+	/**
+	 * 
+	 * @param e [description]
+	 */
+	public void actionPerformed(ActionEvent e){
+
+		if (e.getSource()== playButton){
+			//next go
+			System.out.println("next go");
+		}
 
 
-
-
+	}
 
 
 }
