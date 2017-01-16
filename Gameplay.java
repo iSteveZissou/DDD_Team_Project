@@ -56,7 +56,7 @@ public class Gameplay extends JFrame{
 		this.add(pan3, "West");
 
 		GridLayout grid2 = new GridLayout(5, 2);
-		GridLayout cGrid = new GridLayout(7, 1);
+		GridLayout cGrid = new GridLayout(7, 2); // 1 col originally
 		
 		JPanel eastPan = new JPanel(grid2);
 		this.add (eastPan, "East");
@@ -78,11 +78,13 @@ public class Gameplay extends JFrame{
 		// test of card display
 		centerPan.setBackground(Color.cyan);
 
-		JRadioButton cat1 = new JRadioButton("Height");
-		JRadioButton cat2 = new JRadioButton("Weight");
-		JRadioButton cat3 = new JRadioButton("Length");
-		JRadioButton cat4 = new JRadioButton("Ferocity");
-		JRadioButton cat5 = new JRadioButton("Intelligence");
+		int s = 9;
+	
+		JRadioButton cat1 = new JRadioButton("Height:");
+		JRadioButton cat2 = new JRadioButton("Weight:");
+		JRadioButton cat3 = new JRadioButton("Length:");
+		JRadioButton cat4 = new JRadioButton("Ferocity:");
+		JRadioButton cat5 = new JRadioButton("Intelligence:");
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(cat1);
@@ -95,17 +97,52 @@ public class Gameplay extends JFrame{
 		JLabel description = new JLabel(" T -Rex!");
 		description.setFont(new Font("Courier", Font.BOLD, 18));
 
+		//test Labels 
+		JLabel blank = new JLabel("      ");
+		JLabel val1 = new JLabel("" + s);
+		val1.setFont(new Font("Courier", Font.BOLD, 16));
+		JLabel val2 = new JLabel("9");
+		val2.setFont(new Font("Courier", Font.BOLD, 16));
+		JLabel val3 = new JLabel("9");
+		val3.setFont(new Font("Courier", Font.BOLD, 16));
+		JLabel val4 = new JLabel("9");
+		val4.setFont(new Font("Courier", Font.BOLD, 16));
+		JLabel val5 = new JLabel("9");
+		val5.setFont(new Font("Courier", Font.BOLD, 16));
+
 		centerPan.add(description);
+		centerPan.add(blank);
 		centerPan.add(cat1);
+		centerPan.add(val1);
 		centerPan.add(cat2);
+		centerPan.add(val2);
 		centerPan.add(cat3);
+		centerPan.add(val3);
 		centerPan.add(cat4);
+		centerPan.add(val4);
 		centerPan.add(cat5);
+		centerPan.add(val5);
+		
+
+
+		// first version
+		// centerPan.add(description);
+		// centerPan.add(cat1);
+		// centerPan.add(cat2);
+		// centerPan.add(cat3);
+		// centerPan.add(cat4);
+		// centerPan.add(cat5);
+		
 
 		JLabel cards = new JLabel("  Cards:    ");
 		cards.setFont(new Font("Courier", Font.PLAIN, 14));
 
 		centerPan.add(cards);
+
+
+
+
+		// RadioButton disabled
 
 		boolean test = true;
 		if (test){
@@ -115,14 +152,13 @@ public class Gameplay extends JFrame{
 			cat4.setEnabled(false);
 			cat5.setEnabled(false);
 
-		}
+		 }
+
+
+
 
 		// pan3.setBackground(Color.gray);
 		// eastPan.setBackground(Color.gray);
-
-
-
-
 
 
 
@@ -215,7 +251,7 @@ public class Gameplay extends JFrame{
 		// End of round result test
 		JLabel result = new JLabel("YOU WIN!!");
 		result.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
-		//centerPan.add(result);
+		
 		//
 		
 

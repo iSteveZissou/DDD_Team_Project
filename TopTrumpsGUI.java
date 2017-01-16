@@ -40,6 +40,9 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		JPanel pan2 = new JPanel();
 		JPanel pan3 = new JPanel();
 
+		
+
+
 		newGame = new JButton("NEW GAME");
 		newGame.addActionListener(this);
 		reportButton = new JButton("REPORT");
@@ -54,6 +57,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		this.add(pan3, "South");
 		pan3.setBackground(Color.magenta);
 
+		
 		pan.add(newGame);
 		pan2.add(reportButton);
 		pan3.add(exitButton);
