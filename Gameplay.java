@@ -3,6 +3,8 @@ import javax.swing.*;
 
 import javax.swing.border.*;
 
+import javax.swing.JOptionPane;
+
 /**
  * GUI to display the gameplay interface
  * 
@@ -14,6 +16,8 @@ public class Gameplay extends JFrame{
 	private JPanel pan;
 	private JButton play;
 	private int noPlayers;
+	private final int maxPlayer = 5;
+	private JLabel p2, p3, p4, p5, score2, score3, score4, score5;
 
 	/**
 	 * constructor for GameplayGUI
@@ -27,7 +31,7 @@ public class Gameplay extends JFrame{
 		this.setSize(500, 300);
 		this.setLocation(200, 200);
 		this.setTitle("Top Trumps!");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		this.layoutComponents();
 
@@ -101,6 +105,8 @@ public class Gameplay extends JFrame{
 		JLabel blank = new JLabel("      ");
 		JLabel val1 = new JLabel("" + s);
 		val1.setFont(new Font("Courier", Font.BOLD, 16));
+		//val1.setHorizontalAlignment(JLabel.CENTER);
+
 		JLabel val2 = new JLabel("9");
 		val2.setFont(new Font("Courier", Font.BOLD, 16));
 		JLabel val3 = new JLabel("9");
@@ -168,34 +174,50 @@ public class Gameplay extends JFrame{
 
 		/* Contains the layout for the east and west panels with all the 
 		information for each player*/
-		JLabel p2 = new JLabel(" Player 2 ");
+		p2 = new JLabel(" Player 2 ");
 		pan3.add(p2);
 		p2.setFont(new Font("Courier", Font.BOLD, 16));
-		JLabel score2 = new JLabel("  Score: ");
-		JLabel score3 = new JLabel("  Score: ");
-		JLabel score4 = new JLabel("  Score: ");
-		JLabel score5 = new JLabel("  Score: ");
+		score2 = new JLabel("  Score: ");
+		score3 = new JLabel("  Score: ");
+		score4 = new JLabel("  Score: ");
+		score5 = new JLabel("  Score: ");
 		pan3.add(score2);
 
-		JLabel p3 = new JLabel(" Player 3 ");
+		p3 = new JLabel(" Player 3 ");
 		p3.setFont(new Font("Courier", Font.BOLD, 16));
 		eastPan.add(p3);
 		eastPan.add(score3);
 
 
-		JLabel p4 = new JLabel(" Player 4 ");
+		p4 = new JLabel(" Player 4 ");
 		p4.setFont(new Font("Courier", Font.BOLD, 16));
 		pan3.add(p4);
 		pan3.add(score4);
 
-		JLabel p5 = new JLabel(" Player 5 ");
+		p5 = new JLabel(" Player 5 ");
 		p5.setFont(new Font("Courier", Font.BOLD, 16));
 		eastPan.add(p5);
 		eastPan.add(score5);
 
 
-		p5.setEnabled(false);
-		score5.setEnabled(false);
+		if (noPlayers < maxPlayer){
+			p5.setEnabled(false);
+			score5.setEnabled(false);
+
+		}
+		if (noPlayers < maxPlayer-1){
+			p4.setEnabled(false);
+			score4.setEnabled(false);
+
+		}
+		if (noPlayers < maxPlayer - 2){
+			p3.setEnabled(false);
+			score3.setEnabled(false);
+
+		}
+
+
+		
 
 		this.bottomPanel();
 		//Bottom panel used for the player/user
@@ -269,12 +291,14 @@ public class Gameplay extends JFrame{
 		String[] players = { "2", "3", "4", "5", };
 		JComboBox<String> jBox  = new JComboBox <String>(players);
 		
-		JOptionPane.showMessageDialog(null, jBox, "Players", JOptionPane.PLAIN_MESSAGE);
+		int a = (int)JOptionPane.showMessageDialog(null, jBox, "Players", JOptionPane.PLAIN_MESSAGE);
 		String s = ( String) jBox.getSelectedItem();
 		noPlayers = Integer.parseInt(s);
 
 
 		System.out.println("Number of players: "+ noPlayers);
+
+
 
 		return noPlayers;
 	}
