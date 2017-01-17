@@ -1,7 +1,8 @@
+import java.io.*;
 import java.sql.*;
 
 /**
- * Connects to TopTrumps database to be
+ * Connects to the database to be
  * used in EndReport and Report classes.
  */
 
@@ -10,16 +11,17 @@ import java.sql.*;
  */
 
 public class ConnectionBuilder {
-//	//Database name
-//	static final String dbName = ""; //tbc
-//	
-//	//Database user id and password
-//	static final String username = ""; //tbc
-//	static final String password = ""; //tbc
-//	
-//	Connection c = null;
-//
-//	try/catch methods etc
-}
-//
 
+	public static Connection createConnection() throws SQLException {
+
+		//Database name
+		String dbName = "m_16_0813273j";
+		//Database user id and password
+		String username = "m_16_0813273j";
+		String password = "0813273j";
+
+		Connection c = DriverManager.getConnection("jdbc:postegresql://yacata.dcs.gla.ac.uk:5432/"+ dbName, username, password);
+		
+		return c;
+	}
+}
