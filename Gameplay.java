@@ -269,14 +269,18 @@ public class Gameplay extends JFrame implements ActionListener{
 	
 	public void makeUsers(){
 
-		usersInGame = new UserClass[2];
+		usersInGame = new UserClass[noPlayers];
 
-		UserClass player1 = new UserClass();
-		usersInGame[0] = player1;
+		for (int i = 0; i< noPlayers; i++){
+
+			UserClass player = new UserClass();
+			usersInGame[i] = player;
 
 
-		UserClass player2 = new UserClass();
-		usersInGame[1] = player2;
+			
+
+		}
+		
 
 
 

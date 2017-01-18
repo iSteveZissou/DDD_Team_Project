@@ -20,7 +20,8 @@ public class CardClass implements Comparable<CardClass> {
 
 	private int [] cardValues;
 
-	private String [] CardCategories = { "description", "Height", "Weight", "Length", "Ferocity", "Intelligence"};
+	private String [] CardCategories = { "description", 
+		"Height", "Weight", "Length", "Ferocity", "Intelligence"};
 
 
 	/** Default Constructor */

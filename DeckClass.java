@@ -68,17 +68,8 @@ public class DeckClass {
 		if (numPlayers == 2){
 			for (int i = 0; i < deck.length; i++){
 				arrayUser[0].addCard(deck[i]);
-				
-
-
+	
 			}
-
-
-
-
-
-
-
 		}
 
 
@@ -146,43 +137,29 @@ public class DeckClass {
 				arrayLine[numCards] = s;
 				numCards++;
 
-				
-				
-
-				
-
-
 			}
 			System.out.println("" + numCards);
-
-
-
 			for (int i =0 ;i < 41; i++){
 
 
 				System.out.println(arrayLine[i]);
 			}
 
-			for (int index = 1; index < 40; index++){
+			for (int index = 1; index < 41; index++){
 
 				deck[index-1] = new CardClass(arrayLine[index]);
 
 			}
 
 
-
-			System.out.println("Get Intel" +deck[5].getIntelligence());
-			
-		
-			// for (int i=0; i<numCards; i++)
-			// {
-			// 	deck[i] =  new CardClass(line[i]);
-			// 	System.out.println(deck[i]);
-			// 
-			// 
+			System.out.println("Get Intel " +deck[0].getIntelligence());
 			in.close();
 		
-			
+			for (int j = 0; j< 40; j++){
+				System.out.println(deck[j]);
+			}
+
+			System.out.println("The array size IS::" + deck.length);
 
 		
 		}
@@ -190,7 +167,8 @@ public class DeckClass {
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "File not found", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "File not found", 
+				"INPUT ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 
 		//Close the scanner

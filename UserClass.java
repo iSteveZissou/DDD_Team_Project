@@ -16,6 +16,7 @@ public class UserClass {
 	public UserClass() {
 
 		count = 0;
+		System.out.println("NEW USER CREATED");
 
 	}
 
@@ -50,7 +51,7 @@ public class UserClass {
 
 		hand = new CardClass [40];
 		hand[count] = crd;
-		System.out.println(" The test:::"+ hand[count].getIntelligence());
+		//System.out.println(" The test:::"+ hand[count].getIntelligence());
 
 
 		count++;
