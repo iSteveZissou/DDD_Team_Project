@@ -12,7 +12,7 @@ public class DeckClass {
     private static final int TOTAL_CARDS = 40;
 
 	/** Instance Variables */
-	private CardClass [] deck = new CardClass[TOTAL_CARDS];
+	private CardClass [] deck;
 
 	private int numCards;
 
@@ -55,8 +55,14 @@ public class DeckClass {
 	*	IDEAS: Use Fisher Yates Algorithm
 	*	@return shuffled CardClass array
 	*/
-	public CardClass [] shuffle() {
-		return null;
+	public void shuffle() {
+
+		// Simple way of shuffling though I'm not sure if we can use
+		// the Java Collections Framework??
+		// if not then we can change but this will work for testing purposes!
+
+		Collections.shuffle(Arrays.asList(deck));
+		
 	}
 
 	/** Deal the Cards in the deck to the players 
@@ -65,14 +71,53 @@ public class DeckClass {
 	*/
 	public void dealCards(int numPlayers, UserClass[] arrayUser) {
 
-		if (numPlayers == 2){
-			for (int i = 0; i < deck.length; i++){
-				arrayUser[0].addCard(deck[i]);
-	
+		int count = 0;
+
+		Random rand = new Random();
+		int randomPlayer = rand.nextInt(3);
+		if (numPlayers == 5){
+
+			int i = 0;
+			while ( i < deck.length){
+
+				arrayUser[0].addCard(deck[i++]);
+				arrayUser[1].addCard(deck[i++]);
+ 				arrayUser[2].addCard(deck[i++]);
+				arrayUser[3].addCard(deck[i++]);
+ 				arrayUser[4].addCard(deck[i++]);
 			}
 		}
+		else if (numPlayers ==4){
+			int i = 0;
+			while ( i < deck.length){
+				arrayUser[0].addCard(deck[i++]);
+				arrayUser[1].addCard(deck[i++]);
+ 				arrayUser[2].addCard(deck[i++]);
+				arrayUser[3].addCard(deck[i++]);
+			}
+		}
+		else if (numPlayers == 3){
+			int i = 0;
+			while ( i < deck.length){
+				// Selects random player to give the extra card??
+				if (i == deck.length -1){
+					arrayUser[randomPlayer].addCard(deck[i]);
+					break;
+				}
+				arrayUser[0].addCard(deck[i++]);
+				arrayUser[1].addCard(deck[i++]);
+ 				arrayUser[2].addCard(deck[i++]);	
+			}
+	 	}	
+	 	else if (numPlayers ==2){
+	 		
+	 		int i = 0;
+			while ( i < deck.length){
 
-
+				arrayUser[0].addCard(deck[i++]);
+				arrayUser[1].addCard(deck[i++]);
+ 				}
+	 	}
 
 	}
 
@@ -117,6 +162,7 @@ public class DeckClass {
 
 	private void readText() {
 
+		 deck = new CardClass[TOTAL_CARDS];
 	
 		String line = "";
 		String [] arrayLine = new String[41];
@@ -130,27 +176,34 @@ public class DeckClass {
 			// a string array
 			int numCards=0;
 			while (in.hasNextLine())
-			{
-				
+			{	
 				s = in.nextLine();
-				// s = s + in.nextLine() + "\n";
 				arrayLine[numCards] = s;
 				numCards++;
 
 			}
-			System.out.println("" + numCards);
-			for (int i =0 ;i < 41; i++){
+			
+			// for (int i =0 ;i < 41; i++){
 
 
-				System.out.println(arrayLine[i]);
-			}
+			// 	System.out.println(arrayLine[i]);
+			// }
 
+			
+
+			// first line containing all the categorie names
+			String categories = arrayLine[0];
+			System.out.println(categories);
+
+			// Create deck cards array from the string array of cards
+			// skip the first
 			for (int index = 1; index < 41; index++){
 
 				deck[index-1] = new CardClass(arrayLine[index]);
 
 			}
 
+			this.shuffle();
 
 			System.out.println("Get Intel " +deck[0].getIntelligence());
 			in.close();

@@ -10,7 +10,7 @@ public class UserClass {
 
 	/** Instance Variables */
 	private CardClass [] hand;
-	private int count;
+	private int count = 0;
 
 	/** Default Constructor */
 	public UserClass() {
@@ -27,10 +27,9 @@ public class UserClass {
 
 	public void getHand() {  // not void
 
-		for (int i =0; i < hand.length; i++){
-
-			System.out.println(" This si the hand" + hand[i].getIntelligence());
-		}
+		
+		int n = hand[0].getHeight();
+		System.out.println("HERE: " + n);
 		
 	}
 
@@ -51,14 +50,10 @@ public class UserClass {
 
 		hand = new CardClass [40];
 		hand[count] = crd;
-		//System.out.println(" The test:::"+ hand[count].getIntelligence());
+		System.out.println(" CARD ADDED: " + crd);
 
 
 		count++;
-
-		
-
-
 
 	}
 
@@ -90,5 +85,13 @@ public class UserClass {
 	public String selectCategory() {
 		return "";
 
+	}
+	/**
+	 * gets the number of cards in the user's deck
+	 * @return [count] - the number of cards
+	 */
+	public int numberOfCards(){
+
+		return count;
 	}
 }

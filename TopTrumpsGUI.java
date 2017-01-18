@@ -91,9 +91,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	public void report(){
 
 		Report r = new Report();
-
 	}
-
 
 	/**
 	 * Listen and act on button press events

@@ -17,6 +17,9 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5;
 	private UserClass []usersInGame;
 
+	// we could set constants to use for playerArray index ie. int player 1 =0
+	// this would make understanding the user easier to follow?
+
 	/**
 	 * constructor for GameplayGUI
 	 * [parameters can be added as needed]
@@ -37,10 +40,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		this.layoutComponents();
 		this.centerLayout();
 		this.bottomPanel();
+
+		
 		this.createDeck();
 
-
-
+	
 	}
 
 	/**
@@ -115,7 +119,6 @@ public class Gameplay extends JFrame implements ActionListener{
 			p3.setEnabled(false);
 			score3.setEnabled(false);
 		}
-		
 	}
 	
 	/**
@@ -244,8 +247,6 @@ public class Gameplay extends JFrame implements ActionListener{
 			//next go
 			System.out.println("next go");
 		}
-
-
 	}
 
 	/**
@@ -256,17 +257,21 @@ public class Gameplay extends JFrame implements ActionListener{
 		DeckClass deck = new DeckClass();
 		makeUsers();
 
-		int n = 2;
-		deck.dealCards(n, usersInGame);
+		
+		deck.dealCards(noPlayers, usersInGame);
 
+		// usersInGame[0].getHand();
+		// 
+		int playerNumber = 1;
+		for (int i = 0; i < noPlayers; i++){
+			int n = usersInGame[i].numberOfCards();
+			System.out.println("Player "+ playerNumber +" CARDS:" + n);
+			playerNumber++;
+		}
 	}
-
-
-
 	/**
 	 * Users method
 	 */
-	
 	public void makeUsers(){
 
 		usersInGame = new UserClass[noPlayers];
@@ -274,19 +279,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		for (int i = 0; i< noPlayers; i++){
 
 			UserClass player = new UserClass();
-			usersInGame[i] = player;
-
-
-			
-
+			usersInGame[i] = player;		
 		}
-		
-
-
-
-
-
 	}
-
-
 }
