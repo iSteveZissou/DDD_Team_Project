@@ -10,17 +10,27 @@ public class UserClass {
 
 	/** Instance Variables */
 	private CardClass [] hand;
+	private int count;
 
 	/** Default Constructor */
 	public UserClass() {
+
+		count = 0;
 
 	}
 
 	/** Non-Default Constructor */
 
 	/** Accessor for hand */
-	public CardClass [] getHand() {
-		return hand;
+
+
+	public void getHand() {  // not void
+
+		for (int i =0; i < hand.length; i++){
+
+			System.out.println(" This si the hand" + hand[i].getIntelligence());
+		}
+		
 	}
 
 	/** Mutator for hand */
@@ -36,7 +46,22 @@ public class UserClass {
 	*	@param card to be added
 	*/
 	public void addCard(CardClass crd) {
+
+
+		hand = new CardClass [40];
+		hand[count] = crd;
+		System.out.println(" The test:::"+ hand[count].getIntelligence());
+
+
+		count++;
+
+		
+
+
+
 	}
+
+
 	/** Deletes a Card from the users hand:
 	*   It will always be the 0th index card of the hand array to be deleted
 	*	
