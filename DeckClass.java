@@ -3,6 +3,8 @@
  *
  */
 import java.util.*;
+import java.io.*;
+import javax.swing.*;
 
 public class DeckClass {
 
@@ -17,11 +19,17 @@ public class DeckClass {
 	/** Default Constructor */
 	public DeckClass() {
 
-		//Fill the cardClass array with null values
-		for (int i =0; i<deck.length; i++)
-		{
-			deck[i] =new CardClass();
-		}
+		this.readText();
+		
+
+
+		// //Fill the cardClass array with null values
+		// for (int i =0; i<deck.length; i++)
+		// {
+		// 	deck[i] =new CardClass();
+		// }
+
+
 	}
 
 	/** Non-Default Constructor 
@@ -30,7 +38,7 @@ public class DeckClass {
 	public DeckClass(CardClass [] deck) {
 		for (int i=0; i<deck.length; i++)
 		{
-			this.deck[i] = deck[i]
+			this.deck[i] = deck[i];
 		}
 	}
 	/** Accessor for deck */
@@ -55,7 +63,25 @@ public class DeckClass {
 	*   of the game
 	*	@param number of players
 	*/
-	public void dealCards(int numPlayers) {
+	public void dealCards(int numPlayers, UserClass[] arrayUser) {
+
+		if (numPlayers == 2){
+			for (int i = 0; i < deck.length; i++){
+				arrayUser[0].addCard(deck[i]);
+				
+
+
+			}
+
+
+
+
+
+
+
+		}
+
+
 
 	}
 
@@ -99,29 +125,62 @@ public class DeckClass {
 	}
 
 	private void readText() {
-	Scanner in =null;	
-		FileReader fr;
-		
+
+	
+		String line = "";
+		String [] arrayLine = new String[41];
+		String s ="";
 		try 
 		{
-			fr = new FileReader("deck.txt");
-			in = new Scanner(fr);
+			FileReader fr = new FileReader("deck.txt");
+			Scanner in = new Scanner(fr);
 			
 			//Reads each line of the text file into 
 			// a string array
 			int numCards=0;
 			while (in.hasNextLine())
 			{
-				line[numCards] = in.nextLine();
-				numCards++;				
+				
+				s = in.nextLine();
+				// s = s + in.nextLine() + "\n";
+				arrayLine[numCards] = s;
+				numCards++;
+
+				
+				
+
+				
+
+
 			}
-			
-		
-			for (int i=0; i<numCards; i++)
-			{
-				deck[i] =  new CardClass(line[i]);
+			System.out.println("" + numCards);
+
+
+
+			for (int i =0 ;i < 41; i++){
+
+
+				System.out.println(arrayLine[i]);
 			}
 
+			for (int index = 1; index < 40; index++){
+
+				deck[index-1] = new CardClass(arrayLine[index]);
+
+			}
+
+
+
+			System.out.println("Get Intel" +deck[5].getIntelligence());
+			
+		
+			// for (int i=0; i<numCards; i++)
+			// {
+			// 	deck[i] =  new CardClass(line[i]);
+			// 	System.out.println(deck[i]);
+			// 
+			// 
+			in.close();
 		
 			
 
@@ -135,13 +194,7 @@ public class DeckClass {
 		}
 
 		//Close the scanner
-		finally
-		{
-			if (in!= null)
-	        {
-				in.close();
-	        }
-		}
+		
 	}
 
 

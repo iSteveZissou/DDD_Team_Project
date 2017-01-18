@@ -15,6 +15,7 @@ public class Gameplay extends JFrame implements ActionListener{
 	private int noPlayers;
 	private final int maxPlayer = 5;
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5;
+	private UserClass []usersInGame;
 
 	/**
 	 * constructor for GameplayGUI
@@ -36,6 +37,9 @@ public class Gameplay extends JFrame implements ActionListener{
 		this.layoutComponents();
 		this.centerLayout();
 		this.bottomPanel();
+		this.createDeck();
+
+
 
 	}
 
@@ -240,6 +244,42 @@ public class Gameplay extends JFrame implements ActionListener{
 			//next go
 			System.out.println("next go");
 		}
+
+
+	}
+
+	/**
+	 * Helper method for instatiating the deck
+	 */
+	public void createDeck(){
+
+		DeckClass deck = new DeckClass();
+		makeUsers();
+
+		int n = 2;
+		deck.dealCards(n, usersInGame);
+
+	}
+
+
+
+	/**
+	 * Users method
+	 */
+	
+	public void makeUsers(){
+
+		usersInGame = new UserClass[2];
+
+		UserClass player1 = new UserClass();
+		usersInGame[0] = player1;
+
+
+		UserClass player2 = new UserClass();
+		usersInGame[1] = player2;
+
+
+
 
 
 	}

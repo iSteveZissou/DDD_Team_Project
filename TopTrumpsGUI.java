@@ -27,6 +27,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		// call layout method
 		
 		this.layOut();
+		
 
 	}
 	/**

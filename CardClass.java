@@ -31,7 +31,7 @@ public class CardClass implements Comparable<CardClass> {
 	public CardClass(String cardInfo) {
 		String info = cardInfo;
 		
-		String [] tokens = info.split("[ \n]+");
+		String [] tokens = info.split(" ");
 		
 		for (int i=0; i<tokens.length; i++)
 		{
