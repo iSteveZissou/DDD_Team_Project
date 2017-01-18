@@ -24,8 +24,15 @@ public class DeckClass {
 		}
 	}
 
-	/** Non-Default Constructor */
-
+	/** Non-Default Constructor 
+	**	Use loop to make deep copy
+	*/
+	public DeckClass(CardClass [] deck) {
+		for (int i=0; i<deck.length; i++)
+		{
+			this.deck[i] = deck[i]
+		}
+	}
 	/** Accessor for deck */
 	public CardClass [] getDeck() {
 		return deck;
@@ -60,8 +67,8 @@ public class DeckClass {
 	}
 
 	/** Clears the communal pile */
-	public void clearDeck() {
-
+	public CardClass [] clearDeck() {
+		return null;
 	}
 
 	/** Adds a Card to the communal pile 
@@ -73,13 +80,14 @@ public class DeckClass {
 		deck[deck.length] = crd;
 	}
 
-	/** Deletes a Card from the communal pile
-	*	@param card to be deleted
+	/** Deletes a Card from the communal pile.
+	*   
+	*   This is only used when we have an remaining card when dealing
 	*
-	*	NOTE: not really necessary as the communal pile is 
-	*	either added to or cleared
+	*	@param index of position of the card to be deleted 
+	*          in the deck
 	*/
-	public void deleteCard(CardClass crd) {
+	public void deleteCard(int position) {
 
 	}
 
@@ -88,6 +96,52 @@ public class DeckClass {
 	*/
 	public void reset() {
 		
+	}
+
+	private void readText() {
+	Scanner in =null;	
+		FileReader fr;
+		
+		try 
+		{
+			fr = new FileReader("deck.txt");
+			in = new Scanner(fr);
+			
+			//Reads each line of the text file into 
+			// a string array
+			int numCards=0;
+			while (in.hasNextLine())
+			{
+				line[numCards] = in.nextLine();
+				numCards++;				
+			}
+			
+		
+			for (int i=0; i<numCards; i++)
+			{
+				deck[i] =  new CardClass(line[i]);
+			}
+
+		
+			
+
+		
+		}
+		//Catch statement if the file is not found
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "File not found", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+
+		//Close the scanner
+		finally
+		{
+			if (in!= null)
+	        {
+				in.close();
+	        }
+		}
 	}
 
 

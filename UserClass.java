@@ -37,15 +37,14 @@ public class UserClass {
 	*/
 	public void addCard(CardClass crd) {
 	}
-	/** Deletes a Card from the users hand
+	/** Deletes a Card from the users hand:
+	*   It will always be the 0th index card of the hand array to be deleted
 	*	
 	*	hand = Arrays.copyOf(hand,(hand.length-1));
 	*	hand[hand.length-1] = crd;
 	*
-	*	@param card to be deleted
-	*
 	*/
-	public void deleteCard(CardClass crd) {
+	public void deleteCard() {
 	
 	}
 

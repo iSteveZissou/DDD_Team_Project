@@ -20,6 +20,8 @@ public class CardClass implements Comparable<CardClass> {
 
 	private int [] cardValues;
 
+	private String [] CardCategories = { "description", "Height", "Weight", "Length", "Ferocity", "Intelligence"};
+
 
 	/** Default Constructor */
 	public CardClass() {
@@ -105,6 +107,14 @@ public class CardClass implements Comparable<CardClass> {
 		this.intelligence = intelligence;
 	}
 
+	/**
+	*	Converts string name of a category to index in the category array
+	*	@param String name of category
+	*	@return index value
+	*/
+	public int getCategory(String category) {
+		return 0;
+	}
 
 	/** Compares values of each category 
 	*	a card

@@ -11,6 +11,7 @@ public class ComputerUserClass extends UserClass {
 
 	/**  The computer player selects a category, using an algorithm to find the
 	*    highest value category
+	*     
 	*/
 	public String selectCategory(String category) {
 		return "";
