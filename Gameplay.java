@@ -34,7 +34,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		// helper method to get number of players
 		this.noPlayer();
 
-		this.setSize(500, 300);
+		this.setSize(600, 300);
 		this.setLocation(200, 200);
 		this.setTitle("Top Trumps!");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -72,7 +72,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		pan.add(welcome);
 		pan.setBackground(Color.cyan);
 
-		GridLayout grid = new GridLayout(5, 2);
+		GridLayout grid = new GridLayout(6, 2);
 		JPanel pan3 = new JPanel(grid);
 		this.add(pan3, "West");
 
@@ -98,6 +98,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		score5 = new JLabel("  Score: ");
 		pan3.add(score2);
 
+		
+
+		JLabel cardCount2 = new JLabel("   Cards: " + usersInGame[1].numberOfCards());
+		pan3.add(cardCount2);
+
 		p3 = new JLabel(" Player 3 ");
 		p3.setFont(new Font("Courier", Font.BOLD, 16));
 		eastPan.add(p3);
@@ -107,6 +112,8 @@ public class Gameplay extends JFrame implements ActionListener{
 		p4.setFont(new Font("Courier", Font.BOLD, 16));
 		pan3.add(p4);
 		pan3.add(score4);
+		JLabel cardCount4 = new JLabel("   Cards: ");
+		pan3.add(cardCount4);
 
 		p5 = new JLabel(" Player 5 ");
 		p5.setFont(new Font("Courier", Font.BOLD, 16));
@@ -121,6 +128,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		if (noPlayers < maxPlayer-1){
 			p4.setEnabled(false);
 			score4.setEnabled(false);
+			cardCount4.setEnabled(false);
 		}
 		if (noPlayers < maxPlayer - 2){
 			p3.setEnabled(false);
@@ -164,6 +172,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		val1 = new JLabel("" + playerOne.getHeight());
 		val1.setFont(new Font("Courier", Font.BOLD, 16));
 		//val1.setHorizontalAlignment(JLabel.CENTER);
+		blank.setHorizontalAlignment(JLabel.CENTER);
 
 		val2 = new JLabel(""+playerOne.getWeight());
 		val2.setFont(new Font("Courier", Font.BOLD, 16));
