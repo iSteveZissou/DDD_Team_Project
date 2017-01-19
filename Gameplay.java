@@ -14,8 +14,12 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JButton playButton;
 	private int noPlayers;
 	private final int maxPlayer = 5;
-	private JLabel p2, p3, p4, p5, score2, score3, score4, score5;
+	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description;
+	private JLabel val1,val2, val3, val4, val5;
 	private UserClass []usersInGame;
+	private CardClass playerOne;
+
+	
 
 	// we could set constants to use for playerArray index ie. int player 1 =0
 	// this would make understanding the user easier to follow?
@@ -36,13 +40,23 @@ public class Gameplay extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 
+		this.createDeck();
+		this.userTopCard();
+
 		// Layout all the components
 		this.layoutComponents();
 		this.centerLayout();
 		this.bottomPanel();
 
+		//get top card info
+
+		String s = usersInGame[0].topCardDescrip();
+		System.out.println(s);
 		
-		this.createDeck();
+		
+		
+		
+		
 
 	
 	}
@@ -133,7 +147,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		this.add(centerPan, "Center");
 		centerPan.setBackground(Color.cyan);
 
-		int s = 9;
+		
 	
 		JRadioButton cat1 = new JRadioButton("Height:");
 		JRadioButton cat2 = new JRadioButton("Weight:");
@@ -149,22 +163,22 @@ public class Gameplay extends JFrame implements ActionListener{
 		group.add(cat5);
 
 		centerPan.setBorder(new TitledBorder(new EtchedBorder(), "Top Card"));
-		JLabel description = new JLabel(" T -Rex!");
+		description = new JLabel(usersInGame[0].topCardDescrip());
 		description.setFont(new Font("Courier", Font.BOLD, 18));
 
 		//test Labels 
 		JLabel blank = new JLabel("      ");
-		JLabel val1 = new JLabel("" + s);
+		val1 = new JLabel("" + playerOne.getHeight());
 		val1.setFont(new Font("Courier", Font.BOLD, 16));
 		//val1.setHorizontalAlignment(JLabel.CENTER);
 
-		JLabel val2 = new JLabel("9");
+		val2 = new JLabel(""+playerOne.getWeight());
 		val2.setFont(new Font("Courier", Font.BOLD, 16));
-		JLabel val3 = new JLabel("9");
+		val3 = new JLabel(""+ playerOne.getLength());
 		val3.setFont(new Font("Courier", Font.BOLD, 16));
-		JLabel val4 = new JLabel("9");
+		val4 = new JLabel(""+ playerOne.getFerocity());
 		val4.setFont(new Font("Courier", Font.BOLD, 16));
-		JLabel val5 = new JLabel("9");
+		val5 = new JLabel(""+ playerOne.getIntelligence());
 		val5.setFont(new Font("Courier", Font.BOLD, 16));
 
 		centerPan.add(description);
@@ -180,7 +194,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		centerPan.add(cat5);
 		centerPan.add(val5);
 	
-		JLabel cards = new JLabel("  Cards:    ");
+		JLabel cards = new JLabel("  Cards:    " + usersInGame[0].numberOfCards());
 		cards.setFont(new Font("Courier", Font.PLAIN, 14));
 		centerPan.add(cards);
 
@@ -281,5 +295,35 @@ public class Gameplay extends JFrame implements ActionListener{
 			UserClass player = new UserClass();
 			usersInGame[i] = player;		
 		}
+	}
+
+	public void userTopCard(){
+
+		playerOne = usersInGame[0].topCard();
+
+		// val1.setText("playerOne.getHeight");
+		// val2.setText("playerOne.getHeight");
+		// val3.setText("playerOne.getHeight");
+		// val4.setText("playerOne.getHeight");
+		// val5.setText("playerOne.getHeight");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 }

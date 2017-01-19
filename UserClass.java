@@ -9,7 +9,7 @@ public class UserClass {
 	/** Class Constants */
 
 	/** Instance Variables */
-	private CardClass [] hand;
+	private CardClass [] hand, playerDeck;
 	private int count = 0;
 
 	/** Default Constructor */
@@ -17,6 +17,7 @@ public class UserClass {
 
 		count = 0;
 		System.out.println("NEW USER CREATED");
+		hand = new CardClass [40];
 
 	}
 
@@ -48,12 +49,14 @@ public class UserClass {
 	public void addCard(CardClass crd) {
 
 
-		hand = new CardClass [40];
+
+		
 		hand[count] = crd;
 		System.out.println(" CARD ADDED: " + crd);
 
-
 		count++;
+
+
 
 	}
 
@@ -92,6 +95,23 @@ public class UserClass {
 	 */
 	public int numberOfCards(){
 
+
+		// int test = hand.length;
+		// return test;
+
 		return count;
 	}
+
+	public String topCardDescrip(){
+
+		String description = hand[1].getDescription();
+		return description;
+	}
+
+	public CardClass topCard(){
+
+		return hand[0];
+	}
+
+	
 }

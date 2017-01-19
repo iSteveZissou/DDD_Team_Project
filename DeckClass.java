@@ -205,7 +205,7 @@ public class DeckClass {
 
 			this.shuffle();
 
-			System.out.println("Get Intel " +deck[0].getIntelligence());
+			System.out.println("Get Intel " +deck[0].getDescription());
 			in.close();
 		
 			for (int j = 0; j< 40; j++){
