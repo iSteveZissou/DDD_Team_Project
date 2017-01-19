@@ -104,12 +104,12 @@ public class UserClass {
 		return count;
 	}
 
-	public String topCardDescrip(){
-
-		String description = hand[1].getDescription();
-		return description;
-	}
-
+	
+	/**
+	 * method to return the topcard of the player
+	 * hand[0] will always be the top card
+	 * @return hand[0] 
+	 */
 	public CardClass topCard(){
 
 		return hand[0];

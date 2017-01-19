@@ -34,7 +34,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		// helper method to get number of players
 		this.noPlayer();
 
-		this.setSize(500, 300);
+		this.setSize(600, 300);
 		this.setLocation(200, 200);
 		this.setTitle("Top Trumps!");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -51,13 +51,6 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		//get top card info
 
-		String s = usersInGame[0].topCardDescrip();
-		System.out.println(s);
-		
-		
-		
-		
-		
 
 	
 	}
@@ -80,7 +73,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		pan.add(welcome);
 		pan.setBackground(Color.cyan);
 
-		GridLayout grid = new GridLayout(5, 2);
+		GridLayout grid = new GridLayout(6, 2);
 		JPanel pan3 = new JPanel(grid);
 		this.add(pan3, "West");
 
@@ -106,6 +99,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		score5 = new JLabel("  Score: ");
 		pan3.add(score2);
 
+		
+
+		JLabel cardCount2 = new JLabel("   Cards: " + usersInGame[1].numberOfCards());
+		pan3.add(cardCount2);
+
 		p3 = new JLabel(" Player 3 ");
 		p3.setFont(new Font("Courier", Font.BOLD, 16));
 		eastPan.add(p3);
@@ -115,6 +113,8 @@ public class Gameplay extends JFrame implements ActionListener{
 		p4.setFont(new Font("Courier", Font.BOLD, 16));
 		pan3.add(p4);
 		pan3.add(score4);
+		JLabel cardCount4 = new JLabel("   Cards: ");
+		pan3.add(cardCount4);
 
 		p5 = new JLabel(" Player 5 ");
 		p5.setFont(new Font("Courier", Font.BOLD, 16));
@@ -129,6 +129,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		if (noPlayers < maxPlayer-1){
 			p4.setEnabled(false);
 			score4.setEnabled(false);
+			cardCount4.setEnabled(false);
 		}
 		if (noPlayers < maxPlayer - 2){
 			p3.setEnabled(false);
@@ -164,7 +165,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		group.add(cat5);
 
 		centerPan.setBorder(new TitledBorder(new EtchedBorder(), "Top Card"));
-		description = new JLabel(usersInGame[0].topCardDescrip());
+		description = new JLabel(playerOne.getDescription());
 		description.setFont(new Font("Courier", Font.BOLD, 18));
 
 		//test Labels 
@@ -172,6 +173,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		val1 = new JLabel("" + playerOne.getHeight());
 		val1.setFont(new Font("Courier", Font.BOLD, 16));
 		//val1.setHorizontalAlignment(JLabel.CENTER);
+		blank.setHorizontalAlignment(JLabel.CENTER);
 
 		val2 = new JLabel(""+playerOne.getWeight());
 		val2.setFont(new Font("Courier", Font.BOLD, 16));
@@ -302,9 +304,34 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 	}
 
+<<<<<<< HEAD
 	/**Method for a round
 	   @param  the index corresponds to the category choosen by the user*/
 	public void round(int index) {
+=======
+	/**
+	 * Method to add the User's top card to the GUI on launch
+	 * 
+	 */
+	public void userTopCard(){
+
+		playerOne = usersInGame[0].topCard();
+
+		// val1.setText("playerOne.getHeight");
+		// val2.setText("playerOne.getHeight");
+		// val3.setText("playerOne.getHeight");
+		// val4.setText("playerOne.getHeight");
+		// val5.setText("playerOne.getHeight");
+		
+
+
+
+
+
+
+
+
+>>>>>>> 28da3f9ed81c60ad2c37f100fff3693d40f6abeb
 
 		//INSTANCE VARIABLE?? USED REPEATEDLY
 		int [] round = new int [noPlayers];
