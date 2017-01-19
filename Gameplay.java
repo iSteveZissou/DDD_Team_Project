@@ -50,13 +50,6 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		//get top card info
 
-		String s = usersInGame[0].topCardDescrip();
-		System.out.println(s);
-		
-		
-		
-		
-		
 
 	
 	}
@@ -163,7 +156,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		group.add(cat5);
 
 		centerPan.setBorder(new TitledBorder(new EtchedBorder(), "Top Card"));
-		description = new JLabel(usersInGame[0].topCardDescrip());
+		description = new JLabel(playerOne.getDescription());
 		description.setFont(new Font("Courier", Font.BOLD, 18));
 
 		//test Labels 
@@ -297,6 +290,10 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Method to add the User's top card to the GUI on launch
+	 * 
+	 */
 	public void userTopCard(){
 
 		playerOne = usersInGame[0].topCard();
@@ -306,6 +303,9 @@ public class Gameplay extends JFrame implements ActionListener{
 		// val3.setText("playerOne.getHeight");
 		// val4.setText("playerOne.getHeight");
 		// val5.setText("playerOne.getHeight");
+		
+
+
 
 
 
