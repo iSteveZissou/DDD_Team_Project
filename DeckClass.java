@@ -62,8 +62,10 @@ public class DeckClass {
 		// if not then we can change but this will work for testing purposes!
 
 		Collections.shuffle(Arrays.asList(deck));
+	
+  }
 		
-	}
+	
 
 	/** Deal the Cards in the deck to the players 
 	*   of the game

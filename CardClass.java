@@ -140,7 +140,7 @@ public class CardClass implements Comparable<CardClass> {
     * @return card details 
     */
    public String toString() {
-   		return description + height + weight + length + ferocity + intelligence;
+   		return description +" " +height +" "+ weight +" "+ length +" "+ ferocity +" " +intelligence;
 	}  
 
 }
