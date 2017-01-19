@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//god damn fuck you buddy 
+
 import javax.swing.*;
 
 /**
