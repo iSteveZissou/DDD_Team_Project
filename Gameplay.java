@@ -304,12 +304,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 	}
 
-<<<<<<< HEAD
-	/**Method for a round
-	   @param  the index corresponds to the category choosen by the user*/
-	public void round(int index) {
-=======
-	/**
+	 /**
 	 * Method to add the User's top card to the GUI on launch
 	 * 
 	 */
@@ -322,17 +317,17 @@ public class Gameplay extends JFrame implements ActionListener{
 		// val3.setText("playerOne.getHeight");
 		// val4.setText("playerOne.getHeight");
 		// val5.setText("playerOne.getHeight");
-		
 
+		}
+					
 
+	
 
+	/**Method for a round
+	   @param  the index corresponds to the category choosen by the user*/
+	public void round(int index) {
 
-
-
-
-
->>>>>>> 28da3f9ed81c60ad2c37f100fff3693d40f6abeb
-
+	
 		//INSTANCE VARIABLE?? USED REPEATEDLY
 		int [] round = new int [noPlayers];
 
@@ -486,17 +481,8 @@ public class Gameplay extends JFrame implements ActionListener{
 				}
 				*/
 	}
-					
 
-	public void userTopCard() {
 
-		playerOne = usersInGame[0].topCard();
 
-		// val1.setText("playerOne.getHeight");
-		// val2.setText("playerOne.getHeight");
-		// val3.setText("playerOne.getHeight");
-		// val4.setText("playerOne.getHeight");
-		// val5.setText("playerOne.getHeight");
-
-	}
+	
 }
