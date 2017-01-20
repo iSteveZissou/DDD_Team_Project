@@ -1,8 +1,19 @@
+// to create the Report the string will need to pass "read".Prob will
+//need DB connection
+
+//to createEndReport
+//Report write = new Report("write","6,Player One, 50, 66,2,3,4,5");
+
+
+
+
 //this assumes we have all 5 players.
 //this needs to be updated to reflect
 //the actual number of players 
 
+//buttons dont work - pls help. 
 
+//
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -71,6 +82,9 @@ public class Report extends JFrame implements ActionListener{
 	}
 	
 	public void makeReadMiddle(){
+		SQLMethods sql = new SQLMethods(); 
+		
+		
 		JLabel noGamesLbl, pcWinLbl, humWinLbl, drawsLbl, roundsLbl,
 		noGamesLblRes, pcWinLblRes, humWinLblRes, drawsLblRes, roundsLblRes; 
 	
@@ -81,7 +95,7 @@ public class Report extends JFrame implements ActionListener{
 		noGamesLbl.setHorizontalAlignment(JLabel.CENTER);
 		noGamesLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		noGamesLblRes = new JLabel("Bush");
+		noGamesLblRes = new JLabel(Integer.toString(sql.gameCount()));
 		noGamesLblRes.setHorizontalAlignment(JLabel.CENTER);
 		noGamesLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
@@ -89,7 +103,7 @@ public class Report extends JFrame implements ActionListener{
 		pcWinLbl.setHorizontalAlignment(JLabel.CENTER);
 		pcWinLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		pcWinLblRes= new JLabel("did ");
+		pcWinLblRes= new JLabel(Integer.toString(sql.compWin()));
 		pcWinLblRes.setHorizontalAlignment(JLabel.CENTER);
 		pcWinLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
@@ -97,23 +111,23 @@ public class Report extends JFrame implements ActionListener{
 		humWinLbl.setHorizontalAlignment(JLabel.CENTER);
 		humWinLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		humWinLblRes = new JLabel("9");
+		humWinLblRes = new JLabel(Integer.toString(sql.humanWinner()));
 		humWinLblRes.setHorizontalAlignment(JLabel.CENTER);
 		humWinLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		drawsLbl = new JLabel("Number of Draws:"); 
+		drawsLbl = new JLabel("Average number of Draws:"); 
 		drawsLbl.setHorizontalAlignment(JLabel.CENTER);
 		drawsLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		drawsLblRes= new JLabel("/"); 
+		drawsLblRes= new JLabel(Integer.toString(sql.avgDraws())); 
 		drawsLblRes.setHorizontalAlignment(JLabel.CENTER);
 		drawsLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		roundsLbl = new JLabel("Number of rounds:"); 
+		roundsLbl = new JLabel("Most rounds played:"); 
 		roundsLbl.setHorizontalAlignment(JLabel.CENTER);
 		roundsLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		roundsLblRes= new JLabel("11"); 
+		roundsLblRes= new JLabel(Integer.toString(sql.largestRounds())); 
 		roundsLblRes.setHorizontalAlignment(JLabel.CENTER);
 		roundsLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 				 
@@ -229,15 +243,15 @@ public class Report extends JFrame implements ActionListener{
 	public void makeBottom(){
 		JPanel bottom = new JPanel();
 		JButton saveButton = new JButton("Save Results"); 
-	//	JButton exitButton = new JButton("Exit"); 
-	//	JButton ngButton = new JButton("New Game"); 
+		JButton exitButton = new JButton("Exit"); 
+		JButton ngButton = new JButton("New Game"); 
 		
 		saveButton.addActionListener(this);
-	//	exitButton.addActionListener(e -> this.dispose()); //not sure if we can use
-	//	ngButton.addActionListener(this);
+		exitButton.addActionListener(e -> this.dispose()); //not sure if we can use
+		ngButton.addActionListener(this);
 		
 		bottom.add(saveButton); 
-	//	bottom.add(exitButton); 
+		bottom.add(exitButton); 
 		
 		if (type.equals("write")){
 		//	bottom.add(ngButton); 
@@ -246,30 +260,32 @@ public class Report extends JFrame implements ActionListener{
 		add(bottom, BorderLayout.SOUTH);
 	}
 	
-	public void getData(){
-		//String noDraws, winner, noRounds, p1win, p2win, p3wi, p4win, p5win
-	} 
-	
 	
 	public void actionPerformed(ActionEvent e) {
 		
 		//actions performed upon pressing a button, big if statement here 
 		
 		if (e.getSource() == saveButton) {
-			System.out.println("HEEKKRRJ");
+			
 		}
-		if (e.getSource() == ngButton){
-			System.out.println("Exit");
+		else {
+			System.out.println("whaddup");
+			saveResults(); 
 		}
 		
 	}
-		
+			
 	public void saveResults(){
-		/**
-		 * This method saves the data
-		 * from the database into the txt
-		 * file
-		 */
+		String gameRecord = String.format("%s,'%s',%s", noDraws, winner, noRounds);
+		String roundRecord= String.format("%s,%s,%s,%s,%s", p1win, p2win, p3win, p4win,p5win); 
+		
+		SQLMethods save = new SQLMethods(); 
+		save.writeGameplay(gameRecord);
+		save.writeRoundPlay(roundRecord);
+		
+		
+		
+		
 	}
 		
 }
