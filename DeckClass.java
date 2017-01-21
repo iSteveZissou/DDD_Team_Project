@@ -15,6 +15,7 @@ public class DeckClass {
 	private CardClass [] deck;
 
 	private int numCards;
+	private int count = 0;
 
 	/** Default Constructor */
 	public DeckClass() {
@@ -127,7 +128,7 @@ public class DeckClass {
 	*   @return total number of cards on the communal pile
 	*/
 	public int getDeckCount() {
-		return 0;
+		return count;
 	}
 
 	/** Clears the communal pile */
@@ -140,9 +141,26 @@ public class DeckClass {
 	*	@param card to be added
 	*/
 	public void addCard(CardClass crd) {
-		deck = Arrays.copyOf(deck,(deck.length+1));
-		deck[deck.length] = crd;
+		deck[count] = crd;
+		System.out.println(" CARD ADDEDTO COMMUNAL DECK: " + crd);
+
+		count++;
 	}
+
+	/** Clear the deck
+	*
+	*
+	*/
+	public CardClass [] clear() {
+		CardClass [] returnedDeck = new CardClass [count];
+		for (int i=0; i<count; i++) {
+			returnedDeck[i]= deck[i];
+			deck[i]= new CardClass();
+		}
+		count=0;
+		return returnedDeck;
+		}
+
 
 	/** Deletes a Card from the communal pile.
 	*   

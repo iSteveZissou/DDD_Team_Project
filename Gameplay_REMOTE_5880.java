@@ -18,7 +18,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JLabel val1,val2, val3, val4, val5;
 	private UserClass []usersInGame;
 	private CardClass playerOne;
-	private DeckClass deck;
 
 	
 
@@ -43,7 +42,6 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		this.createDeck();
 		this.userTopCard();
-		this.round(2);
 
 		// Layout all the components
 		this.layoutComponents();
@@ -270,10 +268,9 @@ public class Gameplay extends JFrame implements ActionListener{
 	/**
 	 * Helper method for instatiating the deck
 	 */
-	public void createDeck() {
+	public void createDeck(){
 
-		//DeckClass deck = new DeckClass();
-		deck = new DeckClass();
+		DeckClass deck = new DeckClass();
 		makeUsers();
 
 		
@@ -286,9 +283,6 @@ public class Gameplay extends JFrame implements ActionListener{
 			int n = usersInGame[i].numberOfCards();
 			System.out.println("Player "+ playerNumber +" CARDS:" + n);
 			playerNumber++;
-
-		//SUGGESTION: randomly select a player to decide on the initial category 
-		//this method should return this category index value so it can be used as param in round method
 		}
 	}
 	/**
@@ -297,7 +291,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	public void makeUsers(){
 
 		usersInGame = new UserClass[noPlayers];
-		UserClass winner;
 
 		for (int i = 0; i< noPlayers; i++){
 
@@ -306,8 +299,10 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 	}
 
-	
-	
+	/**
+	 * Method to add the User's top card to the GUI on launch
+	 * 
+	 */
 	public void userTopCard(){
 
 		playerOne = usersInGame[0].topCard();
@@ -318,174 +313,26 @@ public class Gameplay extends JFrame implements ActionListener{
 		// val4.setText("playerOne.getHeight");
 		// val5.setText("playerOne.getHeight");
 		
-}
-/**Method for a round
-	   @param  the index corresponds to the category choosen by the user*/
-	public void round(int index) {
 
-		//INSTANCE VARIABLE?? USED REPEATEDLY
-		int [] round = new int [noPlayers];
 
-		boolean winner= true;
 
-		//INDEX =0 IS NOT CONSIDERED, AS IT IS NEVER CHOOSEN AS A CATEGORY (DESCRIPTION)
-		
-		//Get the value of all players top card Height category	
-		if (index==1) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				round[i] = usersInGame[i].topCard().getHeight();
-			}
-		}
 
-		//Get the value of all players top card Weight category	
-		if (index==2) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				round[i] = usersInGame[i].topCard().getWeight();
-			}
-		}	
 
-		//Get the value of all players top card Length category
-		if (index==3) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				round[i] = usersInGame[i].topCard().getLength();
-			}
-		}	
 
-		//Get the value of all players top card ferocity category
-		if (index==4) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				round[i] = usersInGame[i].topCard().getFerocity();
-			}
-		}
 
-		//Get the value of all players top card intelligence category
-		if (index==5) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				round[i] = usersInGame[i].topCard().getIntelligence();
-			}
-		}	
 
-		//JUST FOR TESTING
-		for (int i=0; i<round.length; i++) {
-			System.out.println("Value of category played by player " +i +" is " +round[i]);
-		}
 
-		//Maxinum value in round array algorithm
-		//COULD BE MOVED INTO ITS OWN METHOD
-		int largestValue =round[0];
-		int increment=1;
-		int winningPlayerIndex=0; 	 //index value for the round array
-		while  (increment<round.length)	{
-			if (round[increment]>largestValue) {
-				largestValue = round[increment];
-				winningPlayerIndex = increment;
 
-			}
-			increment++;
 
-		}
-		System.out.println("WE FOUND OUR WINNING VALUE " +largestValue + " HELD BY PLAYER "+winningPlayerIndex);
-	
-		//Tests for whether there are duplicate largestValue elements in the round array
-		//  	if there are duplicate largestValue && do not compare it to the value it is produced from
-		//			draw; no winner
-		//		if there are no duplicate largestValue elements in round array
-		//			winner
-		for (int j=0; j<round.length; j++)
-		{
-			if (largestValue==round[j] && (largestValue != round[winningPlayerIndex]))
-			{
-				winner=false;
 
-				System.out.println("We have a tie");
-			}
-			else if (largestValue!=round[j]) {
-				winner = true;
 
-				System.out.println("aLL GOOD");
-			}
-		}
-		
-		/*There is a winner:
-		* 	add all cards for the other players deck to the winning players deck
-		* 	remove cards from losing players deck
-		*	add all communal cards to the winning players deck
-		*	remove all cards from communal deck
-		*/
-		if (winner==true) {
 
-			for (int i=0; i<noPlayers; i++)
-			{
-				//Adding cards from the losing players hands to the winning players hands
-				if (winningPlayerIndex!=i) {
-					usersInGame[winningPlayerIndex].addCard(usersInGame[i].topCard());
-					usersInGame[i].deleteCard();
-				}
 
-			}
 
-			int communalDeckTotal = deck.getDeckCount();
-			CardClass [] communalDeck = deck.clear();
 
-			for (int i=0; i<communalDeckTotal; i++) {
-				usersInGame[winningPlayerIndex].addCard(communalDeck[i]);
-			}
-			
-			System.out.println("Adding was successful" + usersInGame[winningPlayerIndex].numberOfCards());
-			System.out.println("Deleting was successful" + usersInGame[1].numberOfCards());
-				
-		}
 
-		/** There is a draw:
-		*	add all players cards to communal deck
-		*   delete players cards
-		*
-		*/
-		if (winner==false) {
-			for (int i=0; i<usersInGame.length; i++)
-			{
-		
-				deck.addCard(usersInGame[i].topCard());
-				usersInGame[i].deleteCard();			
-			}
-			
-		}
-		
-	
 
-		/**Checks to move onto next round
-				if no  losers/winners
-					winner selects next category
-					call round() again
-				 if winner
-				 	quit game play
-				 if loser 
-				 	remove from game
-				 	call round() again */
-	for (int i=0; i<usersInGame.length; i++) {
 
-	
-		//No winners/losers
-		if (usersInGame[i].numberOfCards() != 0 && usersInGame[i].numberOfCards() !=40)
-		{
-			//round(3);
-		}
-		//A winner
-		else if (usersInGame[i].numberOfCards() ==40)
-		{
-			System.err.println("Stop Game");
-			//quit()
-		}
-		else if (usersInGame[i].numberOfCards() ==0)
-		{
-			//remove player method
-			//round
-		}
-	}
+
 	}
 }

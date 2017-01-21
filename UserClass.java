@@ -69,8 +69,14 @@ public class UserClass {
 	*
 	*/
 	public void deleteCard() {
-		
+		CardClass cd = hand[0];
+		System.out.println("The lost card" +cd);
+		hand[0]= new CardClass();
+		for (int i=0; i<hand.length-1; i++) {
 
+			hand[i] = hand[i+1];
+}
+count--;
 	
 	}
 

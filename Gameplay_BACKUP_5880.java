@@ -18,7 +18,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JLabel val1,val2, val3, val4, val5;
 	private UserClass []usersInGame;
 	private CardClass playerOne;
-	private DeckClass deck;
 
 	
 
@@ -272,8 +271,7 @@ public class Gameplay extends JFrame implements ActionListener{
 	 */
 	public void createDeck() {
 
-		//DeckClass deck = new DeckClass();
-		deck = new DeckClass();
+		DeckClass deck = new DeckClass();
 		makeUsers();
 
 		
@@ -306,8 +304,15 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 	}
 
-	
-	
+<<<<<<< HEAD
+	/**Method for a round
+	   @param  the index corresponds to the category choosen by the user*/
+	public void round(int index) {
+=======
+	/**
+	 * Method to add the User's top card to the GUI on launch
+	 * 
+	 */
 	public void userTopCard(){
 
 		playerOne = usersInGame[0].topCard();
@@ -318,15 +323,20 @@ public class Gameplay extends JFrame implements ActionListener{
 		// val4.setText("playerOne.getHeight");
 		// val5.setText("playerOne.getHeight");
 		
-}
-/**Method for a round
-	   @param  the index corresponds to the category choosen by the user*/
-	public void round(int index) {
+
+
+
+
+
+
+
+
+>>>>>>> 28da3f9ed81c60ad2c37f100fff3693d40f6abeb
 
 		//INSTANCE VARIABLE?? USED REPEATEDLY
 		int [] round = new int [noPlayers];
 
-		boolean winner= true;
+		UserClass winner= null;
 
 		//INDEX =0 IS NOT CONSIDERED, AS IT IS NEVER CHOOSEN AS A CATEGORY (DESCRIPTION)
 		
@@ -400,12 +410,12 @@ public class Gameplay extends JFrame implements ActionListener{
 		{
 			if (largestValue==round[j] && (largestValue != round[winningPlayerIndex]))
 			{
-				winner=false;
+				winner=null;
 
 				System.out.println("We have a tie");
 			}
 			else if (largestValue!=round[j]) {
-				winner = true;
+				//winner=usersInGame[winningPlayerIndex];
 
 				System.out.println("aLL GOOD");
 			}
@@ -417,43 +427,31 @@ public class Gameplay extends JFrame implements ActionListener{
 		*	add all communal cards to the winning players deck
 		*	remove all cards from communal deck
 		*/
-		if (winner==true) {
+		if (winner!=null) {
 
 			for (int i=0; i<noPlayers; i++)
 			{
-				//Adding cards from the losing players hands to the winning players hands
-				if (winningPlayerIndex!=i) {
-					usersInGame[winningPlayerIndex].addCard(usersInGame[i].topCard());
-					usersInGame[i].deleteCard();
-				}
-
-			}
-
-			int communalDeckTotal = deck.getDeckCount();
-			CardClass [] communalDeck = deck.clear();
-
-			for (int i=0; i<communalDeckTotal; i++) {
-				usersInGame[winningPlayerIndex].addCard(communalDeck[i]);
-			}
-			
-			System.out.println("Adding was successful" + usersInGame[winningPlayerIndex].numberOfCards());
-			System.out.println("Deleting was successful" + usersInGame[1].numberOfCards());
 				
-		}
+				if (winningPlayerIndex!=i) {
+					//winner.addCard(usersInGame[i].topCard());
+					usersInGame[winningPlayerIndex].addCard(usersInGame[i].topCard());
+				//	remove cards from losing players deck
+				//  add all communal cards to the winning players deck
+				//	remove all cards from communal deck
 
+			}
+
+			}
+				System.out.println("Adding was successful" +usersInGame[winningPlayerIndex].numberOfCards());
+		}
 		/** There is a draw:
 		*	add all players cards to communal deck
 		*   delete players cards
 		*
 		*/
-		if (winner==false) {
-			for (int i=0; i<usersInGame.length; i++)
-			{
-		
-				deck.addCard(usersInGame[i].topCard());
-				usersInGame[i].deleteCard();			
-			}
-			
+		if (winner==null) {
+			// delete players cards
+			//add all players cards to communal deck
 		}
 		
 	
@@ -467,25 +465,38 @@ public class Gameplay extends JFrame implements ActionListener{
 				 if loser 
 				 	remove from game
 				 	call round() again */
-	for (int i=0; i<usersInGame.length; i++) {
 
-	
-		//No winners/losers
-		if (usersInGame[i].numberOfCards() != 0 && usersInGame[i].numberOfCards() !=40)
-		{
-			//round(3);
-		}
-		//A winner
-		else if (usersInGame[i].numberOfCards() ==40)
-		{
-			System.err.println("Stop Game");
-			//quit()
-		}
-		else if (usersInGame[i].numberOfCards() ==0)
-		{
-			//remove player method
-			//round
-		}
+	//if (usersInGame[0].numberOfCards() <30 ){
+				 	//Testing
+				// 	for (int i=0; i<3;i++){
+				//	round(3);
+				//}
+//	}
+		//else
+		//	System.out.println("WE quit");
+		/*for (int i=0; i<noPlayers; i++)
+			{
+				if (winner!=null && usersInGame[i].numberOfCards() != 0 && usersInGame[i].numberOfCards() !=40)
+				{
+					round(3);
+				}
+				else if (usersInGame[i].numberOfCards() ==25)
+				{
+					System.err.println("Stop Game");
+				}
+				*/
 	}
+					
+
+	public void userTopCard() {
+
+		playerOne = usersInGame[0].topCard();
+
+		// val1.setText("playerOne.getHeight");
+		// val2.setText("playerOne.getHeight");
+		// val3.setText("playerOne.getHeight");
+		// val4.setText("playerOne.getHeight");
+		// val5.setText("playerOne.getHeight");
+
 	}
 }
