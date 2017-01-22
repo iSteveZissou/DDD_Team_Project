@@ -13,7 +13,7 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JPanel pan;
 	private JButton playButton;
 	private int noPlayers;
-	private final int maxPlayer = 5;
+	private final int MAX_PLAYERS = 5;
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description;
 	private JLabel val1,val2, val3, val4, val5;
 	private UserClass []usersInGame;
@@ -123,16 +123,16 @@ public class Gameplay extends JFrame implements ActionListener{
 		eastPan.add(score5);
 
 
-		if (noPlayers < maxPlayer){
+		if (noPlayers < MAX_PLAYERS){
 			p5.setEnabled(false);
 			score5.setEnabled(false);
 		}
-		if (noPlayers < maxPlayer-1){
+		if (noPlayers < MAX_PLAYERS-1){
 			p4.setEnabled(false);
 			score4.setEnabled(false);
 			cardCount4.setEnabled(false);
 		}
-		if (noPlayers < maxPlayer - 2){
+		if (noPlayers < MAX_PLAYERS - 2){
 			p3.setEnabled(false);
 			score3.setEnabled(false);
 		}
