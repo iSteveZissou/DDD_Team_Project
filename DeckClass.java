@@ -16,6 +16,7 @@ public class DeckClass {
 
 	private int numCards;
 	private int count = 0;
+	private String categories;
 
 	/** Default Constructor */
 	public DeckClass() {
@@ -180,7 +181,15 @@ public class DeckClass {
 		
 	}
 
-	private void readText() {
+	public String [] getCategories(){
+
+		String [] tokens = categories.split(" ");
+		return tokens;
+
+
+	}
+
+	public void readText() {
 
 		 deck = new CardClass[TOTAL_CARDS];
 	
@@ -212,7 +221,7 @@ public class DeckClass {
 			
 
 			// first line containing all the categorie names
-			String categories = arrayLine[0];
+			categories = arrayLine[0];
 			System.out.println(categories);
 
 			// Create deck cards array from the string array of cards

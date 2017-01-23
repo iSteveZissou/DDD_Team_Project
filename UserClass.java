@@ -29,8 +29,8 @@ public class UserClass {
 	public void getHand() {  // not void
 
 		
-		int n = hand[0].getHeight();
-		System.out.println("HERE: " + n);
+		// int n = hand[0].getHeight();
+		// System.out.println("HERE: " + n);
 		
 	}
 
@@ -75,8 +75,8 @@ public class UserClass {
 		for (int i=0; i<hand.length-1; i++) {
 
 			hand[i] = hand[i+1];
-}
-count--;
+		}
+		count--;
 	
 	}
 

@@ -8,20 +8,20 @@ public class CardClass implements Comparable<CardClass> {
 	/** Instance Variables */
 	private String description;
 
-	private int height;
+	private int cat1;
 
-	private int weight;
+	private int cat2;
 
-	private int length;
+	private int cat3;
 	
-	private int ferocity;
+	private int cat4;
 
-	private int intelligence;
+	private int cat5;
 
 	private int [] cardValues;
 
-	private String [] CardCategories = { "description", 
-		"Height", "Weight", "Length", "Ferocity", "Intelligence"};
+	// private String [] CardCategories = { "description", 
+	// 	"Height", "Weight", "Length", "Ferocity", "Intelligence"};
 
 
 	/** Default Constructor */
@@ -37,11 +37,11 @@ public class CardClass implements Comparable<CardClass> {
 		for (int i=0; i<tokens.length; i++)
 		{
 			description = tokens[0];
-			height = Integer.parseInt(tokens[1]);
-			weight = Integer.parseInt(tokens[2]);
-			length = Integer.parseInt(tokens[3]);	
-			ferocity = 	Integer.parseInt(tokens[4]);
-			intelligence = Integer.parseInt(tokens[5]);	
+			cat1 = Integer.parseInt(tokens[1]);
+			cat2 = Integer.parseInt(tokens[2]);
+			cat3 = Integer.parseInt(tokens[3]);	
+			cat4 = 	Integer.parseInt(tokens[4]);
+			cat5 = Integer.parseInt(tokens[5]);	
 		}
 		
 	}
@@ -52,61 +52,61 @@ public class CardClass implements Comparable<CardClass> {
 	}
 
 	/** Accessor for height */
-	public int getHeight() {
-		return height;
+	public int getCatOne() {
+		return cat1;
 	}
 
 	/** Accessor for weight */
-	public int getWeight() {
-		return weight;
+	public int getCatTwo() {
+		return cat2;
 	}
 
 	/** Accessor for length */
-	public int getLength() {
-		return length;
+	public int getCatThree() {
+		return cat3;
 	}
 
 	/** Accessor for ferocity */
-	public int getFerocity() {
-		return ferocity;
+	public int getCatFour() {
+		return cat4;
 	}
 
 	/** Accessor for intelligence */
-	public int getIntelligence() {
-		return intelligence;
+	public int getCatFive() {
+		return cat5;
 	}
 
 
-	/** Mutator for description */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	// /** Mutator for description */
+	// public void setDescription(String description) {
+	// 	this.description = description;
+	// }
 
-	/** Mutator for height */
-	public void setHeight(int height) {
-		this.height = height;
-	}
+	// /** Mutator for height */
+	// public void setHeight(int height) {
+	// 	this.height = height;
+	// }
 
-	/** Mutator for weight */
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
+	// /** Mutator for weight */
+	// public void setWeight(int weight) {
+	// 	this.weight = weight;
+	// }
 
-	/** Mutator for length */
-	public void setLength(int length) {
-		this.length = length;
-	}
+	// * Mutator for length 
+	// public void setLength(int length) {
+	// 	this.length = length;
+	// }
 
-	/** Mutator for ferocity */
-	public void setFerocity(int ferocity) {
-		this.ferocity = ferocity;
-	}
+	// /** Mutator for ferocity */
+	// public void setFerocity(int ferocity) {
+	// 	this.ferocity = ferocity;
+	// }
 
-	/** Mutator for intelligence */
-	public void setIntelligence(int intelligence)
-	{
-		this.intelligence = intelligence;
-	}
+	// /** Mutator for intelligence */
+	// public void setIntelligence(int intelligence)
+	// {
+	// 	this.intelligence = intelligence;
+	// }
 
 	/**
 	*	Converts string name of a category to index in the category array
@@ -140,7 +140,7 @@ public class CardClass implements Comparable<CardClass> {
     * @return card details 
     */
    public String toString() {
-   		return description +" " +height +" "+ weight +" "+ length +" "+ ferocity +" " +intelligence;
+   		return description +" " +cat1 +" "+ cat2 +" "+ cat3 +" "+ cat4 +" " +cat5;
 	}  
 
 }
