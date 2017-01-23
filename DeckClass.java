@@ -196,9 +196,11 @@ public class DeckClass {
 		String line = "";
 		String [] arrayLine = new String[41];
 		String s ="";
+
+		int t = 0;
 		try 
 		{
-			FileReader fr = new FileReader("deck.txt");
+			FileReader fr = new FileReader("deck2.txt");
 			Scanner in = new Scanner(fr);
 			
 			//Reads each line of the text file into 
@@ -209,6 +211,10 @@ public class DeckClass {
 				s = in.nextLine();
 				arrayLine[numCards] = s;
 				numCards++;
+
+				
+				System.out.println("" + t);
+				t++;
 
 			}
 			

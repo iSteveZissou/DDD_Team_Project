@@ -215,16 +215,16 @@ public class Gameplay extends JFrame implements ActionListener{
 		centerPan.add(userCardsLabel);
 
 
-		// RadioButtons disabled for test
+		//RadioButtons disabled for test
 
-		// boolean test = true;
-		// if (test){
-		// 	cat1.setEnabled(false);
-		// 	cat2.setEnabled(false);
-		// 	cat3.setEnabled(false);
-		// 	cat4.setEnabled(false);
-		// 	cat5.setEnabled(false);
-		//  }
+		boolean test = true;
+		if (test){
+			cat1.setEnabled(false);
+			cat2.setEnabled(false);
+			cat3.setEnabled(false);
+			cat4.setEnabled(false);
+			cat5.setEnabled(false);
+		 }
 	}
 	/**
 	 * Bottom panel alternative layout

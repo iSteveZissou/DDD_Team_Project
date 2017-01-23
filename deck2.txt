@@ -15,7 +15,7 @@ Android19 76 12 5 9 46
 Android18 85 21 8 8 70
 Android17 85 20 8 8 70
 Android16 75 34 5 4 56
-Yamcha 60 18 3 1 66
+Yamaha 60 18 3 1 66
 TaoPaiPai 50 50 1 2 78
 DrBrief 1 62 1 0 99
 Janemba 44 34 1 2 64
@@ -38,3 +38,4 @@ Yajirobe 35 33 1 1 20
 CellJr 56 1 4 9 40
 Dende 78 16 4 0 92
 Nail 48 27 3 4 87
+Goten 48 20 9 6 50
