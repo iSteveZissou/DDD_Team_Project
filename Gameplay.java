@@ -12,6 +12,7 @@ public class Gameplay extends JFrame implements ActionListener{
 	/** Instance variables */
 	private JPanel pan;
 	private JButton playButton;
+	private JRadioButton cat1, cat2, cat3, cat4, cat5;
 	private int noPlayers;
 	private final int MAX_PLAYERS = 5;
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description;
@@ -43,7 +44,8 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		this.createDeck();
 		this.userTopCard();
-		this.round(2);
+		//this.selectCategory(1);
+		//this.round(selectCategory(1));
 
 		// Layout all the components
 		this.layoutComponents();
@@ -152,11 +154,11 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		
 	
-		JRadioButton cat1 = new JRadioButton("Height:");
-		JRadioButton cat2 = new JRadioButton("Weight:");
-		JRadioButton cat3 = new JRadioButton("Length:");
-		JRadioButton cat4 = new JRadioButton("Ferocity:");
-		JRadioButton cat5 = new JRadioButton("Intelligence:");
+		cat1 = new JRadioButton("Height:");
+		cat2 = new JRadioButton("Weight:");
+		cat3 = new JRadioButton("Length:");
+		cat4 = new JRadioButton("Ferocity:");
+		cat5 = new JRadioButton("Intelligence:");
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(cat1);
@@ -263,7 +265,28 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		if (e.getSource()== playButton){
 			//next go
+			round(selectCategory(1));
 			System.out.println("next go");
+		}
+		else if (e.getSource() ==cat1)
+		{
+			round(1);
+		}
+		else if (e.getSource() ==cat2)
+		{
+			round(2);
+		}
+		else if (e.getSource() ==cat3)
+		{
+			round(3);
+		}
+		else if (e.getSource() ==cat4)
+		{
+			round(4);
+		}
+		else if (e.getSource() ==cat5)
+		{
+			round(5);
 		}
 	}
 
@@ -321,9 +344,62 @@ public class Gameplay extends JFrame implements ActionListener{
 		// val3.setText("playerOne.getHeight");
 		// val4.setText("playerOne.getHeight");
 		// val5.setText("playerOne.getHeight");
+}
+
+/** Winner chooses a category to play.
+	If the user is a human player, they will manually
+	via the GUI select the category.
+	If the user is a computer player, they will select the highest value category 
+	of their topcard.
+	@param player whose turn it is to select a category
+	@return category that has been choosen 
+*/
+
+	private int selectCategory(int player) {
+		int highestCategory=0;
+		int [] topCardValues = new int[5];
+		if (player==0) {
+			//actionlistner
+		}
+			
+			
+		
+		else 
+		{
+			topCardValues[0]=usersInGame[player].topCard().getHeight();
+			
+			topCardValues[1]=usersInGame[player].topCard().getWeight();
+			
+			topCardValues[2]=usersInGame[player].topCard().getLength();
+			
+			topCardValues[3]=usersInGame[player].topCard().getFerocity();
+			
+			topCardValues[4]=usersInGame[player].topCard().getIntelligence();
+			
+			int largest =topCardValues[0];
+			int i=1;
+			int largestIndex =0;
+			while ( i<topCardValues.length) {
+				if (topCardValues[i]>largest) {
+					largest = topCardValues[i];
+					largestIndex=i;
+				}
+				i++;
+			}
+
+
+			highestCategory=largestIndex+1;
+		
+			System.out.println(usersInGame[player].topCard());
+			System.out.println(largest + " " + (highestCategory));
+			
 
 		
-}
+	}
+		return highestCategory;	
+	}
+
+
 /**Method for a round
  @param  the index corresponds to the category choosen by the user*/
 	public void round(int index) {
