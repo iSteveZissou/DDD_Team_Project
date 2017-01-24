@@ -49,7 +49,9 @@ public class SQLMethods {
 		sizeRS.next(); 
 		gameCount = sizeRS.getInt("count");
 		} catch (SQLException e){
-			//do something
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error executing query.",
+					"Error: Query failed.", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		return gameCount; 
@@ -67,7 +69,9 @@ public class SQLMethods {
 		humanRS.next();
 		humanWin = humanRS.getInt("count");
 		} catch (SQLException e){
-			//do somethin
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error executing query.",
+					"Error: Query failed.", JOptionPane.ERROR_MESSAGE);
 		}
 		return humanWin;
 	}
@@ -84,7 +88,9 @@ public class SQLMethods {
 		drawsRS.next();
 		avgDraws = drawsRS.getInt("avgdraws");
 		} catch (SQLException e) {
-			//do somehi?
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error executing query.",
+					"Error: Query failed.", JOptionPane.ERROR_MESSAGE);
 		}
 		return avgDraws;
 	}
@@ -102,7 +108,9 @@ public class SQLMethods {
 		compWinRS.next();
 		computerWins = compWinRS.getInt("count");
 		} catch (SQLException e){
-			//do somethin???
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error executing query.",
+					"Error: Query failed.", JOptionPane.ERROR_MESSAGE);
 		}
 		return computerWins;
 	}
@@ -120,7 +128,9 @@ public class SQLMethods {
 		roundsRS.next();
 		largestRounds = roundsRS.getInt("max");
 		} catch (SQLException e){
-			//do
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error executing query.",
+					"Error: Query failed.", JOptionPane.ERROR_MESSAGE);
 		}
 		return largestRounds;
 	}
