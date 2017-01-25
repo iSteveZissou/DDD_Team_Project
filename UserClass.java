@@ -17,13 +17,17 @@ public class UserClass {
 
 		count = 0;
 		System.out.println("NEW USER CREATED");
-		hand = new CardClass [40];
+		hand = new CardClass [41];
 
 	}
 
 	/** Non-Default Constructor */
 
 	/** Accessor for hand */
+
+	public UserClass(int n){
+
+	}
 
 
 	public void getHand() {  // not void
@@ -93,8 +97,8 @@ public class UserClass {
 	/** Player selects the appropriate category 
 	*   to play
 	*/
-	public String selectCategory() {
-		return "";
+	public String testMethod() {
+		return null;
 
 	}
 	/**

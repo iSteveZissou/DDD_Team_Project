@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.event.*;
+import java.util.*;
 
 /**
  * GUI to display the gameplay interface
@@ -13,13 +14,16 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JPanel pan;
 	private JButton playButton;
 	private JRadioButton cat1, cat2, cat3, cat4, cat5;
-	private int noPlayers;
+	private int noPlayers, winningPlayerIndex = 0;
 	private final int MAX_PLAYERS = 5;
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description;
 	private JLabel val1,val2, val3, val4, val5, userCardsLabel;
 	private UserClass []usersInGame;
 	private CardClass playerOne;
 	private DeckClass deck;
+
+	//test
+	private JLabel welcome, communal;
 
 	
 
@@ -53,6 +57,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		this.bottomPanel();
 		this.userTopCard();
 
+
+		this.getFirstPlayer();
+		
+
+
 		//get top card info
 
 
@@ -68,7 +77,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		// This is all pretty much just placeholders for now
 		
-		JLabel welcome = new JLabel("Top Trumps!!");
+		welcome = new JLabel("Top Trumps!!");
 		welcome.setFont(new Font("Courier", Font.PLAIN, 24));
 
 		// Layout for top of panel
@@ -237,7 +246,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		playButton = new JButton("Play!");
 		playButton.addActionListener(this);
 		JPanel bottomPan = new JPanel();
-		JLabel communal = new JLabel("Communal pile:      ");
+		communal = new JLabel("Communal pile:      ");
 		this.add(bottomPan, "South");
 		bottomPan.add(communal);
 		bottomPan.add(playButton);
@@ -269,7 +278,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	private void updateGUI(){
 
-
+		communal.setText("Communal cards:  " + deck.getDeckCount());
 
 
 	}
@@ -282,9 +291,11 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		if (e.getSource()== playButton){
 			//next go
-			round(selectCategory(1));
+			round(selectCategory(winningPlayerIndex));
 			this.userTopCard();
+			this.updateGUI();
 			System.out.println("next go");
+			
 		}
 		// else if (e.getSource() ==cat1)
 		// {
@@ -360,16 +371,26 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	public void userTopCard(){
 
-		playerOne = usersInGame[0].topCard();
+		if (usersInGame[0].numberOfCards()!= 0){
 
 
-		description.setText(playerOne.getDescription());
-		val1.setText("" +playerOne.getCatOne());
-		val2.setText(""+playerOne.getCatTwo());
-		val3.setText(""+playerOne.getCatThree());
-		val4.setText(""+playerOne.getCatFour());
-		val5.setText(""+playerOne.getCatFive());
-		userCardsLabel.setText("  Cards:    " + usersInGame[0].numberOfCards());
+
+			playerOne = usersInGame[0].topCard();
+
+
+			description.setText(playerOne.getDescription());
+			val1.setText("" +playerOne.getCatOne());
+			val2.setText(""+playerOne.getCatTwo());
+			val3.setText(""+playerOne.getCatThree());
+			val4.setText(""+playerOne.getCatFour());
+			val5.setText(""+playerOne.getCatFive());
+			userCardsLabel.setText("  Cards:    " + usersInGame[0].numberOfCards());
+
+		}
+
+
+
+		
 }
 
 /** Winner chooses a category to play.
@@ -384,14 +405,19 @@ public class Gameplay extends JFrame implements ActionListener{
 	private int selectCategory(int player) {
 		int highestCategory=0;
 		int [] topCardValues = new int[5];
-		if (player==0) {
-			//actionlistner
-		}
+
+
+
+		// if (player==0) {
+
+		// 	highestCategory = 3;
+		// 	//actionlistner
+		// }
 			
 			
 		
-		else 
-		{
+		// else 
+		// {
 			topCardValues[0]=usersInGame[player].topCard().getCatOne();
 			
 			topCardValues[1]=usersInGame[player].topCard().getCatTwo();
@@ -411,7 +437,7 @@ public class Gameplay extends JFrame implements ActionListener{
 					largestIndex=i;
 				}
 				i++;
-			}
+			// }
 
 
 			highestCategory=largestIndex+1;
@@ -436,21 +462,51 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		boolean winner= true;
 
+		winningPlayerIndex =0;
+
+
+
+		
+		// for (int i = 0; i < noPlayers; i++){
+		// 	if (usersInGame[i])
+		// }
+
+
+
+
+
 		//INDEX =0 IS NOT CONSIDERED, AS IT IS NEVER CHOOSEN AS A CATEGORY (DESCRIPTION)
 		
 		//Get the value of all players top card Height category	
 		if (index==1) {
 			for (int i=0; i<noPlayers; i++)
 			{
-				round[i] = usersInGame[i].topCard().getCatOne();
+				if( usersInGame[i].numberOfCards() !=0){
+					System.out.println("CRASHED HERE!!!!!!!!");
+					round[i] = usersInGame[i].topCard().getCatOne();
+				}
+				else if (usersInGame[i].numberOfCards()  == 0){
+					round[i] = -1; // set to kinus one if player eliminated
+				}
+
+
 			}
+
+				
 		}
 
 		//Get the value of all players top card Weight category	
 		if (index==2) {
 			for (int i=0; i<noPlayers; i++)
 			{
-				round[i] = usersInGame[i].topCard().getCatTwo();
+				if( usersInGame[i].numberOfCards() !=0){
+					System.out.println("CRASHED HERE!!!!!!!!");
+					round[i] = usersInGame[i].topCard().getCatTwo();
+				}
+
+				else if (usersInGame[i].numberOfCards() == 0){
+					round[i] = -1; // set to kinus one if player eliminated
+				}
 			}
 		}	
 
@@ -458,23 +514,45 @@ public class Gameplay extends JFrame implements ActionListener{
 		if (index==3) {
 			for (int i=0; i<noPlayers; i++)
 			{
-				round[i] = usersInGame[i].topCard().getCatThree();
+				if( usersInGame[i].numberOfCards() != 0){
+					System.out.println("CRASHED HERE!!!!!!!!");
+					round[i] = usersInGame[i].topCard().getCatTwo();
+				}
+				else if (usersInGame[i].numberOfCards() == 0){
+					round[i] = -1; // set to kinus one if player eliminated
+				}
 			}
+
 		}	
 
 		//Get the value of all players top card ferocity category
 		if (index==4) {
 			for (int i=0; i<noPlayers; i++)
 			{
-				round[i] = usersInGame[i].topCard().getCatFour();
-			}
+				if( usersInGame[i].numberOfCards() !=0){
+					System.out.println("CRASHED HERE!!!!!!!!");
+					round[i] = usersInGame[i].topCard().getCatFour();
+				}
+				else if (usersInGame[i].numberOfCards() == 0){
+					round[i] = -1; // set to kinus one if player eliminated
+				}
+
+				}
 		}
+
 
 		//Get the value of all players top card intelligence category
 		if (index==5) {
 			for (int i=0; i<noPlayers; i++)
 			{
-				round[i] = usersInGame[i].topCard().getCatFive();
+				if( usersInGame[i].numberOfCards() != 0){
+					System.out.println("CRASHED HERE!!!!!!!!");
+					round[i] = usersInGame[i].topCard().getCatTwo();
+
+				}
+				else if (usersInGame[i].numberOfCards() == 0){
+					round[i] = -1; // set to kinus one if player eliminated
+				}
 			}
 		}	
 
@@ -487,37 +565,70 @@ public class Gameplay extends JFrame implements ActionListener{
 		//COULD BE MOVED INTO ITS OWN METHOD
 		int largestValue =round[0];
 		int increment=1;
-		int winningPlayerIndex=0; 	 //index value for the round array
+		int possibleWinner =0;
+			 //index value for the round array
 		while  (increment<round.length)	{
 			if (round[increment]>largestValue) {
 				largestValue = round[increment];
-				winningPlayerIndex = increment;
+				possibleWinner= increment;
+
 
 			}
 			increment++;
 
 		}
-		System.out.println("WE FOUND OUR WINNING VALUE " +largestValue + " HELD BY PLAYER "+winningPlayerIndex);
+
+		System.out.println("WE FOUND OUR WINNING VALUE " +largestValue + " HELD BY PLAYER "+possibleWinner);
 	
 		//Tests for whether there are duplicate largestValue elements in the round array
 		//  	if there are duplicate largestValue && do not compare it to the value it is produced from
 		//			draw; no winner
 		//		if there are no duplicate largestValue elements in round array
 		//			winner
-		for (int j=0; j<round.length; j++)
-		{
-			if (largestValue==round[j] && (largestValue != round[winningPlayerIndex]))
-			{
-				winner=false;
+		// for (int j=0; j<round.length; j++)
+		// {
+		// 	if ((round[j]==largestValue) )
+		// 	{
+		// 		if (largestValue == round[possibleWinner]){
+		// 			winner=false;
 
-				System.out.println("We have a tie");
-			}
-			else if (largestValue!=round[j]) {
-				winner = true;
+		// 			System.out.println("We have a tie");
+		// 		}
+				
+		// 	}
+		// 	else if (round[j] ==largestValue) {
+		// 		winner = true;
+		// 		winningPlayerIndex = possibleWinner;
 
-				System.out.println("aLL GOOD");
-			}
-		}
+		// 		System.out.println("aLL GOOD");
+		// 	}
+		// }
+		// boolean test = false;
+		// for (int i = 0; i < noPlayers; i++){
+
+
+		// 	if (largestValue==round[i]){
+		// 		test = false;
+
+
+
+		// 		if (possibleWinner == i){
+					
+		// 			test = true;
+		// 		}
+		// 		if (!test){
+		// 			winner = false;
+		// 		System.out.println("We have a tie");
+		// 		}
+				
+
+
+		// 	}
+
+
+
+
+
 		
 		/*There is a winner:
 		* 	add all cards for the other players deck to the winning players deck
@@ -526,26 +637,40 @@ public class Gameplay extends JFrame implements ActionListener{
 		*	remove all cards from communal deck
 		*/
 		if (winner==true) {
+			winningPlayerIndex = possibleWinner;
+			int n = deck.getDeckCount();
+			CardClass [] pile = deck.getPile(); 
 
 			for (int i=0; i<noPlayers; i++)
 			{
 				//Adding cards from the losing players hands to the winning players hands
-				if (winningPlayerIndex!=i) {
+				if (usersInGame[i].numberOfCards() != 0){
 					usersInGame[winningPlayerIndex].addCard(usersInGame[i].topCard());
 					usersInGame[i].deleteCard();
+					if ( n>0){
+						for (int j =0; j <n; j++){
+
+						usersInGame[winningPlayerIndex].addCard(pile[i]);
+						}
+
+					}
+
 				}
+					
+				
 
 			}
 
 			int communalDeckTotal = deck.getDeckCount();
-			CardClass [] communalDeck = deck.clear();
+			deck.clear();
 
-			for (int i=0; i<communalDeckTotal; i++) {
-				usersInGame[winningPlayerIndex].addCard(communalDeck[i]);
-			}
+
 			
 			System.out.println("Adding was successful" + usersInGame[winningPlayerIndex].numberOfCards());
 			System.out.println("Deleting was successful" + usersInGame[1].numberOfCards());
+			System.out.println("      INDEX of wining player: " +winningPlayerIndex);
+			System.out.println("     Category in play: "+ index);
+
 			
 				
 		}
@@ -558,9 +683,12 @@ public class Gameplay extends JFrame implements ActionListener{
 		if (winner==false) {
 			for (int i=0; i<usersInGame.length; i++)
 			{
-		
-				deck.addCard(usersInGame[i].topCard());
-				usersInGame[i].deleteCard();			
+				if (usersInGame[i].numberOfCards() != 0){
+
+					deck.addCard(usersInGame[i].topCard());
+					usersInGame[i].deleteCard();
+				}
+					
 			}
 
 			
@@ -600,6 +728,30 @@ public class Gameplay extends JFrame implements ActionListener{
 	
 
 	}
+
+	/**
+	 * Helper method to selct player to go first
+	 */
+	public int getFirstPlayer(){
+
+
+
+
+		Random rand = new Random();
+		winningPlayerIndex = rand.nextInt(noPlayers);
+
+
+		//TEST will change later
+		
+
+
+		welcome.setText("player "+ winningPlayerIndex + " to go");
+
+		return winningPlayerIndex;
+
+
+	}
+
 
 
 

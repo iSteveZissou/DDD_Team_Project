@@ -123,6 +123,8 @@ public class DeckClass {
  				}
 	 	}
 
+	 	this.clear();
+	 	
 	}
 
 	/** Return total number of cards on the communal pile 
@@ -152,15 +154,13 @@ public class DeckClass {
 	*
 	*
 	*/
-	public CardClass [] clear() {
-		CardClass [] returnedDeck = new CardClass [count];
-		for (int i=0; i<count; i++) {
-			returnedDeck[i]= deck[i];
-			deck[i]= new CardClass();
-		}
-		count=0;
-		return returnedDeck;
-		}
+	public void clear() {
+
+
+		deck = new CardClass[TOTAL_CARDS];
+	 	count = 0;
+	 }
+	
 
 
 	/** Deletes a Card from the communal pile.
@@ -200,7 +200,7 @@ public class DeckClass {
 		int t = 0;
 		try 
 		{
-			FileReader fr = new FileReader("deck2.txt");
+			FileReader fr = new FileReader("deck.txt");
 			Scanner in = new Scanner(fr);
 			
 			//Reads each line of the text file into 
@@ -261,6 +261,18 @@ public class DeckClass {
 
 		//Close the scanner
 		
+	}
+
+	public CardClass[] getPile(){
+
+		CardClass [] pile = new CardClass[count];
+
+		for (int i=0; i< count; i++){
+			pile[i] = deck[i];
+
+
+		}
+		return pile;
 	}
 
 
