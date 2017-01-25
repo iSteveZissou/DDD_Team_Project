@@ -1,20 +1,3 @@
-// to create the Report the string will need to pass "read".Prob will
-//need DB connection
-
-//to createEndReport
-//Report write = new Report("write","6,Player One, 50, 66,2,3,4,5");
-
-
-
-
-//this assumes we have all 5 players.
-//this needs to be updated to reflect
-//the actual number of players 
-
-//buttons dont work - pls help. 
-
-//
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +51,7 @@ public class Report extends JFrame implements ActionListener{
 		
 		noPlayers = Integer.parseInt(result[0]); 
 		noDraws = result[1]; 
-		winner = result[2]; 
+		winner = getWinnerString(Integer.parseInt(result[2])); 
 		noRounds = result[3]; 
 		p1win = result[4];
 		p2win= result[5]; 
@@ -86,6 +69,29 @@ public class Report extends JFrame implements ActionListener{
 		}
 		
 		
+	}
+	
+	public String getWinnerString(int winnerNumber){
+		String winner = ""; 
+		
+		if (winnerNumber == 1){
+			winner = "Player One"; 
+		}
+		if (winnerNumber == 2){
+			winner = "Player Two"; 
+		}
+		if (winnerNumber == 3){
+			winner = "Player Three"; 
+		}
+		if (winnerNumber == 4){
+			winner = "Player Four"; 
+		}
+		if (winnerNumber == 5){
+			winner = "Player Fine"; 
+		}
+		
+		
+		return winner; 
 	}
 	
 	public void makeTop(){
@@ -278,7 +284,8 @@ public class Report extends JFrame implements ActionListener{
 		ngButton = new JButton("New Game"); 
 		
 		saveButton.addActionListener(this);
-		exitButton.addActionListener(e -> this.dispose()); //not sure if we can use
+		//exitButton.addActionListener(e -> this.dispose()); //not sure if we can use
+		exitButton.addActionListener(this); 
 		ngButton.addActionListener(this);
 		
 		if (type.equals("EndReport")){
@@ -295,22 +302,25 @@ public class Report extends JFrame implements ActionListener{
 
 		
 		if (e.getSource() == ngButton){
-			System.out.println("NEW GAME WILL LAUNCH");
-			System.exit(0);
+		 //new game
 		}
 		
 		
 		if (e.getSource() == saveButton) {
 				if (type.equals("Report")){
 					saveResultsFile(); 
-					System.out.println("save buttons - Report");
 				}
 				else {
-					System.out.println("save buttons - EndReport");
-					//saveResultsSQL(); 
+					saveResultsSQL(); 
 				}
 		}
+		
+		if(e.getSource() == exitButton){
+			//return to game menu
+			
+		}
 	}	
+	
 	
 	public void saveResultsFile(){
 		PrintWriter saveData = null; 
@@ -330,6 +340,7 @@ public class Report extends JFrame implements ActionListener{
 	}
 	
 	public void getResultsSQL() {
+		
 		SQLMethods sql = new SQLMethods(); 
 		
 		noGamesVal = Integer.toString(sql.gameCount()); 
@@ -343,6 +354,7 @@ public class Report extends JFrame implements ActionListener{
 	}
 	
 	public void saveResultsSQL(){
+		
 		String gameRecord = String.format("%s,'%s',%s", noDraws, winner, noRounds);
 		String roundRecord= String.format("%s,%s,%s,%s,%s", p1win, p2win, p3win, p4win,p5win); 
 		

@@ -61,7 +61,7 @@ public class SQLMethods {
 	public int humanWinner() {
 		int humanWin = 0;
 		Statement humanWinnerStmt = null;
-		String humanWinQuery = "SELECT COUNT (winner) FROM gameplaydata WHERE winner = 'Player One'";
+		String humanWinQuery = "SELECT COUNT (winner) FROM gameplayData WHERE winner = 'Player One'";
 		try {
 		humanWinnerStmt = connection.createStatement();
 		ResultSet humanRS = humanWinnerStmt.executeQuery(humanWinQuery);
@@ -99,7 +99,7 @@ public class SQLMethods {
 	public int compWin(){
 		int computerWins = 0;
 		Statement compStmt = null;
-		String compWinQuery = "SELECT COUNT (winner) FROM gameplaydata WHERE winner != 'Player One'";
+		String compWinQuery = "SELECT COUNT (winner) FROM gameplayData WHERE winner != 'Player One'";
 
 		try{
 		compStmt = connection.createStatement();
@@ -119,7 +119,7 @@ public class SQLMethods {
 	public int largestRounds()  {
 		int largestRounds = 0;
 		Statement roundsStmt = null;
-		String largestRoundsQuery = "SELECT MAX (totRounds) FROM gameplaydata";
+		String largestRoundsQuery = "SELECT MAX (totRounds) FROM gameplayData";
 		
 		try{
 		roundsStmt = connection.createStatement();
@@ -149,7 +149,6 @@ public class SQLMethods {
 		try {
 			stmt = connection.createStatement(); 
 			int rs = stmt.executeUpdate(queryAddGameplay);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Failed to save results. Please contact support",
