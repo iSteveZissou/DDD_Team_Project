@@ -265,6 +265,7 @@ public class DeckClass {
 
 	public CardClass[] getPile(){
 
+		System.out.println( " this is the pile count " + count);
 		CardClass [] pile = new CardClass[count];
 
 		for (int i=0; i< count; i++){

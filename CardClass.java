@@ -139,8 +139,26 @@ public class CardClass implements Comparable<CardClass> {
     * Example: "TRex 6 6 12 9 9"
     * @return card details 
     */
-   public String toString() {
+  	public String toString() {
    		return description +" " +cat1 +" "+ cat2 +" "+ cat3 +" "+ cat4 +" " +cat5;
 	}  
+
+	/**
+	 *  returns the value at a given index for the user's topcard
+	 * @param  n [the index 
+	 * @return   the value at that index
+	 */
+	public int catAtIndex(int n){
+		cardValues = new int [6];
+
+		cardValues[0] = 0;
+		cardValues[1] = cat1;
+		cardValues[2] = cat2;
+		cardValues[3] = cat3;
+		cardValues[4] = cat4;
+		cardValues[5] = cat5;
+
+		return cardValues[n];
+	}
 
 }

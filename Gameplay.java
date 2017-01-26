@@ -14,13 +14,14 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JPanel pan;
 	private JButton playButton;
 	private JRadioButton cat1, cat2, cat3, cat4, cat5;
-	private int noPlayers, winningPlayerIndex = 0;
+	private int noPlayers, winningPlayerIndex = 0, highestCategory;
 	private final int MAX_PLAYERS = 5;
-	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description;
-	private JLabel val1,val2, val3, val4, val5, userCardsLabel;
+	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description, inPlay;
+	private JLabel val1,val2, val3, val4, val5, userCardsLabel, cardCount2, result, yourScore;
 	private UserClass []usersInGame;
-	private CardClass playerOne;
+	private CardClass playerOne, playerTwo;
 	private DeckClass deck;
+	private String [] cats;
 
 	//test
 	private JLabel welcome, communal;
@@ -40,7 +41,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		// helper method to get number of players
 		this.noPlayer();
 
-		this.setSize(600, 300);
+		this.setSize(700, 400);
 		this.setLocation(200, 200);
 		this.setTitle("Top Trumps!");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -55,10 +56,12 @@ public class Gameplay extends JFrame implements ActionListener{
 		this.layoutComponents();
 		this.centerLayout();
 		this.bottomPanel();
-		this.userTopCard();
+		
 
 
 		this.getFirstPlayer();
+		this.userTopCard();
+		this.updateGUI(true);
 		
 
 
@@ -77,14 +80,19 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		// This is all pretty much just placeholders for now
 		
+		GridLayout gridTop = new GridLayout(1,2);
 		welcome = new JLabel("Top Trumps!!");
 		welcome.setFont(new Font("Courier", Font.PLAIN, 24));
+		inPlay = new JLabel("");
+		//inPlay.setFont(new Font("Courier", Font.PLAIN, 24));
 
 		// Layout for top of panel
-		pan = new JPanel();
+		pan = new JPanel(gridTop);
 		this.add(pan, "North");
 		pan.add(welcome);
 		pan.setBackground(Color.cyan);
+
+		pan.add(inPlay);
 
 		GridLayout grid = new GridLayout(6, 2);
 		JPanel pan3 = new JPanel(grid);
@@ -114,7 +122,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		
 
-		JLabel cardCount2 = new JLabel("   Cards: " + usersInGame[1].numberOfCards());
+		cardCount2 = new JLabel("   Cards: " + usersInGame[1].numberOfCards());
 		pan3.add(cardCount2);
 
 		p3 = new JLabel(" Player 3 ");
@@ -162,7 +170,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		this.add(centerPan, "Center");
 		centerPan.setBackground(Color.cyan);
 
-		String [] cats = deck.getCategories();
+		cats = deck.getCategories();
 
 		
 	
@@ -183,6 +191,8 @@ public class Gameplay extends JFrame implements ActionListener{
 		group.add(cat3);
 		group.add(cat4);
 		group.add(cat5);
+
+		cat1.setSelected(true);
 
 
 
@@ -226,14 +236,14 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		//RadioButtons disabled for test
 
-		boolean test = true;
-		if (test){
-			cat1.setEnabled(false);
-			cat2.setEnabled(false);
-			cat3.setEnabled(false);
-			cat4.setEnabled(false);
-			cat5.setEnabled(false);
-		 }
+		// boolean test = true;
+		// if (test){
+		// 	cat1.setEnabled(false);
+		// 	cat2.setEnabled(false);
+		// 	cat3.setEnabled(false);
+		// 	cat4.setEnabled(false);
+		// 	cat5.setEnabled(false);
+		//  }
 	}
 	/**
 	 * Bottom panel alternative layout
@@ -242,19 +252,35 @@ public class Gameplay extends JFrame implements ActionListener{
 
 
 		//Bottom panel used for the player/user
-		
+		GridLayout gridBottom = new GridLayout(2,3);
 		playButton = new JButton("Play!");
 		playButton.addActionListener(this);
-		JPanel bottomPan = new JPanel();
-		communal = new JLabel("Communal pile:      ");
+		//playButton.setPreferredSize(new Dimension(10, 10));
+		JPanel bottomPan = new JPanel(gridBottom);
+		yourScore = new JLabel("Your Score: ");
+		yourScore.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
+		bottomPan.add(yourScore);
+		communal = new JLabel("Communal pile:");
 		this.add(bottomPan, "South");
 		bottomPan.add(communal);
-		bottomPan.add(playButton);
+		//bottomPan.add(playButton);
 		bottomPan.setBackground(Color.cyan);
 
+	
+
 		// End of round result test
-		JLabel result = new JLabel("YOU WIN!!");
-		result.setFont(new Font("Trebuchet MS", Font.PLAIN, 24));
+		result = new JLabel("Result");
+		result.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		bottomPan.add(result);
+
+		JPanel trial = new JPanel();
+		trial.setBackground(Color.cyan);
+		trial.add(playButton);
+		trial.setLayout(new FlowLayout(FlowLayout.LEFT));
+		bottomPan.add(trial);
+
+
+
 
 	}
 
@@ -276,9 +302,35 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	}
 
-	private void updateGUI(){
+	private void updateGUI(boolean start){
 
 		communal.setText("Communal cards:  " + deck.getDeckCount());
+
+		if (winningPlayerIndex == 0){
+			welcome.setText("You're Turn");
+		}
+		else{
+			welcome.setText("Player "+ (winningPlayerIndex+1) + "'s turn");
+		}
+		cardCount2.setText("   Cards: " + usersInGame[1].numberOfCards());
+		
+
+		if (!start){
+			inPlay.setText("Category chosen: "+ cats[highestCategory]);
+			// testing
+			yourScore.setText("Your Score: " + playerOne.catAtIndex(highestCategory));
+			
+			score2.setText("  Score: " + playerTwo.catAtIndex(highestCategory));
+
+			if (winningPlayerIndex ==0){
+				result.setText("You Win!");
+			}
+			else {
+			result.setText("Player "+(winningPlayerIndex +1)+ " WINS!");
+			}
+		}
+		
+
 
 
 	}
@@ -291,9 +343,11 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		if (e.getSource()== playButton){
 			//next go
-			round(selectCategory(winningPlayerIndex));
+			this.selectCategory(winningPlayerIndex);
+			round(highestCategory);
+		
+			this.updateGUI(false);
 			this.userTopCard();
-			this.updateGUI();
 			System.out.println("next go");
 			
 		}
@@ -373,9 +427,25 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		if (usersInGame[0].numberOfCards()!= 0){
 
+			if (winningPlayerIndex == 0){
+				cat1.setEnabled(true);
+				cat2.setEnabled(true);
+				cat3.setEnabled(true);
+				cat4.setEnabled(true);
+				cat5.setEnabled(true);
 
+			}
+			else{
+				cat1.setEnabled(false);
+				cat2.setEnabled(false);
+				cat3.setEnabled(false);
+				cat4.setEnabled(false);
+				cat5.setEnabled(false);
+			}
 
 			playerOne = usersInGame[0].topCard();
+
+			
 
 
 			description.setText(playerOne.getDescription());
@@ -392,6 +462,8 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		
 }
+	
+
 
 /** Winner chooses a category to play.
 	If the user is a human player, they will manually
@@ -402,22 +474,41 @@ public class Gameplay extends JFrame implements ActionListener{
 	@return category that has been choosen 
 */
 
-	private int selectCategory(int player) {
-		int highestCategory=0;
+	private void selectCategory(int player) {
+		highestCategory=0;
 		int [] topCardValues = new int[5];
 
 
 
-		// if (player==0) {
+		if (player==0) {
 
-		// 	highestCategory = 3;
-		// 	//actionlistner
-		// }
+			
+
+			if (cat1.isSelected()){
+				highestCategory = 1;
+			}
+			else if (cat2.isSelected()){
+				highestCategory = 2;
+			}
+			else if (cat3.isSelected()){
+				highestCategory = 3;
+			}
+			else if(cat4.isSelected()){
+				highestCategory =4;
+			}
+			else if (cat5.isSelected()){
+				highestCategory = 5;
+			}
+		 
+
+			
+
+		}
 			
 			
 		
-		// else 
-		// {
+		else 
+		{
 			topCardValues[0]=usersInGame[player].topCard().getCatOne();
 			
 			topCardValues[1]=usersInGame[player].topCard().getCatTwo();
@@ -437,7 +528,7 @@ public class Gameplay extends JFrame implements ActionListener{
 					largestIndex=i;
 				}
 				i++;
-			// }
+			 }
 
 
 			highestCategory=largestIndex+1;
@@ -445,10 +536,13 @@ public class Gameplay extends JFrame implements ActionListener{
 			System.out.println(usersInGame[player].topCard());
 			System.out.println(largest + " " + (highestCategory));
 			
+		}
 
+		// testing
+		playerTwo = usersInGame[1].topCard();
 		
-	}
-		return highestCategory;	
+	
+		
 	}
 
 
@@ -516,7 +610,7 @@ public class Gameplay extends JFrame implements ActionListener{
 			{
 				if( usersInGame[i].numberOfCards() != 0){
 					System.out.println("CRASHED HERE!!!!!!!!");
-					round[i] = usersInGame[i].topCard().getCatTwo();
+					round[i] = usersInGame[i].topCard().getCatThree();
 				}
 				else if (usersInGame[i].numberOfCards() == 0){
 					round[i] = -1; // set to kinus one if player eliminated
@@ -547,7 +641,7 @@ public class Gameplay extends JFrame implements ActionListener{
 			{
 				if( usersInGame[i].numberOfCards() != 0){
 					System.out.println("CRASHED HERE!!!!!!!!");
-					round[i] = usersInGame[i].topCard().getCatTwo();
+					round[i] = usersInGame[i].topCard().getCatFive();
 
 				}
 				else if (usersInGame[i].numberOfCards() == 0){
@@ -603,30 +697,30 @@ public class Gameplay extends JFrame implements ActionListener{
 		// 		System.out.println("aLL GOOD");
 		// 	}
 		// }
-		// boolean test = false;
-		// for (int i = 0; i < noPlayers; i++){
+		boolean test = false;
+		for (int i = 0; i < noPlayers; i++){
 
 
-		// 	if (largestValue==round[i]){
-		// 		test = false;
+			if (largestValue==round[i]){
+				test = false;
 
 
 
-		// 		if (possibleWinner == i){
+				if (possibleWinner == i){
 					
-		// 			test = true;
-		// 		}
-		// 		if (!test){
-		// 			winner = false;
-		// 		System.out.println("We have a tie");
-		// 		}
+					test = true;
+				}
+				if (!test){
+					winner = false;
+					System.out.println("We have a tie");
+				}
 				
 
 
-		// 	}
+			}
 
 
-
+		}
 
 
 		
@@ -638,8 +732,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		*/
 		if (winner==true) {
 			winningPlayerIndex = possibleWinner;
-			int n = deck.getDeckCount();
-			CardClass [] pile = deck.getPile(); 
+			
 
 			for (int i=0; i<noPlayers; i++)
 			{
@@ -647,19 +740,22 @@ public class Gameplay extends JFrame implements ActionListener{
 				if (usersInGame[i].numberOfCards() != 0){
 					usersInGame[winningPlayerIndex].addCard(usersInGame[i].topCard());
 					usersInGame[i].deleteCard();
-					if ( n>0){
-						for (int j =0; j <n; j++){
-
-						usersInGame[winningPlayerIndex].addCard(pile[i]);
-						}
-
-					}
+					
 
 				}
 					
 				
 
 			}
+			int n = deck.getDeckCount();
+			CardClass [] pile = deck.getPile(); 
+			if ( n>0){
+						for (int j =0; j <n; j++){
+
+						usersInGame[winningPlayerIndex].addCard(pile[j]);
+						}
+
+					}
 
 			int communalDeckTotal = deck.getDeckCount();
 			deck.clear();
@@ -729,6 +825,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	}
 
+
 	/**
 	 * Helper method to selct player to go first
 	 */
@@ -745,7 +842,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		
 
 
-		welcome.setText("player "+ winningPlayerIndex + " to go");
+		//welcome.setText("player "+ winningPlayerIndex + " to go");
 
 		return winningPlayerIndex;
 
