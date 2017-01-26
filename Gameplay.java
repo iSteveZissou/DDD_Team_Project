@@ -307,13 +307,13 @@ public class Gameplay extends JFrame implements ActionListener{
 		communal.setText("Communal cards:  " + deck.getDeckCount());
 
 		if (winningPlayerIndex == 0){
-			welcome.setText("You're Turn");
+			welcome.setText("Your Turn");
 		}
 		else{
 			welcome.setText("Player "+ (winningPlayerIndex+1) + "'s turn");
 		}
 		cardCount2.setText("   Cards: " + usersInGame[1].numberOfCards());
-		
+
 
 		if (!start){
 			inPlay.setText("Category chosen: "+ cats[highestCategory]);
