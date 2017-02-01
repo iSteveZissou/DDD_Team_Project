@@ -43,6 +43,14 @@ public class CardClass implements Comparable<CardClass> {
 			cat4 = 	Integer.parseInt(tokens[4]);
 			cat5 = Integer.parseInt(tokens[5]);	
 		}
+
+		cardValues = new int [6];
+		cardValues[0] = 0;
+		cardValues[1] = cat1;
+		cardValues[2] = cat2;
+		cardValues[3] = cat3;
+		cardValues[4] = cat4;
+		cardValues[5] = cat5;
 		
 	}
 
@@ -149,16 +157,32 @@ public class CardClass implements Comparable<CardClass> {
 	 * @return   the value at that index
 	 */
 	public int catAtIndex(int n){
-		cardValues = new int [6];
+		
 
-		cardValues[0] = 0;
-		cardValues[1] = cat1;
-		cardValues[2] = cat2;
-		cardValues[3] = cat3;
-		cardValues[4] = cat4;
-		cardValues[5] = cat5;
+		
 
 		return cardValues[n];
+	}
+
+	public int getHighestValue() {
+
+		int largest = cardValues[0];
+		int i=1;
+		int largestIndex = 0;
+
+		while (i<cardValues.length) {
+			if (cardValues[i]>largest) {
+				largest = cardValues[i];
+				largestIndex=i;
+			}
+			i++;
+			
+
+			
+		}
+		System.out.println("The category index choosen is " + largestIndex);
+
+		return largestIndex;
 	}
 
 }

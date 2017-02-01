@@ -20,6 +20,7 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JLabel val1,val2, val3, val4, val5, userCardsLabel, cardCount2, result, yourScore;
 	private UserClass []usersInGame;
 	private CardClass playerOne, playerTwo;
+	private CardClass [] playersTopCard;
 	private DeckClass deck;
 	private String [] cats;
 
@@ -234,16 +235,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		centerPan.add(userCardsLabel);
 
 
-		//RadioButtons disabled for test
-
-		// boolean test = true;
-		// if (test){
-		// 	cat1.setEnabled(false);
-		// 	cat2.setEnabled(false);
-		// 	cat3.setEnabled(false);
-		// 	cat4.setEnabled(false);
-		// 	cat5.setEnabled(false);
-		//  }
+		
 	}
 	/**
 	 * Bottom panel alternative layout
@@ -302,6 +294,20 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	}
 
+		/**
+	 * Helper method to selct player to go first
+	 */
+	public int getFirstPlayer(){
+
+
+		Random rand = new Random();
+		winningPlayerIndex = rand.nextInt(noPlayers);
+
+		return winningPlayerIndex;
+
+
+	}
+
 	private void updateGUI(boolean start){
 
 		communal.setText("Communal cards:  " + deck.getDeckCount());
@@ -320,7 +326,7 @@ public class Gameplay extends JFrame implements ActionListener{
 			// testing
 			yourScore.setText("Your Score: " + playerOne.catAtIndex(highestCategory));
 			
-			score2.setText("  Score: " + playerTwo.catAtIndex(highestCategory));
+			//score2.setText("  Score: " + playerTwo.catAtIndex(highestCategory));
 
 			if (winningPlayerIndex ==0){
 				result.setText("You Win!");
@@ -349,33 +355,10 @@ public class Gameplay extends JFrame implements ActionListener{
 			this.updateGUI(false);
 			this.userTopCard();
 			System.out.println("next go");
+			System.out.println(" IT WORDKS");
 			
 		}
-		// else if (e.getSource() ==cat1)
-		// {
-		// 	round(1);
-		// 	this.userTopCard();
-		// }
-		// else if (e.getSource() ==cat2)
-		// {
-		// 	round(2);
-		// 	this.userTopCard();
-		// }
-		// else if (e.getSource() ==cat3)
-		// {
-		// 	round(3);
-		// 	this.userTopCard();
-		// }
-		// else if (e.getSource() ==cat4)
-		// {
-		// 	round(4);
-		// 	this.userTopCard();
-		// }
-		// else if (e.getSource() ==cat5)
-		// {
-		// 	round(5);
-		// 	this.userTopCard();
-		// }
+	
 	}
 
 	/**
@@ -458,9 +441,6 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		}
 
-
-
-		
 }
 	
 
@@ -478,12 +458,16 @@ public class Gameplay extends JFrame implements ActionListener{
 		highestCategory=0;
 		int [] topCardValues = new int[5];
 
+			playersTopCard = new CardClass[noPlayers];
+			for (int i=0; i<noPlayers; i++) {
+				playersTopCard[i] = usersInGame[i].topCard();
+				
+			}	
 
 
 		if (player==0) {
 
 			
-
 			if (cat1.isSelected()){
 				highestCategory = 1;
 			}
@@ -498,51 +482,17 @@ public class Gameplay extends JFrame implements ActionListener{
 			}
 			else if (cat5.isSelected()){
 				highestCategory = 5;
-			}
-		 
-
-			
+			}	
 
 		}
 			
-			
-		
 		else 
 		{
-			topCardValues[0]=usersInGame[player].topCard().getCatOne();
-			
-			topCardValues[1]=usersInGame[player].topCard().getCatTwo();
-			
-			topCardValues[2]=usersInGame[player].topCard().getCatThree();
-			
-			topCardValues[3]=usersInGame[player].topCard().getCatFour();
-			
-			topCardValues[4]=usersInGame[player].topCard().getCatFive();
-			
-			int largest =topCardValues[0];
-			int i=1;
-			int largestIndex =0;
-			while ( i<topCardValues.length) {
-				if (topCardValues[i]>largest) {
-					largest = topCardValues[i];
-					largestIndex=i;
-				}
-				i++;
-			 }
-
-
-			highestCategory=largestIndex+1;
+			highestCategory=playersTopCard[player].getHighestValue();
+			System.err.println(""  +highestCategory);
 		
-			System.out.println(usersInGame[player].topCard());
-			System.out.println(largest + " " + (highestCategory));
-			
 		}
 
-		// testing
-		playerTwo = usersInGame[1].topCard();
-		
-	
-		
 	}
 
 
@@ -550,304 +500,27 @@ public class Gameplay extends JFrame implements ActionListener{
  @param  the index corresponds to the category choosen by the user*/
 	public void round(int index) {
 
-	
-		//INSTANCE VARIABLE?? USED REPEATEDLY
-		int [] round = new int [noPlayers];
-
-		boolean winner= true;
-
-		winningPlayerIndex =0;
-
-
-
-		
-		// for (int i = 0; i < noPlayers; i++){
-		// 	if (usersInGame[i])
-		// }
-
-
-
-
-
-		//INDEX =0 IS NOT CONSIDERED, AS IT IS NEVER CHOOSEN AS A CATEGORY (DESCRIPTION)
-		
-		//Get the value of all players top card Height category	
-		if (index==1) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() !=0){
-					System.out.println("CRASHED HERE!!!!!!!!");
-					round[i] = usersInGame[i].topCard().getCatOne();
-				}
-				else if (usersInGame[i].numberOfCards()  == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-
-
-			}
-
-				
-		}
-
-		//Get the value of all players top card Weight category	
-		if (index==2) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() !=0){
-					System.out.println("CRASHED HERE!!!!!!!!");
-					round[i] = usersInGame[i].topCard().getCatTwo();
-				}
-
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-			}
-		}	
-
-		//Get the value of all players top card Length category
-		if (index==3) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() != 0){
-					System.out.println("CRASHED HERE!!!!!!!!");
-					round[i] = usersInGame[i].topCard().getCatThree();
-				}
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-			}
-
-		}	
-
-		//Get the value of all players top card ferocity category
-		if (index==4) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() !=0){
-					System.out.println("CRASHED HERE!!!!!!!!");
-					round[i] = usersInGame[i].topCard().getCatFour();
-				}
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-
-				}
-		}
-
-
-		//Get the value of all players top card intelligence category
-		if (index==5) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() != 0){
-					System.out.println("CRASHED HERE!!!!!!!!");
-					round[i] = usersInGame[i].topCard().getCatFive();
-
-				}
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-			}
-		}	
-
-		//JUST FOR TESTING
-		for (int i=0; i<round.length; i++) {
-			System.out.println("Value of category played by player " +i +" is " +round[i]);
-		}
-
-		//Maxinum value in round array algorithm
-		//COULD BE MOVED INTO ITS OWN METHOD
-		int largestValue =round[0];
-		int increment=1;
-		int possibleWinner =0;
-			 //index value for the round array
-		while  (increment<round.length)	{
-			if (round[increment]>largestValue) {
-				largestValue = round[increment];
-				possibleWinner= increment;
-
-
-			}
-			increment++;
-
-		}
-
-		System.out.println("WE FOUND OUR WINNING VALUE " +largestValue + " HELD BY PLAYER "+possibleWinner);
-	
-		//Tests for whether there are duplicate largestValue elements in the round array
-		//  	if there are duplicate largestValue && do not compare it to the value it is produced from
-		//			draw; no winner
-		//		if there are no duplicate largestValue elements in round array
-		//			winner
-		// for (int j=0; j<round.length; j++)
-		// {
-		// 	if ((round[j]==largestValue) )
-		// 	{
-		// 		if (largestValue == round[possibleWinner]){
-		// 			winner=false;
-
-		// 			System.out.println("We have a tie");
-		// 		}
-				
-		// 	}
-		// 	else if (round[j] ==largestValue) {
-		// 		winner = true;
-		// 		winningPlayerIndex = possibleWinner;
-
-		// 		System.out.println("aLL GOOD");
-		// 	}
-		// }
-		boolean test = false;
-		for (int i = 0; i < noPlayers; i++){
-
-
-			if (largestValue==round[i]){
-				test = false;
-
-
-
-				if (possibleWinner == i){
-					
-					test = true;
-				}
-				if (!test){
-					winner = false;
-					System.out.println("We have a tie");
-				}
-				
-
-
-			}
-
-
-		}
-
-
-		
-		/*There is a winner:
-		* 	add all cards for the other players deck to the winning players deck
-		* 	remove cards from losing players deck
-		*	add all communal cards to the winning players deck
-		*	remove all cards from communal deck
-		*/
-		if (winner==true) {
-			winningPlayerIndex = possibleWinner;
+		index = highestCategory;
+		System.err.println ("I'm here");
 			
-
-			for (int i=0; i<noPlayers; i++)
-			{
-				//Adding cards from the losing players hands to the winning players hands
-				if (usersInGame[i].numberOfCards() != 0){
-					usersInGame[winningPlayerIndex].addCard(usersInGame[i].topCard());
-					usersInGame[i].deleteCard();
-					
-
-				}
-					
-				
-
+		Round round = new Round(highestCategory, noPlayers , usersInGame, deck);
+		int possibleWinner = round.getWinner();
+			if(possibleWinner ==-1) {
+				winningPlayerIndex = winningPlayerIndex;
 			}
-			int n = deck.getDeckCount();
-			CardClass [] pile = deck.getPile(); 
-			if ( n>0){
-						for (int j =0; j <n; j++){
-
-						usersInGame[winningPlayerIndex].addCard(pile[j]);
-						}
-
-					}
-
-			int communalDeckTotal = deck.getDeckCount();
-			deck.clear();
+			else 
+				winningPlayerIndex = possibleWinner;
 
 
-			
-			System.out.println("Adding was successful" + usersInGame[winningPlayerIndex].numberOfCards());
-			System.out.println("Deleting was successful" + usersInGame[1].numberOfCards());
-			System.out.println("      INDEX of wining player: " +winningPlayerIndex);
-			System.out.println("     Category in play: "+ index);
-
-			
-				
-		}
-
-		/** There is a draw:
-		*	add all players cards to communal deck
-		*   delete players cards
-		*
-		*/
-		if (winner==false) {
-			for (int i=0; i<usersInGame.length; i++)
-			{
-				if (usersInGame[i].numberOfCards() != 0){
-
-					deck.addCard(usersInGame[i].topCard());
-					usersInGame[i].deleteCard();
-				}
-					
-			}
-
-			
-		}
-		
-	
-
-		/**Checks to move onto next round
-				if no  losers/winners
-					winner selects next category
-					call round() again
-				 if winner
-				 	quit game play
-				 if loser 
-				 	remove from game
-				 	call round() again */
-	for (int i=0; i<usersInGame.length; i++) {
-
-	
-		//No winners/losers
-		if (usersInGame[i].numberOfCards() != 0 && usersInGame[i].numberOfCards() !=40)
-		{
-			//round(3);
-		}
-		//A winner
-		else if (usersInGame[i].numberOfCards() ==40)
-		{
-			System.err.println("Stop Game");
-			//quit()
-		}
-		else if (usersInGame[i].numberOfCards() ==0)
-		{
-			//remove player method
-			//round
-		}
-	}
-	
 
 	}
 
 
-	/**
-	 * Helper method to selct player to go first
-	 */
-	public int getFirstPlayer(){
 
 
 
 
-		Random rand = new Random();
-		winningPlayerIndex = rand.nextInt(noPlayers);
 
-
-		//TEST will change later
-		
-
-
-		//welcome.setText("player "+ winningPlayerIndex + " to go");
-
-		return winningPlayerIndex;
-
-
-	}
 
 
 
