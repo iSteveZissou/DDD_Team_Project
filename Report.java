@@ -7,7 +7,15 @@ import java.io.PrintWriter;
 import javax.swing.*;
 
 /**
- * GUI to display the Game report
+ * Class to display the game reports. Class can handle 2 different 
+ * types of reports based on the input provided in the constructor.
+ * 
+ * Report refers to the report accessible from the main menu and outputs
+ * information from the database. This data can be saved to a text file
+ * 
+ * EndReport refers to the report accessible after the game ends. Game 
+ * data is output in the GUI and the user has the option to save it into 
+ * the database.
  * 
  */
 
@@ -32,18 +40,23 @@ public class Report extends JFrame implements ActionListener{
 		type = style; 
 		
 		//Displays different report based on input		
-		if (type.equals("Report")){  //report with overall data
-			getResultsSQL(); 
+		if (type.equals("Report")){  //report with overall data (pulled from SQL database) 
+			getResultsSQL();  //gets results from the database about the past games 
 			makeReportMiddle();
 		}
 		else{			
-			splitInput(data);		//report with game data
+			splitInput(data);		//report with game data ( pulled from the game play)
 			makeEndReportMiddle();		
 		}	
 		
 		makeBottom();
 		setVisible(true); 
 	}
+	/**
+	 * Method which splits the post-game data 
+	 * and assigns it to appropriate variables. 
+	 * 
+	 */
 	
 	public void splitInput(String data){
 		
@@ -67,9 +80,14 @@ public class Report extends JFrame implements ActionListener{
 				}
 			}
 		}
-		
-		
 	}
+	
+	/**
+	 * Method which takes in the player number and converts it
+	 *  into string with regards to the player name
+	 * 
+	 *@return String of the player name
+	 */
 	
 	public String getWinnerString(int winnerNumber){
 		String winner = ""; 
@@ -87,12 +105,15 @@ public class Report extends JFrame implements ActionListener{
 			winner = "Player Four"; 
 		}
 		if (winnerNumber == 5){
-			winner = "Player Fine"; 
+			winner = "Player Five"; 
 		}
-		
 		
 		return winner; 
 	}
+	
+	/**
+	 * Builds the top panel of the GUI
+	 */
 	
 	public void makeTop(){
 		JPanel top = new JPanel();
@@ -103,13 +124,16 @@ public class Report extends JFrame implements ActionListener{
 		add(top, BorderLayout.NORTH);	
 		
 	}
+	/**
+	 * Builds the middle panel of the Report 
+	 */
 	
 	public void makeReportMiddle(){
 			
 		JLabel noGamesLbl, pcWinLbl, humWinLbl, drawsLbl, roundsLbl,
 		noGamesLblRes, pcWinLblRes, humWinLblRes, drawsLblRes, roundsLblRes; 
 	
-		GridLayout gridMiddle = new GridLayout(5, 2); //rows, columsn
+		GridLayout gridMiddle = new GridLayout(5, 2); //rows, columns
 		JPanel panMiddle = new JPanel(gridMiddle);
 		
 		panMiddle.setBackground(Color.cyan);
@@ -170,6 +194,10 @@ public class Report extends JFrame implements ActionListener{
 			
 	}
 	
+	/**
+	 * Builds the middle panel of the EndReport 
+	 */
+	
 	public void makeEndReportMiddle(){
 		JLabel noDrawsLbl, winnerLbl, noRoundsLbl, p1winLbl, p2winLbl, p3winLbl, p4winLbl, p5winLbl,
 		noDrawsRls, winnerRls, noRoundsRsl, p1winRsl, p1winRls, p2winRls, p3winRls, p4winRls, p5winRls; 
@@ -229,6 +257,8 @@ public class Report extends JFrame implements ActionListener{
 		p2winRls.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (p2winRls);
 		
+		
+		//depending on the number of players, player labels are displayed accordingly.
 		if (noPlayers < 6 && noPlayers > 2 ){ 
 			
 			p3winLbl = new JLabel("Player 3 round wins: " ); 
@@ -275,6 +305,12 @@ public class Report extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 	
+	/**
+	 * Builds the bottom panel of the GUI, 
+	 * Depending on the type of report different 
+	 * buttons will be displayed
+	 *  
+	 */
 	public void makeBottom(){
 		JPanel bottom = new JPanel();
 		
@@ -288,6 +324,7 @@ public class Report extends JFrame implements ActionListener{
 		exitButton.addActionListener(this); 
 		ngButton.addActionListener(this);
 		
+		
 		if (type.equals("EndReport")){
 			bottom.add(ngButton); 
 			}
@@ -298,6 +335,10 @@ public class Report extends JFrame implements ActionListener{
 		add(bottom, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Action listeners for buttons
+	 *  
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		
@@ -321,7 +362,10 @@ public class Report extends JFrame implements ActionListener{
 		}
 	}	
 	
-	
+	/**
+	 * Method to save results from the database 
+	 *  
+	 */
 	public void saveResultsFile(){
 		PrintWriter saveData = null; 
 		String Report = String.format("%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n", 
@@ -339,6 +383,10 @@ public class Report extends JFrame implements ActionListener{
 		saveData.close();
 	}
 	
+	/**
+	 * Method to get the results from the database 
+	 *  
+	 */
 	public void getResultsSQL() {
 		
 		SQLMethods sql = new SQLMethods(); 
@@ -352,7 +400,10 @@ public class Report extends JFrame implements ActionListener{
 		sql.closeConnection();
 		
 	}
-	
+	/**
+	 * Method to save results into the database 
+	 *  
+	 */
 	public void saveResultsSQL(){
 		
 		String gameRecord = String.format("%s,'%s',%s", noDraws, winner, noRounds);
