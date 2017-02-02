@@ -343,6 +343,8 @@ public class Report extends JFrame implements ActionListener{
 
 		
 		if (e.getSource() == ngButton){
+			Gameplay nGame = new Gameplay();
+			this.dispose();
 		 //new game
 		}
 		
@@ -358,7 +360,8 @@ public class Report extends JFrame implements ActionListener{
 		
 		if(e.getSource() == exitButton){
 			//return to game menu
-			
+			//this.dispose();
+			System.exit(0);
 		}
 	}	
 	

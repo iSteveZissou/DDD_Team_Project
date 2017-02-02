@@ -440,16 +440,19 @@ public class Gameplay extends JFrame implements ActionListener{
 
 			//Check if player one is still in the game
 			//if not skip to end
+			boolean end = false;
 			if (!playerInOrOut[0]) {
+				end =true;
 				playButton.setEnabled(false);
 				skipToEnd();
 			}
-
+			if (!end){
 			this.selectCategory(winningPlayerIndex);
 			round(highestCategory);
 			getStats();
 			this.updateGUI(false);
-			this.userTopCard();			
+			this.userTopCard();	
+			}		
 		}
 	}
 
@@ -507,6 +510,12 @@ public class Gameplay extends JFrame implements ActionListener{
 			cat3.repaint();
 			cat4.repaint();
 			cat5.repaint();
+
+			if (usersInGame[PLAYER_ONE].numberOfCards() ==40){
+				
+				JOptionPane.showMessageDialog(null, "You WIN!", "YOU WIN!", JOptionPane.PLAIN_MESSAGE);
+				this.skipToEnd();
+			}
 			
 
 
@@ -536,8 +545,12 @@ public class Gameplay extends JFrame implements ActionListener{
 			userCardsLabel.setText("  Cards:    " + usersInGame[0].numberOfCards());
 
 		}
-		else 
-			userCardsLabel.setText("  Cards:    " + usersInGame[0].numberOfCards());
+		else {
+			JOptionPane.showMessageDialog(null, "You Lost! The Game will no skip to the end!", 
+			"GAME OVER!", JOptionPane.PLAIN_MESSAGE);
+			skipToEnd();
+			
+		}
 }
 
 /** Winner chooses a category to play.
@@ -592,14 +605,24 @@ public class Gameplay extends JFrame implements ActionListener{
 		index = highestCategory;
 		System.err.println ("I'm here");
 
+		// for (int i = 0; i < noPlayers; i++){
+		// 		if (usersInGame[i].numberOfCards() ==0) {
+		// 			playerInOrOut[i] = false;
+		// 		}
+		// 	}
+
+
 		round = new Round(highestCategory, noPlayers , usersInGame, deck);
 		int possibleWinner = round.getWinner();
 			if(possibleWinner ==-1) {
 				winningPlayerIndex = winningPlayerIndex;
 				
 			}
-			else 
+			else {
 				winningPlayerIndex = possibleWinner;
+			}
+
+
 	}	
 
 	/** Plays a round recursively, once player one is 
@@ -607,8 +630,7 @@ public class Gameplay extends JFrame implements ActionListener{
 	*/
 	public void skipToEnd(){
 
-		// JOptionPane.showMessageDialog(null, "You Lost :(", 
-		// 	"GAME OVER!", JOptionPane.PLAIN_MESSAGE);
+		
 
 		//Count how many players are left in the game
 		int playersLeft = 0;
@@ -634,10 +656,10 @@ public class Gameplay extends JFrame implements ActionListener{
 		//Stop the game
 		else if (playersLeft==1){
 
-			System.out.println("The number of DRAWS!!!!!"+noDraws);
-			System.out.println("The number of ROUNDS" +noRounds);
+			// System.out.println("The number of DRAWS!!!!!"+noDraws);
+			// System.out.println("The number of ROUNDS" +noRounds);
 			for (int i=0; i<playersWinners.length; i++) {
-				System.out.println("Array of winning tally " + playersWinners[i]);
+				//System.out.println("Array of winning tally " + playersWinners[i]);
 			}
 
 			findOverAllWinner();
