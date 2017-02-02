@@ -59,11 +59,11 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		exitButton.addActionListener(this);
 
 		this.add(pan, "North");
-		pan.setBackground(Color.cyan);
+		//pan.setBackground(Color.cyan);
 		this.add(pan2, "Center");
-		pan2.setBackground(Color.cyan);
+		//pan2.setBackground(Color.cyan);
 		this.add(pan3, "South");
-		pan3.setBackground(Color.cyan);
+		//pan3.setBackground(Color.cyan);
 
 		
 		pan.add(welcome);

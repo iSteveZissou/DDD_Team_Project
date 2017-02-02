@@ -20,8 +20,6 @@ public class CardClass implements Comparable<CardClass> {
 
 	private int [] cardValues;
 
-	// private String [] CardCategories = { "description", 
-	// 	"Height", "Weight", "Length", "Ferocity", "Intelligence"};
 
 
 	/** Default Constructor */
@@ -85,37 +83,6 @@ public class CardClass implements Comparable<CardClass> {
 	}
 
 
-	// /** Mutator for description */
-	// public void setDescription(String description) {
-	// 	this.description = description;
-	// }
-
-	// /** Mutator for height */
-	// public void setHeight(int height) {
-	// 	this.height = height;
-	// }
-
-	// /** Mutator for weight */
-	// public void setWeight(int weight) {
-	// 	this.weight = weight;
-	// }
-
-	// * Mutator for length 
-	// public void setLength(int length) {
-	// 	this.length = length;
-	// }
-
-	// /** Mutator for ferocity */
-	// public void setFerocity(int ferocity) {
-	// 	this.ferocity = ferocity;
-	// }
-
-	// /** Mutator for intelligence */
-	// public void setIntelligence(int intelligence)
-	// {
-	// 	this.intelligence = intelligence;
-	// }
-
 	/**
 	*	Converts string name of a category to index in the category array
 	*	@param String name of category
@@ -157,9 +124,6 @@ public class CardClass implements Comparable<CardClass> {
 	 * @return   the value at that index
 	 */
 	public int catAtIndex(int n){
-		
-
-		
 
 		return cardValues[n];
 	}
@@ -177,7 +141,6 @@ public class CardClass implements Comparable<CardClass> {
 			}
 			i++;
 			
-
 			
 		}
 		System.out.println("The category index choosen is " + largestIndex);

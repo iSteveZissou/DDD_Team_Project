@@ -16,6 +16,7 @@ public class Round{
 		this.noPlayers = noPlayers;
 		this.usersInGame = usersInGame;
 		this.deck = communalDeck;
+		
 		this.setUpRoundArray();
 		this.findWinnerDraw();
 		
@@ -30,79 +31,32 @@ public class Round{
 		round = new int [noPlayers];
 
 		//INDEX =0 IS NOT CONSIDERED, AS IT IS NEVER CHOOSEN AS A CATEGORY (DESCRIPTION)
-		
-		//Get the value of all players top card cat1 category	
-		if (index==1) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() !=0){
-
+	
+		for (int i=0; i<noPlayers; i++)
+		{
+			if( usersInGame[i].numberOfCards() !=0){
+				if (index ==1){
 					round[i] = usersInGame[i].topCard().getCatOne();
 				}
-				else if (usersInGame[i].numberOfCards()  == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-			}
-		
-		}
-
-		//Get the value of all players top card Weight category	
-		if (index==2) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() !=0){
+				else if (index == 2){
 					round[i] = usersInGame[i].topCard().getCatTwo();
 				}
-
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-			}
-		}	
-
-		//Get the value of all players top card Length category
-		if (index==3) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() != 0){
+				else if (index ==3){
 					round[i] = usersInGame[i].topCard().getCatThree();
 				}
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-			}
-
-		}	
-
-		//Get the value of all players top card ferocity category
-		if (index==4) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() !=0){
+				else if (index ==4){
 					round[i] = usersInGame[i].topCard().getCatFour();
 				}
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
-
-				}
-		}
-
-
-		//Get the value of all players top card intelligence category
-		if (index==5) {
-			for (int i=0; i<noPlayers; i++)
-			{
-				if( usersInGame[i].numberOfCards() != 0){
+				else if (index ==5){
 					round[i] = usersInGame[i].topCard().getCatFive();
-
 				}
-				else if (usersInGame[i].numberOfCards() == 0){
-					round[i] = -1; // set to kinus one if player eliminated
-				}
+								
 			}
-		}	
-
+			else if (usersInGame[i].numberOfCards()  == 0){
+				round[i] = -1; // set to kinus one if player eliminated
+			}
+		}
+		
 		//JUST FOR TESTING
 		for (int i=0; i<round.length; i++) {
 			System.out.println("Value of category played by player " +i +" is " +round[i]);
@@ -172,6 +126,7 @@ public class Round{
 	 * @param possibleWinner [description]
 	 */
 	public void handOutCards( int possibleWinner) {
+
 		if (winner==true) {
 			winningPlayerIndex = possibleWinner;
 			
@@ -202,15 +157,11 @@ public class Round{
 			int communalDeckTotal = deck.getDeckCount();
 			deck.clear();
 
-
-			
 			System.out.println("Adding was successful" + usersInGame[winningPlayerIndex].numberOfCards());
 			System.out.println("Deleting was successful" + usersInGame[1].numberOfCards());
 			System.out.println("      INDEX of wining player: " +winningPlayerIndex);
 			System.out.println("     Category in play: "+ index);
-
-			
-				
+	
 		}
 
 		/** There is a draw:
@@ -227,13 +178,9 @@ public class Round{
 
 					deck.addCard(usersInGame[i].topCard());
 					usersInGame[i].deleteCard();
-				}
-					
-			}
-
-			
+				}			
+			}	
 		}
-
 	}
 	
 	/**
