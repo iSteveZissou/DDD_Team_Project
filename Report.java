@@ -92,19 +92,19 @@ public class Report extends JFrame implements ActionListener{
 	public String getWinnerString(int winnerNumber){
 		String winner = ""; 
 		
-		if (winnerNumber == 1){
+		if (winnerNumber == 0){
 			winner = "Player One"; 
 		}
-		if (winnerNumber == 2){
+		if (winnerNumber == 1){
 			winner = "Player Two"; 
 		}
-		if (winnerNumber == 3){
+		if (winnerNumber == 2){
 			winner = "Player Three"; 
 		}
-		if (winnerNumber == 4){
+		if (winnerNumber == 3){
 			winner = "Player Four"; 
 		}
-		if (winnerNumber == 5){
+		if (winnerNumber == 4){
 			winner = "Player Five"; 
 		}
 		
