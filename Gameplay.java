@@ -31,6 +31,10 @@ public class Gameplay extends JFrame implements ActionListener{
 	private final int PLAYER_ONE = 0, PLAYER_TWO = 1, PLAYER_THREE = 2, PLAYER_FOUR = 3, PLAYER_FIVE = 4;
 
 	// counts
+	private int noDraws, overAllWinner, noRounds;
+	private Round round;
+	private int [] playersWinners;
+	private int p1Wins, p2Wins, p3Wins, p4Wins, p5Wins;
 
 
 	
@@ -419,21 +423,34 @@ public class Gameplay extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 
 		if (e.getSource()== playButton){
-			//next go
-			
-			if (!playerInOrOut[0]){
-			this.skipToEnd();
+
+			//Set player one to false if he is out
+			for (int i = 0; i < noPlayers; i++){
+				if (usersInGame[i].numberOfCards() ==0) {
+					playerInOrOut[i] = false;
+				}
 			}
+
+		//KEEP might help clean up code
+		//	if (round.getPlayerOneStillIn()) {
+		//		playButton.setEnabled(false);
+		//	skipToEnd();
+		//	}
+
+
+			//Check if player one is still in the game
+			//if not skip to end
+			if (!playerInOrOut[0]) {
+				playButton.setEnabled(false);
+				skipToEnd();
+			}
+
 			this.selectCategory(winningPlayerIndex);
 			round(highestCategory);
-		
+			getStats();
 			this.updateGUI(false);
-			this.userTopCard();
-			System.out.println("next go");
-			System.out.println(" IT WORDKS");
-			
+			this.userTopCard();			
 		}
-	
 	}
 
 	/**
@@ -441,23 +458,18 @@ public class Gameplay extends JFrame implements ActionListener{
 	 */
 	public void createDeck() {
 
-		//DeckClass deck = new DeckClass();
 		deck = new DeckClass();
 		makeUsers();
 
 		
 		deck.dealCards(noPlayers, usersInGame);
 
-		// usersInGame[0].getHand();
-		// 
 		int playerNumber = 1;
 		for (int i = 0; i < noPlayers; i++){
 			int n = usersInGame[i].numberOfCards();
 			System.out.println("Player "+ playerNumber +" CARDS:" + n);
 			playerNumber++;
 
-		//SUGGESTION: randomly select a player to decide on the initial category 
-		//this method should return this category index value so it can be used as param in round method
 		}
 	}
 	/**
@@ -470,26 +482,23 @@ public class Gameplay extends JFrame implements ActionListener{
 		UserClass winner;
 
 		playerInOrOut = new boolean [noPlayers];
+		playersWinners = new int [noPlayers];
 
 		for (int i = 0; i< noPlayers; i++){
 
 			UserClass player = new UserClass();
 			usersInGame[i] = player;
 			playerInOrOut[i] = true;	
+			playersWinners[i] = 0;
 			playersTopCard[i] = usersInGame[i].topCard();	
 		}
-
-
 	}
 
 	 /**
 	 * Method to add the User's top card to the GUI on launch
 	 * 
 	 */
-	public void userTopCard(){
-
-
-		
+	public void userTopCard() {
 
 		if (usersInGame[0].numberOfCards()!= 0){
 
@@ -529,8 +538,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 		else 
 			userCardsLabel.setText("  Cards:    " + usersInGame[0].numberOfCards());
-
-
 }
 
 /** Winner chooses a category to play.
@@ -541,7 +548,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	@param player whose turn it is to select a category
 	@return category that has been choosen 
 */
-
 	private void selectCategory(int player) {
 		highestCategory=0;
 		int [] topCardValues = new int[5];
@@ -575,13 +581,6 @@ public class Gameplay extends JFrame implements ActionListener{
 			highestCategory=playersTopCard[player].getHighestValue();
 			System.err.println(""  +highestCategory);
 		}
-		//not sure where to put this
-		for (int i = 0; i < noPlayers; i++){
-			if (usersInGame[i].numberOfCards() ==0){
-				playerInOrOut[i] = false;
-			}
-		}
-
 	}
 
 
@@ -589,10 +588,11 @@ public class Gameplay extends JFrame implements ActionListener{
  @param  the index corresponds to the category choosen by the user*/
 	public void round(int index) {
 
+
 		index = highestCategory;
 		System.err.println ("I'm here");
 
-		Round round = new Round(highestCategory, noPlayers , usersInGame, deck);
+		round = new Round(highestCategory, noPlayers , usersInGame, deck);
 		int possibleWinner = round.getWinner();
 			if(possibleWinner ==-1) {
 				winningPlayerIndex = winningPlayerIndex;
@@ -600,37 +600,112 @@ public class Gameplay extends JFrame implements ActionListener{
 			}
 			else 
 				winningPlayerIndex = possibleWinner;
-
 	}	
 
-
+	/** Plays a round recursively, once player one is 
+	*   out of the game.
+	*/
 	public void skipToEnd(){
 
 		// JOptionPane.showMessageDialog(null, "You Lost :(", 
 		// 	"GAME OVER!", JOptionPane.PLAIN_MESSAGE);
 
-		//this.dispose();
-		
-
+		//Count how many players are left in the game
 		int playersLeft = 0;
 		for (int i=0; i<usersInGame.length; i++){
 			if (usersInGame[i].numberOfCards() !=0) {
 				playersLeft++;
 			}
 		}
-		//System.out.println("GIVE mE THE VALUE" +playersLeft);
+		System.out.println("Number of players left in the game " +playersLeft);
+		
+
+		//If there are still more than 1 player left
+		//than keep playing the game
 		if (playersLeft>1) {
 
-		this.selectCategory(winningPlayerIndex);
-		this.round(highestCategory);
-		this.skipToEnd();
-
+			this.selectCategory(winningPlayerIndex);
+			round(highestCategory);
+			getStats();
+			this.skipToEnd();
 		}
+
+		//If there is only one player left in the game
+		//Stop the game
 		else if (playersLeft==1){
-			
+
+			System.out.println("The number of DRAWS!!!!!"+noDraws);
+			System.out.println("The number of ROUNDS" +noRounds);
+			for (int i=0; i<playersWinners.length; i++) {
+				System.out.println("Array of winning tally " + playersWinners[i]);
+			}
+
+			findOverAllWinner();
+			getReport();
+			this.dispose();
+		}
 	}
 
-}
+	/** 
+	*  Helper method to find 
+	*  the overall winner of the game
+	*
+	*/
+	private void findOverAllWinner() {
+		int largestValue =playersWinners[PLAYER_ONE];
+		int increment=1;
+		while  (increment<playersWinners.length)	{
+			if (playersWinners[increment]>largestValue) {
+				largestValue = playersWinners[increment];
+				overAllWinner= increment;
+			}
+			increment++;
+		}
+		System.out.println("The overall winner is " + overAllWinner);
+	}
 
+
+	/** Helper method to update the stats which are needed
+	* 	for the report
+	*/
+	private void getStats() {
+			noDraws = noDraws + round.getNoDraws();
+			noRounds++;
+			for (int i=0; i<noPlayers; i++) {
+				playersWinners[i] = playersWinners[i] + round.getPlayerWinners()[i];
+			}
+			System.out.println("The number of ROUNDS " +noRounds);
+			System.out.println("The number of DRAWS"+noDraws);
+			for (int i=0; i<playersWinners.length; i++) {
+				System.out.println("Array of winning tally " + playersWinners[i]);
+		}
+	}
+
+	/**Method to format report parameters and instantiate
+	*  the Report class
+	*/
+	private void getReport() {
+		for (int i=0; i<noPlayers; i++) {
+			p1Wins = playersWinners[PLAYER_ONE];
+			p2Wins = playersWinners[PLAYER_TWO];
+			if (noPlayers ==3) {
+				p3Wins = playersWinners[PLAYER_THREE];
+			}
+			if(noPlayers ==4) {
+				p3Wins = playersWinners[PLAYER_THREE];
+				p4Wins = playersWinners[PLAYER_FOUR];
+			} 	
+			if(noPlayers ==5) {
+				p3Wins = playersWinners[PLAYER_THREE];
+				p4Wins = playersWinners[PLAYER_FOUR];
+				p5Wins = playersWinners[PLAYER_FIVE];
+			}	
+		}
+		String reportInfo = (noPlayers +"," +noDraws +","+overAllWinner+","+noRounds
+			+ "," +p1Wins+","+p2Wins+","+p3Wins+","+p4Wins+","+p5Wins);
+		System.out.println(reportInfo);
+
+		Report report = new Report("EndReport", reportInfo);
+	}
 
 }

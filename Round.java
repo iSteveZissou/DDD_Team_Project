@@ -8,6 +8,9 @@ public class Round{
 	private int [] round ;
 	private boolean winner;
 	private int winningPlayerIndex;
+	private int noDraws;
+	private int [] playerWinners;
+	private boolean playerOneStillIn = false;
 
 	public Round(int index, int noPlayers, UserClass []  usersInGame, DeckClass communalDeck){
 
@@ -27,6 +30,10 @@ public class Round{
 	 * [setUpRoundArray description]
 	 */
 	public void setUpRoundArray() {
+			playerWinners = new int [noPlayers];
+			for (int i=0; i< playerWinners.length; i++){
+				playerWinners[i] = 0;
+			}
 
 		round = new int [noPlayers];
 
@@ -101,6 +108,7 @@ public class Round{
 				if (!test){
 					winner = false;
 					System.out.println("We have a tie");
+					noDraws++;
 				}
 			
 			}
@@ -129,6 +137,10 @@ public class Round{
 
 		if (winner==true) {
 			winningPlayerIndex = possibleWinner;
+			
+
+			playerWinners[winningPlayerIndex] = 1;
+
 			
 
 			for (int i=0; i<noPlayers; i++)
@@ -181,6 +193,10 @@ public class Round{
 				}			
 			}	
 		}
+		//Ignore for the moment
+		if (usersInGame[0].numberOfCards() == 0) {
+			playerOneStillIn = true;
+		}
 	}
 	
 	/**
@@ -192,13 +208,18 @@ public class Round{
  		return winningPlayerIndex;
  }
 
+ 	public int getNoDraws() {
+ 		return noDraws;
+ 	}
+
+ 	public int [] getPlayerWinners() {
+ 		return playerWinners;
+ 	}
+
+ 	public boolean getPlayerOneStillIn() {
+ 		return playerOneStillIn;
+ 	}
+
 
 
 }
-
-
-
-
-
-
-
