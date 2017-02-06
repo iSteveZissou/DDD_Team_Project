@@ -53,15 +53,10 @@ public class UserClass {
 	public void addCard(CardClass crd) {
 
 
-
-		
 		hand[count] = crd;
-		System.out.println(" CARD ADDED: " + crd);
+		//System.out.println(" CARD ADDED: " + crd);
 
 		count++;
-
-
-
 	}
 
 
@@ -123,6 +118,11 @@ public class UserClass {
 	public CardClass topCard(){
 
 		return hand[0];
+	}
+
+	public String printCard(int cardNumber){
+		String a = hand[cardNumber].toString();
+		return a;
 	}
 
 	

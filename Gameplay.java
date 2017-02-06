@@ -460,7 +460,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	 * Helper method for instatiating the deck
 	 */
 	public void createDeck() {
-
 		deck = new DeckClass();
 		makeUsers();
 
@@ -468,9 +467,17 @@ public class Gameplay extends JFrame implements ActionListener{
 		deck.dealCards(noPlayers, usersInGame);
 
 		int playerNumber = 1;
+		System.out.println("\n\nTEST3: PRINT PLAYERS HAND");
 		for (int i = 0; i < noPlayers; i++){
 			int n = usersInGame[i].numberOfCards();
-			System.out.println("Player "+ playerNumber +" CARDS:" + n);
+			System.out.println("\nPlayer "+ playerNumber +" CARDS:" + n);
+
+			//TEST 3: Print Contents of Users hand
+			for(int j=0;j<n;j++){
+				String a = usersInGame[i].printCard(j);
+				System.out.println(a);
+			}
+
 			playerNumber++;
 
 		}
