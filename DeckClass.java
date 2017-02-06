@@ -145,7 +145,7 @@ public class DeckClass {
 	*/
 	public void addCard(CardClass crd) {
 		deck[count] = crd;
-		System.out.println(" CARD ADDEDTO COMMUNAL DECK: " + crd);
+		System.out.println("CARD ADDED TO COMMUNAL DECK: " + crd.toString());
 
 		count++;
 	}
