@@ -16,7 +16,7 @@ public class UserClass {
 	public UserClass() {
 
 		count = 0;
-		System.out.println("NEW USER CREATED");
+		//System.out.println("NEW USER CREATED");
 		hand = new CardClass [41];
 
 	}

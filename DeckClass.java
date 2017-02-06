@@ -203,19 +203,22 @@ public class DeckClass {
 			FileReader fr = new FileReader("deck2.txt");
 			Scanner in = new Scanner(fr);
 			
+			System.out.println("\nTEST 1: READ IN & PRINT CARDS:\n");
+
 			//Reads each line of the text file into 
 			// a string array
 			int numCards=0;
 			while (in.hasNextLine())
 			{	
 				s = in.nextLine();
+
+				//TEST 1
+				System.out.println(s);
+
+
 				arrayLine[numCards] = s;
 				numCards++;
-
-				
-				System.out.println("" + t);
 				t++;
-
 			}
 			
 			// for (int i =0 ;i < 41; i++){
