@@ -19,7 +19,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	 */
 	public TopTrumpsGUI(){
 
-		this.setSize(300, 200);
+		this.setSize(300, 150);
 		this.setLocation(100,100);
 		this.setTitle ("Top Trumps!");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,19 +33,20 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	 */
 	public void layOut(){
 
-		GridLayout grid = new GridLayout(4, 1);
+	
 
-		JLabel welcome = new JLabel("Top Trumps!!");
-		welcome.setFont(new Font("Courier", Font.PLAIN, 28));
-		welcome.setHorizontalAlignment(JLabel.CENTER);
+		// JLabel welcome = new JLabel("Top Trumps!!");
+		// welcome.setFont(new Font("Courier", Font.PLAIN, 28));
+		// welcome.setHorizontalAlignment(JLabel.CENTER);
 
 
 	
 		JPanel pan = new JPanel();
+	
+		JPanel pan1 = new JPanel();
 		JPanel pan2 = new JPanel();
-		JPanel pan3 = new JPanel();
 
-		pan.setPreferredSize(new Dimension(80, 80));
+		
 		newGame = new JButton("NEW GAME");
 		newGame.addActionListener(this);
 		//newGame.setPreferredSize(new Dimension(10, 10));
@@ -57,16 +58,16 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 
 		this.add(pan, "North");
 		//pan.setBackground(Color.cyan);
-		this.add(pan2, "Center");
+		this.add(pan1, "Center");
 		//pan2.setBackground(Color.cyan);
-		this.add(pan3, "South");
+		this.add(pan2, "South");
 		//pan3.setBackground(Color.cyan);
 
 		
-		pan.add(welcome);
+		
 		pan.add(newGame);
-		pan2.add(reportButton);
-		pan3.add(exitButton);
+		pan1.add(reportButton);
+		pan2.add(exitButton);
 
 		this.setVisible(true);
 
