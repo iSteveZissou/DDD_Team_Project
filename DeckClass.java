@@ -1,6 +1,6 @@
- /** Maintains a list of CardClass objects
- * The methods allow objects to be added and deleted from the list
- *
+ /** Maintains a list of CardClass objects.
+ *	 The methods allow CardClass objects to be added and deleted from the list
+ *   according to when Cards are added and deleted from the communal deck.
  */
 import java.util.*;
 import java.io.*;
@@ -18,89 +18,65 @@ public class DeckClass {
 	private int count = 0;
 	private String categories;
 
-	/** Default Constructor */
+	/** Non-Default Constructor	 */
 	public DeckClass() {
-
 		this.readText();
-		
-
-
-		// //Fill the cardClass array with null values
-		// for (int i =0; i<deck.length; i++)
-		// {
-		// 	deck[i] =new CardClass();
-		// }
-
-
 	}
 
-	/** Non-Default Constructor 
-	**	Use loop to make deep copy
-	*/
-	public DeckClass(CardClass [] deck) {
-		for (int i=0; i<deck.length; i++)
-		{
-			this.deck[i] = deck[i];
-		}
-	}
-	/** Accessor for deck */
-	public CardClass [] getDeck() {
-		return deck;
-	}
 
-	/** Mutator for deck */
-	public void setDeck(CardClass [] deck) {
-		this.deck = deck;
-	}
 
-	/** Shuffles the CardClass objects on the Deck at random
-	*	IDEAS: Use Fisher Yates Algorithm
-	*	@return shuffled CardClass array
+	/** 
+	*   Shuffles the CardClass objects in the deck array at random.
+	*   The method loops through the deck array and swaps each Card
+	*   with a random Card. 
 	*/
 	public void shuffle() {
 
-		// Simple way of shuffling though I'm not sure if we can use
-		// the Java Collections Framework??
-		// if not then we can change but this will work for testing purposes!
+		Random rand = new Random();
+		for (int i = 0; i<deck.length; i++){
+			int random = Math.abs(rand.nextInt()) % deck.length;
+			CardClass temp = deck[i]; 
+			deck[i]  = deck[random];
+			deck[random] = temp; 	
+		}
 
-		Collections.shuffle(Arrays.asList(deck));
-	
   }
 		
 	
 
-	/** Deal the Cards in the deck to the players 
-	*   of the game
-	*	@param number of players
+	/**
+	*   Deal the Cards in the deck to the players of the game
+	*   @param arrayUser - array of the users in the game
 	*/
-	public void dealCards(int numPlayers, UserClass[] arrayUser) {
+		public void dealCards(UserClass[] arrayUser) {
 
 		int count = 0;
 
 		Random rand = new Random();
 		int randomPlayer = rand.nextInt(3);
-		if (numPlayers == 5){
-
+		
+		//How cards are dealt out when there are 5 players
+		if (arrayUser.length == 5){
 			int i = 0;
 			while ( i < deck.length){
-
-				arrayUser[0].addCard(deck[i++]);
-				arrayUser[1].addCard(deck[i++]);
- 				arrayUser[2].addCard(deck[i++]);
-				arrayUser[3].addCard(deck[i++]);
- 				arrayUser[4].addCard(deck[i++]);
+				for (int j =0; j<arrayUser.length; j++) {
+					arrayUser[j].addCard(deck[i++]);
+				}
 			}
 		}
-		else if (numPlayers ==4){
+
+		//How cards are dealt out when there are 4 players
+		else if (arrayUser.length == 4){
 			int i = 0;
 			while ( i < deck.length){
-				arrayUser[0].addCard(deck[i++]);
-				arrayUser[1].addCard(deck[i++]);
- 				arrayUser[2].addCard(deck[i++]);
-				arrayUser[3].addCard(deck[i++]);
+				for (int j=0; j<arrayUser.length; j++) {
+					arrayUser[j].addCard(deck[i++]);
+				}
 			}
 		}
-		else if (numPlayers == 3){
+
+		//How cards are dealt out when there are 3 players
+		else if (arrayUser.length == 3){
 			int i = 0;
 			while ( i < deck.length){
 				// Selects random player to give the extra card??
@@ -108,23 +84,23 @@ public class DeckClass {
 					arrayUser[randomPlayer].addCard(deck[i]);
 					break;
 				}
-				arrayUser[0].addCard(deck[i++]);
-				arrayUser[1].addCard(deck[i++]);
- 				arrayUser[2].addCard(deck[i++]);	
+				for (int j=0; j<arrayUser.length; j++) {
+					arrayUser[j].addCard(deck[i++]);
+				}
+				
 			}
 	 	}	
-	 	else if (numPlayers ==2){
+	 	else if (arrayUser.length ==2){
 	 		
 	 		int i = 0;
 			while ( i < deck.length){
+				for (int j=0; j<arrayUser.length; i++) {					
+					arrayUser[j].addCard(deck[i++]);
 
-				arrayUser[0].addCard(deck[i++]);
-				arrayUser[1].addCard(deck[i++]);
- 				}
-	 	}
-
+				}
+ 			}
+		}
 	 	this.clear();
-	 	
 	}
 
 	/** Return total number of cards on the communal pile 
@@ -134,62 +110,37 @@ public class DeckClass {
 		return count;
 	}
 
-	/** Clears the communal pile */
-	public CardClass [] clearDeck() {
-		return null;
-	}
 
 	/** Adds a Card to the communal pile 
-	*
-	*	@param card to be added
+	*	@param crd - card to be added
 	*/
 	public void addCard(CardClass crd) {
 		deck[count] = crd;
-		System.out.println("CARD ADDED TO COMMUNAL DECK: " + crd.toString());
-
 		count++;
 	}
 
-	/** Clear the deck
-	*
-	*
+	/**
+	*  Clears the deck of all cards
 	*/
 	public void clear() {
-
-
 		deck = new CardClass[TOTAL_CARDS];
 	 	count = 0;
 	 }
 	
-
-
-	/** Deletes a Card from the communal pile.
-	*   
-	*   This is only used when we have an remaining card when dealing
-	*
-	*	@param index of position of the card to be deleted 
-	*          in the deck
-	*/
-	public void deleteCard(int position) {
-
-	}
-
-	/** Reset deck once the game is completed
-	*
-	*/
-	public void reset() {
-		
-	}
-
+	 /** 
+	  * Splits the category string into an array of single category names 
+	  *	@return array of the category names
+	  */
 	public String [] getCategories(){
-
 		String [] tokens = categories.split(" ");
 		return tokens;
-
-
 	}
 
-	public void readText() {
+	/** 
+	 *  Reads the textFile and converts it into the appropriate format 
+	 *  to create Card's and construct the deck
+	 */
+	private void readText() {
 
 		 deck = new CardClass[TOTAL_CARDS];
 	
@@ -205,8 +156,7 @@ public class DeckClass {
 			
 			System.out.println("\nTEST 1: READ IN & PRINT CARDS:\n");
 
-			//Reads each line of the text file into 
-			// a string array
+		
 			int numCards=0;
 			while (in.hasNextLine())
 			{	
@@ -221,17 +171,13 @@ public class DeckClass {
 				t++;
 			}
 			
-			// for (int i =0 ;i < 41; i++){
-
-
-			// 	System.out.println(arrayLine[i]);
-			// }
+		
 
 			
 
 			// first line containing all the categorie names
 			categories = arrayLine[0];
-			System.out.println(categories);
+		
 
 			// Create deck cards array from the string array of cards
 			// skip the first

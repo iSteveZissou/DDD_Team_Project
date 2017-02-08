@@ -395,11 +395,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		if (e.getSource()== playButton){
 
 			//Set player one to false if he is out
-			// for (int i = 0; i < noPlayers; i++){
-			// 	if (usersInGame[i].numberOfCards() ==0) {
-			// 		playerInOrOut[i] = false;
-			// 	}
-			// }
+			for (int i = 0; i < noPlayers; i++){
+				if (usersInGame[i].numberOfCards() ==0) {
+					playerInOrOut[i] = false;
+				}
+			}
 			//Check if player one is still in the game
 			//if not skip to end
 			boolean end = false;
@@ -424,7 +424,7 @@ public class Gameplay extends JFrame implements ActionListener{
 	public void createDeck() {
 		deck = new DeckClass();
 		makeUsers();
-		deck.dealCards(noPlayers, usersInGame);
+		deck.dealCards(usersInGame);
 
 		int playerNumber = 1;
 		System.out.println("\n\nTEST3: PRINT PLAYERS HAND");
@@ -571,11 +571,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		index = highestCategory;
 		System.err.println ("I'm here");
 
-		for (int i = 0; i < noPlayers; i++){
-				if (usersInGame[i].numberOfCards() ==0) {
-					playerInOrOut[i] = false;
-				}
-			}
+		// for (int i = 0; i < noPlayers; i++){
+		// 		if (usersInGame[i].numberOfCards() ==0) {
+		// 			playerInOrOut[i] = false;
+		// 		}
+		// 	}
 
 
 		round = new Round(highestCategory, noPlayers , usersInGame, deck);
