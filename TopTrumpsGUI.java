@@ -19,16 +19,13 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	 */
 	public TopTrumpsGUI(){
 
-		this.setSize(300, 170);
+		this.setSize(300, 200);
 		this.setLocation(100,100);
 		this.setTitle ("Top Trumps!");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// call layout method
-		
 		this.layOut();
-		
-
 	}
 	/**
 	 * Add components
@@ -48,7 +45,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		JPanel pan2 = new JPanel();
 		JPanel pan3 = new JPanel();
 
-		pan.setPreferredSize(new Dimension(70, 70));
+		pan.setPreferredSize(new Dimension(80, 80));
 		newGame = new JButton("NEW GAME");
 		newGame.addActionListener(this);
 		//newGame.setPreferredSize(new Dimension(10, 10));
