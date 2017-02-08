@@ -357,12 +357,15 @@ public class Report extends JFrame implements ActionListener{
 	 */
 	public void saveResultsFile(){
 		PrintWriter saveData = null; 
-		String Report = String.format("%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n", 
+		String Report = String.format("%s %s \n %s %s \n %s %s \n %s %s \n %s %s \n", 
 				noGamesStr,noGamesVal,pcWinsStr,pcWinsVal,humanWinStr,humanWinVal,drawsStr,drawsVal,roundsStr,roundsVal);								
 		try{
 			
 		saveData = new PrintWriter("gameStats.txt");
 		saveData.write(Report);
+		
+		JOptionPane.showMessageDialog(null, "Game results saved to file",
+				"Game Saved", JOptionPane.INFORMATION_MESSAGE);
 		
 		}catch(FileNotFoundException e){ JOptionPane.showMessageDialog(null, "File not Found",
 				"Error: No File", JOptionPane.ERROR_MESSAGE);
@@ -411,13 +414,13 @@ public class Report extends JFrame implements ActionListener{
 			save.writeRoundPlay(roundRecord);
 			save.closeConnection();
 			
+			//increases the counter so the results cannot be saved more than once
 			count++; 
 			
 			//Confirmation 
 			JOptionPane.showMessageDialog(null, "Game results saved to database",
 					"Game Saved", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else{
+		} else{
 			JOptionPane.showMessageDialog(null, "Game has already been saved",
 					"Error: Save", JOptionPane.ERROR_MESSAGE);
 			
