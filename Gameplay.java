@@ -19,13 +19,10 @@ public class Gameplay extends JFrame implements ActionListener{
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description, inPlay;
 	private JLabel val1,val2, val3, val4, val5, userCardsLabel, cardCount2, result, yourScore;
 	private UserClass []usersInGame;
-	
 	private CardClass [] playersTopCard;
 	private DeckClass deck;
 	private boolean [] playerInOrOut;
 	private String [] cats;
-
-	//test
 	private JLabel welcome, communal, cardCount3, cardCount4, cardCount5;
 
 	private final int PLAYER_ONE = 0, PLAYER_TWO = 1, PLAYER_THREE = 2, PLAYER_FOUR = 3, PLAYER_FIVE = 4;
@@ -36,17 +33,10 @@ public class Gameplay extends JFrame implements ActionListener{
 	private int [] playersWinners;
 	private int p1Wins, p2Wins, p3Wins, p4Wins, p5Wins;
 
-
-	
-
-	// we could set constants to use for playerArray index ie. int player 1 =0
-	// this would make understanding the user easier to follow?
-
 	/**
 	 * constructor for GameplayGUI
 	 * [parameters can be added as needed]
-	 */
-	
+	 */	
 	public Gameplay(){
 
 		// helper method to get number of players
@@ -121,8 +111,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		score5 = new JLabel("  Score: ");
 		pan3.add(score2);
 
-		
-
 		cardCount2 = new JLabel("   Cards: " + usersInGame[1].numberOfCards());
 		pan3.add(cardCount2);
 
@@ -159,8 +147,6 @@ public class Gameplay extends JFrame implements ActionListener{
 			}
 		}
 
-
-
 		if (noPlayers < MAX_PLAYERS){
 			p5.setEnabled(false);
 			score5.setEnabled(false);
@@ -183,7 +169,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	 */
 	public void centerLayout(){
 
-
 		JLabel comPile = new JLabel("Communal pile: ");
 		GridLayout cGrid = new GridLayout(7, 2); // 1 col originally
 		JPanel centerPan = new JPanel(cGrid);
@@ -194,6 +179,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		cat1 = new JRadioButton(cats[1]+":");
 		cat1.addActionListener(this);
+		cat1.setBackground(Color, cyan);
 		cat2 = new JRadioButton(cats[2]+":");
 		cat2.addActionListener(this);
 		cat3 = new JRadioButton(cats[3]+":");
@@ -217,6 +203,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		description.setFont(new Font("Courier", Font.BOLD, 18));
 
 		//test Labels 
+		// val refers to the user's current category'
 		JLabel blank = new JLabel("      ");
 		val1 = new JLabel("");
 		val1.setFont(new Font("Courier", Font.BOLD, 16));
@@ -251,34 +238,24 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		communal = new JLabel("Communal pile:");
 		communal.setFont(new Font("Courier", Font.PLAIN, 14));
-		centerPan.add(communal);
-
-
-
-		
+		centerPan.add(communal);	
 	}
 	/**
 	 * Bottom panel alternative layout
 	 */
 	public void bottomPanel(){
 
-
 		//Bottom panel used for the player/user
 		GridLayout gridBottom = new GridLayout(1,3);
 		playButton = new JButton("Play!");
 		playButton.addActionListener(this);
-		//playButton.setPreferredSize(new Dimension(10, 10));
 		JPanel bottomPan = new JPanel(gridBottom);
 		yourScore = new JLabel("Your Score: ");
 		yourScore.setFont(new Font("Courier", Font.BOLD, 16));
 		bottomPan.add(yourScore);
-		//communal = new JLabel("Communal pile:");
+		
 		this.add(bottomPan, "South");
-		//bottomPan.add(communal);
-		//bottomPan.add(playButton);
 		bottomPan.setBackground(Color.gray);
-
-	
 
 		// End of round result test
 		result = new JLabel("Result");
@@ -291,10 +268,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		trial.add(playButton);
 		trial.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		bottomPan.add(trial);
-
-
-
-
 	}
 
 	/**
@@ -313,7 +286,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		noPlayers = Integer.parseInt(s);
 		System.out.println("Number of players: "+ noPlayers);
 
-
 		playerInOrOut = new boolean [noPlayers];
 		for (int i =0; i < noPlayers; i++){
 			playerInOrOut[i] = true;
@@ -321,17 +293,14 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	}
 
-		/**
+	/**
 	 * Helper method to selct player to go first
 	 */
 	public int getFirstPlayer(){
 
-
 		Random rand = new Random();
 		winningPlayerIndex = rand.nextInt(noPlayers);
-
 		return winningPlayerIndex;
-
 
 	}
 
@@ -345,9 +314,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		else{
 			welcome.setText("Player "+ (winningPlayerIndex+1) + "'s turn");
 		}
-		
-
-
 		if (!start){
 			inPlay.setText("Category Picked: "+ cats[highestCategory]+ " ");
 			// testing
@@ -430,14 +396,6 @@ public class Gameplay extends JFrame implements ActionListener{
 					playerInOrOut[i] = false;
 				}
 			}
-
-		//KEEP might help clean up code
-		//	if (round.getPlayerOneStillIn()) {
-		//		playButton.setEnabled(false);
-		//	skipToEnd();
-		//	}
-
-
 			//Check if player one is still in the game
 			//if not skip to end
 			boolean end = false;
@@ -462,8 +420,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	public void createDeck() {
 		deck = new DeckClass();
 		makeUsers();
-
-		
 		deck.dealCards(noPlayers, usersInGame);
 
 		int playerNumber = 1;
@@ -483,7 +439,8 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 	}
 	/**
-	 * Users method
+	 * Users method - makes all the users depending on the Value
+	 * selected at the beggining of the game
 	 */
 	public void makeUsers(){
 
@@ -506,11 +463,12 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	 /**
 	 * Method to add the User's top card to the GUI on launch
+	 * Continues to be called to update the user's topcard after each '
 	 * 
 	 */
 	public void userTopCard() {
 
-		if (usersInGame[0].numberOfCards()!= 0){
+		if (usersInGame[PLAYER_ONE].numberOfCards()!= 0){
 
 			cat1.repaint();
 			cat2.repaint();
@@ -523,9 +481,6 @@ public class Gameplay extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "You WIN!", "YOU WIN!", JOptionPane.PLAIN_MESSAGE);
 				this.skipToEnd();
 			}
-			
-
-
 			if (winningPlayerIndex == 0){
 				cat1.setEnabled(true);
 				cat2.setEnabled(true);
@@ -549,7 +504,7 @@ public class Gameplay extends JFrame implements ActionListener{
 			val3.setText(""+playersTopCard[PLAYER_ONE].getCatThree());
 			val4.setText(""+playersTopCard[PLAYER_ONE].getCatFour());
 			val5.setText(""+playersTopCard[PLAYER_ONE].getCatFive());
-			userCardsLabel.setText("  Cards:    " + usersInGame[0].numberOfCards());
+			userCardsLabel.setText("  Cards:    " + usersInGame[PLAYER_ONE].numberOfCards());
 
 		}
 		else {
@@ -632,12 +587,11 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	}	
 
-	/** Plays a round recursively, once player one is 
-	*   out of the game.
-	*/
+	/** 
+	 * Plays a round recursively, once player one is 
+	 *   out of the game.
+	 */
 	public void skipToEnd(){
-
-		
 
 		//Count how many players are left in the game
 		int playersLeft = 0;
