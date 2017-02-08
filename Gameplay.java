@@ -182,12 +182,16 @@ public class Gameplay extends JFrame implements ActionListener{
 		cat1.setBackground(Color, cyan);
 		cat2 = new JRadioButton(cats[2]+":");
 		cat2.addActionListener(this);
+		cat2.setBackground(Color, cyan);
 		cat3 = new JRadioButton(cats[3]+":");
 		cat3.addActionListener(this);
+		cat3.setBackground(Color, cyan);
 		cat4 = new JRadioButton(cats[4]+":");
 		cat4.addActionListener(this);
+		cat4.setBackground(Color, cyan);
 		cat5 = new JRadioButton(cats[5]+":");
 		cat5.addActionListener(this);
+		cat5.setBackground(Color, cyan);
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(cat1);
