@@ -288,7 +288,7 @@ public class Gameplay extends JFrame implements ActionListener{
 			"Players", JOptionPane.PLAIN_MESSAGE);
 		String s = ( String) jBox.getSelectedItem();
 		noPlayers = Integer.parseInt(s);
-		System.out.println("Number of players: "+ noPlayers);
+	//	System.out.println("Number of players: "+ noPlayers);
 
 		playerInOrOut = new boolean [noPlayers];
 		for (int i =0; i < noPlayers; i++){
@@ -512,7 +512,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "You Lost! The Game will no skip to the end!", 
+			JOptionPane.showMessageDialog(null, "You Lost! The Game will now skip to the end!", 
 			"GAME OVER!", JOptionPane.PLAIN_MESSAGE);
 			skipToEnd();
 			
@@ -553,12 +553,13 @@ public class Gameplay extends JFrame implements ActionListener{
 			else if (cat5.isSelected()){
 				highestCategory = 5;
 			}	
+			System.out.println("\nTEST 6: The player one chooses category " +cats[highestCategory]);
 		}
 			
 		else 
 		{
 			highestCategory=playersTopCard[player].getHighestValue();
-			System.err.println(""  +highestCategory);
+			System.out.println("\nTEST 6: The player " + (player+1)   + " chooses category " +cats[highestCategory]);
 		}
 	}
 
@@ -569,16 +570,10 @@ public class Gameplay extends JFrame implements ActionListener{
 
 
 		index = highestCategory;
-		System.err.println ("I'm here");
-
-		// for (int i = 0; i < noPlayers; i++){
-		// 		if (usersInGame[i].numberOfCards() ==0) {
-		// 			playerInOrOut[i] = false;
-		// 		}
-		// 	}
 
 
-		round = new Round(highestCategory, noPlayers , usersInGame, deck);
+
+		round = new Round(highestCategory, noPlayers , usersInGame, deck, cats);
 		int possibleWinner = round.getWinner();
 			if(possibleWinner ==-1) {
 				winningPlayerIndex = winningPlayerIndex;
@@ -588,8 +583,28 @@ public class Gameplay extends JFrame implements ActionListener{
 				winningPlayerIndex = possibleWinner;
 			}
 
+		//Tests 7
+		if (usersInGame[0].numberOfCards() != 0){
+			System.out.println("TEST 7: Player Ones Cards are: ");
+			for (int i=0; i<usersInGame[0].numberOfCards(); i++) {
+				System.out.println(usersInGame[0].printCard(i));
+			} 
+		}
+
+		for (int i=1; i<usersInGame.length; i++) {
+			if (usersInGame[i].numberOfCards() != 0){
+			System.out.println("\n\nTEST 7: Player " + (i+1)+" Cards are: ");
+			for (int j=0; j<usersInGame[i].numberOfCards(); j++) {
+				System.out.println(usersInGame[i].printCard(j));
+			} 
+		
+		}
+	}
+
 
 	}	
+
+
 
 	/** 
 	 * Plays a round recursively, once player one is 
@@ -604,7 +619,7 @@ public class Gameplay extends JFrame implements ActionListener{
 				playersLeft++;
 			}
 		}
-		System.out.println("Number of players left in the game " +playersLeft);
+		//System.out.println("Number of players left in the game " +playersLeft);
 		
 
 		//If there are still more than 1 player left
@@ -648,7 +663,7 @@ public class Gameplay extends JFrame implements ActionListener{
 			}
 			increment++;
 		}
-		System.out.println("The overall winner is " + overAllWinner);
+	//	System.out.println("The overall winner is " + overAllWinner);
 	}
 
 
@@ -661,10 +676,10 @@ public class Gameplay extends JFrame implements ActionListener{
 			for (int i=0; i<noPlayers; i++) {
 				playersWinners[i] = playersWinners[i] + round.getPlayerWinners()[i];
 			}
-			System.out.println("The number of ROUNDS " +noRounds);
-			System.out.println("The number of DRAWS"+noDraws);
+			//System.out.println("The number of ROUNDS " +noRounds);
+		//	System.out.println("The number of DRAWS"+noDraws);
 			for (int i=0; i<playersWinners.length; i++) {
-				System.out.println("Array of winning tally " + playersWinners[i]);
+		//		System.out.println("Array of winning tally " + playersWinners[i]);
 		}
 	}
 
@@ -690,7 +705,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 		String reportInfo = (noPlayers +"," +noDraws +","+overAllWinner+","+noRounds
 			+ "," +p1Wins+","+p2Wins+","+p3Wins+","+p4Wins+","+p5Wins);
-		System.out.println(reportInfo);
+		//System.out.println(reportInfo);
 
 		Report report = new Report("EndReport", reportInfo);
 	}

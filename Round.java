@@ -9,16 +9,18 @@ public class Round{
 	private boolean winner;
 	private int winningPlayerIndex;
 	private int noDraws;
+	private String [] categoryNames;
 	private int [] playerWinners;
 	private boolean playerOneStillIn = false;
 
-	public Round(int index, int noPlayers, UserClass []  usersInGame, DeckClass communalDeck){
+	public Round(int index, int noPlayers, UserClass []  usersInGame, DeckClass communalDeck, String [] cats){
 
 
 		this.index = index;
 		this.noPlayers = noPlayers;
 		this.usersInGame = usersInGame;
 		this.deck = communalDeck;
+		this.categoryNames = cats;
 		
 		this.setUpRoundArray();
 		this.findWinnerDraw();
@@ -64,9 +66,21 @@ public class Round{
 			}
 		}
 		
-		//JUST FOR TESTING
+		//TESTS 5
+		if (usersInGame[0].numberOfCards()!=0){
+			System.out.println("TEST 5: Player one's cards are " +usersInGame[0].printCard(0));
+		}
+
+		for (int i=1; i<usersInGame.length; i++) {
+			if (usersInGame[i].numberOfCards()!=0) {
+			System.out.println("TEST 5: Player " + (i+1) +" cards are " +usersInGame[i].printCard(0));
+		}
+	}
+
+		//Tests 6
+		System.out.println("TEST 6: Category in play is " + categoryNames[index]);
 		for (int i=0; i<round.length; i++) {
-			System.out.println("Value of category played by player " +i +" is " +round[i]);
+			System.out.println("Value of category played by player " +(i+1) +" is " +round[i]);
 		}
 
 	}
@@ -90,7 +104,7 @@ public class Round{
 
 		}
 
-		System.out.println("WE FOUND OUR WINNING VALUE " +largestValue + " HELD BY PLAYER "+possibleWinner);
+		//System.out.println("WE FOUND OUR WINNING VALUE " +largestValue + " HELD BY PLAYER "+possibleWinner);
 	
 		boolean test = false;
 		for (int i = 0; i < noPlayers; i++){
@@ -107,7 +121,7 @@ public class Round{
 				}
 				if (!test){
 					winner = false;
-					System.out.println("We have a tie");
+				//	System.out.println("We have a tie");
 					noDraws++;
 				}
 			
@@ -169,10 +183,10 @@ public class Round{
 			int communalDeckTotal = deck.getDeckCount();
 			deck.clear();
 
-			System.out.println("Adding was successful" + usersInGame[winningPlayerIndex].numberOfCards());
-			System.out.println("Deleting was successful" + usersInGame[1].numberOfCards());
-			System.out.println("      INDEX of wining player: " +winningPlayerIndex);
-			System.out.println("     Category in play: "+ index);
+			//System.out.println("Adding was successful" + usersInGame[winningPlayerIndex].numberOfCards());
+			//System.out.println("Deleting was successful" + usersInGame[1].numberOfCards());
+			//System.out.println("      INDEX of wining player: " +winningPlayerIndex);
+
 	
 		}
 
