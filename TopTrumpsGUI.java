@@ -12,7 +12,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	/** Instance variable and class constants */
 
 	private JButton newGame, reportButton, exitButton;
-	private JPanel pan, pan2, pan3;
+	
 
 	/**
 	 * Contructor for TopTrumpsGUI
@@ -42,7 +42,6 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 
 	
 		JPanel pan = new JPanel();
-	
 		JPanel pan1 = new JPanel();
 		JPanel pan2 = new JPanel();
 
@@ -57,14 +56,12 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		exitButton.addActionListener(this);
 
 		this.add(pan, "North");
-		//pan.setBackground(Color.cyan);
+		pan.setBackground(Color.yellow);
 		this.add(pan1, "Center");
-		//pan2.setBackground(Color.cyan);
+		pan1.setBackground(Color.cyan);
 		this.add(pan2, "South");
-		//pan3.setBackground(Color.cyan);
+		pan2.setBackground(Color.gray);
 
-		
-		
 		pan.add(newGame);
 		pan1.add(reportButton);
 		pan2.add(exitButton);
