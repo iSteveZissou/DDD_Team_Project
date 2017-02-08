@@ -21,7 +21,7 @@ import javax.swing.*;
 
 public class Report extends JFrame implements ActionListener{
 
-	private int noPlayers; 
+	private int noPlayers, count = 0; 
 	private JButton saveButton, exitButton, ngButton;  
 	private String type, noDraws, winner, noRounds, p1win, p2win, p3win, p4win, p5win, noGamesVal, pcWinsVal, humanWinVal, drawsVal, roundsVal; 
 	private String noGamesStr = "Games Played: "; 
@@ -117,9 +117,9 @@ public class Report extends JFrame implements ActionListener{
 	
 	public void makeTop(){
 		JPanel top = new JPanel();
-		top.setBackground(Color.cyan);
+		top.setBackground(Color.yellow);
 		JLabel title = new JLabel("TopTrumps Triumphs"); 
-		title.setFont(new Font("Andale Mono 14", Font.PLAIN, 40));	
+		title.setFont(new Font("Courier", Font.BOLD, 40));	
 		top.add(title);
 		add(top, BorderLayout.NORTH);	
 		
@@ -138,40 +138,35 @@ public class Report extends JFrame implements ActionListener{
 		
 		panMiddle.setBackground(Color.cyan);
 				
-		noGamesLbl = new JLabel(noGamesStr); 
-		noGamesLbl.setHorizontalAlignment(JLabel.CENTER);
-		noGamesLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
+		noGamesLbl = new JLabel( " " + noGamesStr); 
+		noGamesLbl.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		
 		noGamesLblRes = new JLabel(noGamesVal);
 		noGamesLblRes.setHorizontalAlignment(JLabel.CENTER);
 		noGamesLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		pcWinLbl = new JLabel(pcWinsStr); 
-		pcWinLbl.setHorizontalAlignment(JLabel.CENTER);
+		pcWinLbl = new JLabel( " " + pcWinsStr); 
 		pcWinLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
 		pcWinLblRes= new JLabel(pcWinsVal);
 		pcWinLblRes.setHorizontalAlignment(JLabel.CENTER);
 		pcWinLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		humWinLbl = new JLabel(humanWinStr);
-		humWinLbl.setHorizontalAlignment(JLabel.CENTER);
+		humWinLbl = new JLabel( " " + humanWinStr);
 		humWinLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
 		humWinLblRes = new JLabel(humanWinVal);
 		humWinLblRes.setHorizontalAlignment(JLabel.CENTER);
 		humWinLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		drawsLbl = new JLabel(drawsStr); 
-		drawsLbl.setHorizontalAlignment(JLabel.CENTER);
+		drawsLbl = new JLabel( " " + drawsStr); 
 		drawsLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
 		drawsLblRes= new JLabel(drawsVal); 
 		drawsLblRes.setHorizontalAlignment(JLabel.CENTER);
 		drawsLblRes.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
-		roundsLbl = new JLabel(roundsStr); 
-		roundsLbl.setHorizontalAlignment(JLabel.CENTER);
+		roundsLbl = new JLabel( " " + roundsStr); 
 		roundsLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		
 		roundsLblRes= new JLabel(roundsVal); 
@@ -207,8 +202,7 @@ public class Report extends JFrame implements ActionListener{
 		
 		panMiddle.setBackground(Color.cyan);
 		
-		noDrawsLbl = new JLabel("Number of Draws: "); 
-		noDrawsLbl.setHorizontalAlignment(JLabel.CENTER);
+		noDrawsLbl = new JLabel(" Number of Draws: "); 
 		noDrawsLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (noDrawsLbl);
 		
@@ -217,8 +211,7 @@ public class Report extends JFrame implements ActionListener{
 		noDrawsRls.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (noDrawsRls);
 		
-		winnerLbl = new JLabel("Winner: "); 
-		winnerLbl.setHorizontalAlignment(JLabel.CENTER);
+		winnerLbl = new JLabel(" Winner: "); 
 		winnerLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (winnerLbl);
 
@@ -227,8 +220,7 @@ public class Report extends JFrame implements ActionListener{
 		winnerRls.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (winnerRls);
 		
-		noRoundsLbl = new JLabel("Rounds Played: "); 
-		noRoundsLbl.setHorizontalAlignment(JLabel.CENTER);
+		noRoundsLbl = new JLabel(" Rounds Played: "); 
 		noRoundsLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 		panMiddle.add (noRoundsLbl);
 		
@@ -237,8 +229,7 @@ public class Report extends JFrame implements ActionListener{
 		noRoundsRsl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (noRoundsRsl);
 		
-		p1winLbl = new JLabel("Player 1 round wins: " ); 
-		p1winLbl.setHorizontalAlignment(JLabel.CENTER);
+		p1winLbl = new JLabel(" Player 1 round wins: " ); 
 		p1winLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (p1winLbl);
 		
@@ -247,8 +238,7 @@ public class Report extends JFrame implements ActionListener{
 		p1winRls.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (p1winRls);
 		
-		p2winLbl = new JLabel("Player 2 round wins: " ); 
-		p2winLbl.setHorizontalAlignment(JLabel.CENTER);
+		p2winLbl = new JLabel(" Player 2 round wins: " ); 
 		p2winLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 		panMiddle.add (p2winLbl);
 			
@@ -261,8 +251,7 @@ public class Report extends JFrame implements ActionListener{
 		//depending on the number of players, player labels are displayed accordingly.
 		if (noPlayers < 6 && noPlayers > 2 ){ 
 			
-			p3winLbl = new JLabel("Player 3 round wins: " ); 
-			p3winLbl.setHorizontalAlignment(JLabel.CENTER);
+			p3winLbl = new JLabel(" Player 3 round wins: " ); 
 			p3winLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 			panMiddle.add (p3winLbl);
 		
@@ -274,8 +263,7 @@ public class Report extends JFrame implements ActionListener{
 			
 			
 			if (noPlayers < 6 && noPlayers > 3 ){
-				p4winLbl = new JLabel("Player 4 round wins: " ); 
-				p4winLbl.setHorizontalAlignment(JLabel.CENTER);
+				p4winLbl = new JLabel(" Player 4 round wins: " ); 
 				p4winLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));	
 				panMiddle.add (p4winLbl);
 				
@@ -286,8 +274,7 @@ public class Report extends JFrame implements ActionListener{
 	
 		
 				if (noPlayers <  6 && noPlayers > 4 ){	
-					p5winLbl = new JLabel("Player 5 round wins: " ); 
-					p5winLbl.setHorizontalAlignment(JLabel.CENTER);
+					p5winLbl = new JLabel(" Player 5 round wins: " ); 
 					p5winLbl.setFont(new Font("Andale Mono 14", Font.PLAIN, 18));
 					panMiddle.add (p5winLbl);
 					
@@ -314,13 +301,12 @@ public class Report extends JFrame implements ActionListener{
 	public void makeBottom(){
 		JPanel bottom = new JPanel();
 		
-		bottom.setBackground(Color.cyan);
+		bottom.setBackground(Color.gray);
 		saveButton = new JButton("Save Results"); 
-		exitButton = new JButton("Exit"); 
+		exitButton = new JButton("Main Menu"); 
 		ngButton = new JButton("New Game"); 
 		
 		saveButton.addActionListener(this);
-		//exitButton.addActionListener(e -> this.dispose()); //not sure if we can use
 		exitButton.addActionListener(this); 
 		ngButton.addActionListener(this);
 		
@@ -343,9 +329,9 @@ public class Report extends JFrame implements ActionListener{
 
 		
 		if (e.getSource() == ngButton){
+			//launches a new game
 			Gameplay nGame = new Gameplay();
 			this.dispose();
-		 //new game
 		}
 		
 		
@@ -360,8 +346,8 @@ public class Report extends JFrame implements ActionListener{
 		
 		if(e.getSource() == exitButton){
 			//return to game menu
-			//this.dispose();
-			System.exit(0);
+			TopTrumpsGUI gui = new TopTrumpsGUI();
+			this.dispose();
 		}
 	}	
 	
@@ -405,18 +391,37 @@ public class Report extends JFrame implements ActionListener{
 	}
 	/**
 	 * Method to save results into the database 
-	 *  
+	 * the counter allows the file to be saved only 
+	 * once
+	 *   
 	 */
 	public void saveResultsSQL(){
 		
-		String gameRecord = String.format("%s,'%s',%s", noDraws, winner, noRounds);
-		String roundRecord= String.format("%s,%s,%s,%s,%s", p1win, p2win, p3win, p4win,p5win); 
 		
-		SQLMethods save = new SQLMethods(); 
-		save.generateGameID();
-		save.writeGameplay(gameRecord);
-		save.writeRoundPlay(roundRecord);
-		save.closeConnection();
+		if (count == 0){
+			
+			//create queries 
+			String gameRecord = String.format("%s,'%s',%s", noDraws, winner, noRounds);
+			String roundRecord= String.format("%s,%s,%s,%s,%s", p1win, p2win, p3win, p4win,p5win); 
+			
+			//write to database 
+			SQLMethods save = new SQLMethods(); 
+			save.generateGameID();
+			save.writeGameplay(gameRecord);
+			save.writeRoundPlay(roundRecord);
+			save.closeConnection();
+			
+			count++; 
+			
+			//Confirmation 
+			JOptionPane.showMessageDialog(null, "Game results saved to database",
+					"Game Saved", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Game has already been saved",
+					"Error: Save", JOptionPane.ERROR_MESSAGE);
+			
+		}
 
 	}
 		
