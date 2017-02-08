@@ -395,11 +395,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		if (e.getSource()== playButton){
 
 			//Set player one to false if he is out
-			for (int i = 0; i < noPlayers; i++){
-				if (usersInGame[i].numberOfCards() ==0) {
-					playerInOrOut[i] = false;
-				}
-			}
+			// for (int i = 0; i < noPlayers; i++){
+			// 	if (usersInGame[i].numberOfCards() ==0) {
+			// 		playerInOrOut[i] = false;
+			// 	}
+			// }
 			//Check if player one is still in the game
 			//if not skip to end
 			boolean end = false;
@@ -519,14 +519,14 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 }
 
-/** Winner chooses a category to play.
+	/** Winner chooses a category to play.
 	If the user is a human player, they will manually
 	via the GUI select the category.
 	If the user is a computer player, they will select the highest value category 
 	of their topcard.
 	@param player whose turn it is to select a category
 	@return category that has been choosen 
-*/
+	*/
 	private void selectCategory(int player) {
 		highestCategory=0;
 		int [] topCardValues = new int[5];
@@ -571,11 +571,11 @@ public class Gameplay extends JFrame implements ActionListener{
 		index = highestCategory;
 		System.err.println ("I'm here");
 
-		// for (int i = 0; i < noPlayers; i++){
-		// 		if (usersInGame[i].numberOfCards() ==0) {
-		// 			playerInOrOut[i] = false;
-		// 		}
-		// 	}
+		for (int i = 0; i < noPlayers; i++){
+				if (usersInGame[i].numberOfCards() ==0) {
+					playerInOrOut[i] = false;
+				}
+			}
 
 
 		round = new Round(highestCategory, noPlayers , usersInGame, deck);
