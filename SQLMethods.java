@@ -136,15 +136,13 @@ public class SQLMethods {
 	}
 
 	//method to generate a new gameID
-	public boolean generateGameID() {
-		
+	public boolean generateGameID(){
 		gameID = gameCount() + 1;
 		return true; 
 	}
 
 	//method to write game data to the DB
 	public boolean writeGameplay(String input) {
-		generateGameID(); 
 		String queryAddGameplay = "INSERT INTO gameplayData VALUES(" + gameID + "," + input + ");"; 
 		Statement stmt = null;
 		try {
