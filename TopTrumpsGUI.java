@@ -90,7 +90,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	 */
 	public void report(){
 
-		//Report r = new Report();
+		Report report = new Report ("Report",""); 
 	}
 
 	/**

@@ -20,9 +20,9 @@ public class SQLMethods {
 
 	public SQLMethods() {
 		
-		String DBname = "m_16_2246923g";
-		String username = "m_16_2246923g";
-		String pass = "2246923g"; 
+		String DBname = "m_16_0813273j";
+		String username = "m_16_0813273j";
+		String pass = "0813273j"; 
 
 		try {
 			connection = DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/" + DBname, username,
