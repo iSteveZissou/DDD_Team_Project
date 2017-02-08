@@ -136,51 +136,57 @@ public class SQLMethods {
 	}
 
 	//method to generate a new gameID
-	public void generateGameID() {
+	public boolean generateGameID() {
 		
-		gameID = gameCount() + 1; 
+		gameID = gameCount() + 1;
+		return true; 
 	}
 
 	//method to write game data to the DB
-	public void writeGameplay(String input) {
+	public boolean writeGameplay(String input) {
 		generateGameID(); 
 		String queryAddGameplay = "INSERT INTO gameplayData VALUES(" + gameID + "," + input + ");"; 
 		Statement stmt = null;
 		try {
 			stmt = connection.createStatement(); 
 			int rs = stmt.executeUpdate(queryAddGameplay);
+			return true; 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Failed to save results. Please contact support",
 					"Error: Saving Failed", JOptionPane.ERROR_MESSAGE);
 		}
-
+		
+		return false; 
 	}	
 	
-	public void writeRoundPlay(String input) {
+	public boolean writeRoundPlay(String input) {
 	
 		String queryAddGameplay = "INSERT INTO roundswon VALUES(" + gameID + "," + input + ");"; 
 		Statement stmt = null;
 		try {
 			stmt = connection.createStatement(); 
 			int rs = stmt.executeUpdate(queryAddGameplay);
+			return true; 
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Failed to save results. Please contact support",
 					"Error: Saving Failed", JOptionPane.ERROR_MESSAGE);
 		}
-
+		return false; 
 	}
 
 	//method to close the connection
-	public void closeConnection() {
+	public boolean closeConnection() {
 		try {
 			connection.close();
+			return true; 
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false; 
 	}
 
 }

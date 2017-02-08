@@ -395,32 +395,41 @@ public class Report extends JFrame implements ActionListener{
 	/**
 	 * Method to save results into the database 
 	 * the counter allows the file to be saved only 
-	 * once
+	 * once. Method also checks that the database saved successfully
 	 *   
 	 */
 	public void saveResultsSQL(){
 		
 		
 		if (count == 0){
-			
 			//create queries 
 			String gameRecord = String.format("%s,'%s',%s", noDraws, winner, noRounds);
 			String roundRecord= String.format("%s,%s,%s,%s,%s", p1win, p2win, p3win, p4win,p5win); 
-			
-			//write to database 
+		
+			//write to database  
 			SQLMethods save = new SQLMethods(); 
-			save.generateGameID();
-			save.writeGameplay(gameRecord);
-			save.writeRoundPlay(roundRecord);
-			save.closeConnection();
+			boolean generateGameIDCheck  = save.generateGameID();
+			boolean saveGameplayCheck = save.writeGameplay(gameRecord);
+			boolean writeRoundPlayCheck  = save.writeRoundPlay(roundRecord);	
+			boolean closeConnectionCheck = save.closeConnection();
 			
-			//increases the counter so the results cannot be saved more than once
-			count++; 
 			
-			//Confirmation 
-			JOptionPane.showMessageDialog(null, "Game results saved to database",
-					"Game Saved", JOptionPane.INFORMATION_MESSAGE);
-		} else{
+			//checks if the game saved successfully
+			if(generateGameIDCheck && saveGameplayCheck && writeRoundPlayCheck &&closeConnectionCheck){
+				//increases the counter so the results cannot be saved more than once
+				count++; 
+				//Confirmation to the user.
+				JOptionPane.showMessageDialog(null, "Game results saved to database",
+						"Game Saved", JOptionPane.INFORMATION_MESSAGE);		
+			}
+			else {	
+				JOptionPane.showMessageDialog(null, "Could not save data to database, please contact admin",
+					"Error: Save", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		}
+		
+		else{
 			JOptionPane.showMessageDialog(null, "Game has already been saved",
 					"Error: Save", JOptionPane.ERROR_MESSAGE);
 			
