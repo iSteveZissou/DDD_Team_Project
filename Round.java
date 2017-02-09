@@ -1,20 +1,21 @@
+/** Class which contains all method which handle a single
+	round in a game */
 public class Round{
 
-
+	/** Instance Variables */
 	private int index = 0;
-	private int noPlayers;
+	private int noPlayers, noDraws;
 	private DeckClass deck;
 	private UserClass [] usersInGame = new UserClass [noPlayers];
 	private int [] round ;
 	private boolean winner;
 	private int winningPlayerIndex;
-	private int noDraws;
 	private String [] categoryNames;
 	private int [] playerWinners;
 	private boolean playerOneStillIn = false;
 
+	/** Constructor */
 	public Round(int index, int noPlayers, UserClass []  usersInGame, DeckClass communalDeck, String [] cats){
-
 
 		this.index = index;
 		this.noPlayers = noPlayers;
@@ -23,23 +24,23 @@ public class Round{
 		this.categoryNames = cats;
 		
 		this.setUpRoundArray();
-		this.findWinnerDraw();
-		
+		this.findWinnerDraw();	
 
 	}
 
 	/**
-	 * [setUpRoundArray description]
+	 * Sets up the round array.
+	 * The round array is an integer array of all the players
+	 * card values for a selected category.
 	 */
 	public void setUpRoundArray() {
-			playerWinners = new int [noPlayers];
-			for (int i=0; i< playerWinners.length; i++){
+
+		playerWinners = new int [noPlayers];
+		for (int i=0; i< playerWinners.length; i++){
 				playerWinners[i] = 0;
-			}
+		}
 
 		round = new int [noPlayers];
-
-		//INDEX =0 IS NOT CONSIDERED, AS IT IS NEVER CHOOSEN AS A CATEGORY (DESCRIPTION)
 	
 		for (int i=0; i<noPlayers; i++)
 		{
@@ -61,8 +62,11 @@ public class Round{
 				}
 								
 			}
+
+			//Card value for a selected category is set to
+			//-1 if a player is eliminated
 			else if (usersInGame[i].numberOfCards()  == 0){
-				round[i] = -1; // set to kinus one if player eliminated
+				round[i] = -1; 
 			}
 		}
 		
@@ -74,49 +78,48 @@ public class Round{
 		for (int i=1; i<usersInGame.length; i++) {
 			if (usersInGame[i].numberOfCards()!=0) {
 			System.out.println("TEST 5: Player " + (i+1) +" cards are " +usersInGame[i].printCard(0));
+			}
 		}
-	}
 
 		//Tests 6
 		System.out.println("TEST 6: Category in play is " + categoryNames[index]);
 		for (int i=0; i<round.length; i++) {
 			System.out.println("Value of category played by player " +(i+1) +" is " +round[i]);
 		}
-
 	}
+
 	/**
-	 * [findWinnerDraw description]
+	 * Method to find a winner or draw result.
+	 * Uses maxinum value algorithm to find the largest
+	 * value in the round array. 
+	 * Checks that there is no duplicate of this value.
+	 * If duplicate: draw
+	 * If no duplicate: win 
 	 */
 	public void findWinnerDraw() {
+
 		winner= true;
-		//Maxinum value in round array algorithm
-		//COULD BE MOVED INTO ITS OWN METHOD
+		
+		//Maxinum value algorithm
 		int largestValue =round[0];
 		int increment=1;
 		int possibleWinner =0;
-			 //index value for the round array
 		while  (increment<round.length)	{
 			if (round[increment]>largestValue) {
 				largestValue = round[increment];
 				possibleWinner= increment;
 			}
 			increment++;
-
 		}
 
 		//System.out.println("WE FOUND OUR WINNING VALUE " +largestValue + " HELD BY PLAYER "+possibleWinner);
-	
+		
+		//Tests for duplicate of largest value in round array
 		boolean test = false;
 		for (int i = 0; i < noPlayers; i++){
-
-
 			if (largestValue==round[i]){
 				test = false;
-
-
-
 				if (possibleWinner == i){
-					
 					test = true;
 				}
 				if (!test){
@@ -124,61 +127,50 @@ public class Round{
 				//	System.out.println("We have a tie");
 					noDraws++;
 				}
-			
 			}
-
-		
 		}
-
+		//Method which hands out cards 
+		//depending on the result of the round
 		handOutCards(possibleWinner);
 	}
 		
 
 		
-		/*There is a winner:
-		* 	add all cards for the other players deck to the winning players deck
-		* 	remove cards from losing players deck
-		*	add all communal cards to the winning players deck
-		*	remove all cards from communal deck
-		*	
-		*/
+	
 	
 	/**
-	 * [handOutCards description]
-	 * @param possibleWinner [description]
+	 * Method which distributes cards depending on the 
+	 * result of the round
+	 * @param possibleWinner number of the winning player if there was a win
 	 */
-	public void handOutCards( int possibleWinner) {
-
+	public void handOutCards(int possibleWinner) {
+		/*	There is a winner:
+		* 	-add all cards for the other players deck to the winning players deck
+		* 	-remove cards from losing players deck
+		*	-add all communal cards to the winning players deck
+		*	-remove all cards from communal deck.	
+		*/
 		if (winner==true) {
+
 			winningPlayerIndex = possibleWinner;
-			
-
 			playerWinners[winningPlayerIndex] = 1;
-
-			
 
 			for (int i=0; i<noPlayers; i++)
 			{
-				//Adding cards from the losing players hands to the winning players hands
+				 
 				if (usersInGame[i].numberOfCards() != 0){
 					usersInGame[winningPlayerIndex].addCard(usersInGame[i].topCard());
 					usersInGame[i].deleteCard();
-					
-
 				}
-					
-				
-
 			}
+ 
 			int n = deck.getDeckCount();
 			CardClass [] pile = deck.getPile(); 
 			if ( n>0){
-						for (int j =0; j <n; j++){
-
-						usersInGame[winningPlayerIndex].addCard(pile[j]);
-						}
-
+				for (int j =0; j <n; j++){
+					usersInGame[winningPlayerIndex].addCard(pile[j]);
 					}
+				}
 
 			int communalDeckTotal = deck.getDeckCount();
 			deck.clear();
@@ -191,49 +183,56 @@ public class Round{
 		}
 
 		/** There is a draw:
-		*	add all players cards to communal deck
-		*   delete players cards
-		*
+		*	-add all players cards to communal deck
+		*   -delete players cards
 		*/
 		if (winner==false) {
 
 			winningPlayerIndex = -1;
-			for (int i=0; i<usersInGame.length; i++)
-			{
-				if (usersInGame[i].numberOfCards() != 0){
 
+			for (int i=0; i<usersInGame.length; i++) {
+				if (usersInGame[i].numberOfCards() != 0){
 					deck.addCard(usersInGame[i].topCard());
 					usersInGame[i].deleteCard();
 				}			
 			}	
 		}
-		//Ignore for the moment
+		
 		if (usersInGame[0].numberOfCards() == 0) {
 			playerOneStillIn = true;
 		}
 	}
 	
 	/**
-	 * [getWinner description]
-	 * @return [description]
+	 * Accessor for winningPlayerIndex
+	 * @return the index of the winning player
 	 */
  	public int getWinner() {
-
  		return winningPlayerIndex;
- }
+ 	}
 
+ 	/**
+	 * Accessor for noDraws
+	 * @return the number of draws
+	 */
  	public int getNoDraws() {
  		return noDraws;
  	}
 
+ 	/**
+	 * Accessor for playerWinners
+	 * @return number of time each player has won a round
+	 */
  	public int [] getPlayerWinners() {
  		return playerWinners;
  	}
 
+ 	/**
+	 * Accessor for playerOneStillIn
+	 * @return flag to show if player one is still in the game
+	 */
  	public boolean getPlayerOneStillIn() {
  		return playerOneStillIn;
  	}
-
-
 
 }

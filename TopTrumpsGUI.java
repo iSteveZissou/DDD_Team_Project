@@ -9,11 +9,9 @@ import java.awt.event.*;
 
 public class TopTrumpsGUI extends JFrame implements ActionListener{
 
-	/** Instance variable and class constants */
-
+	/** Instance variable  */
 	private JButton newGame, reportButton, exitButton;
 	
-
 	/**
 	 * Contructor for TopTrumpsGUI
 	 */
@@ -28,28 +26,17 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		this.layOut();
 	}
 	/**
-	 * Add components
-	 * Lay out the components
+	 * Adds the layout components
 	 */
 	public void layOut(){
-
-	
-
-		// JLabel welcome = new JLabel("Top Trumps!!");
-		// welcome.setFont(new Font("Courier", Font.PLAIN, 28));
-		// welcome.setHorizontalAlignment(JLabel.CENTER);
-
-
 	
 		JPanel pan = new JPanel();
 		JPanel pan1 = new JPanel();
 		JPanel pan2 = new JPanel();
 
-		
 		newGame = new JButton("NEW GAME");
 		newGame.addActionListener(this);
-		//newGame.setPreferredSize(new Dimension(10, 10));
-
+		
 		reportButton = new JButton("REPORT");
 		reportButton.addActionListener(this);
 		exitButton = new JButton("EXIT");
@@ -71,8 +58,6 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	}
 	/**
 	 * Method to start the main game
-	 * ?? read in input file and instantiate deck
-	 * ?? or put file input in the Gameplay Class??
 	 */
 	public void startGame(){
 
@@ -81,7 +66,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * generate new report
+	 *  Generate new report
 	 */
 	public void report(){
 
@@ -97,7 +82,6 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		if (e.getSource()==newGame){
 			//start new Game
 			this.startGame();
-			//this.setVisible(false);
 			System.out.println("New Game Begins");
 		}
 
@@ -109,7 +93,6 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		else if (e.getSource()==exitButton){
 			System.exit(0);
 		}
-
 
 	}
 

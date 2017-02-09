@@ -1,11 +1,10 @@
- /** Maintains a list of CardClass objects.
- *	 The methods allow CardClass objects to be added and deleted from the list
- *   according to when Cards are added and deleted from the communal deck.
- */
 import java.util.*;
 import java.io.*;
 import javax.swing.*;
 
+/**  Class that maintains a list of CardClass objects which
+ *   corresponds to the deck in the game.
+ */
 public class DeckClass {
 //
     /** Class Constants */
@@ -18,21 +17,21 @@ public class DeckClass {
 	private int count = 0;
 	private String categories;
 
-	/** Non-Default Constructor	 */
+	/** Non-Default Constructor */
 	public DeckClass() {
 		this.readText();
 	}
 
-
-
 	/** 
 	*   Shuffles the CardClass objects in the deck array at random.
 	*   The method loops through the deck array and swaps each Card
-	*   with a random Card. 
+	*   with a random Card in the array. 
 	*/
 	public void shuffle() {
 
 		Random rand = new Random();
+
+		//Shuffle algorithm
 		for (int i = 0; i<deck.length; i++){
 			int random = Math.abs(rand.nextInt()) % deck.length;
 			CardClass temp = deck[i]; 
@@ -40,12 +39,14 @@ public class DeckClass {
 			deck[random] = temp; 	
 		}
 
-  }
+ 	 }
 		
 	
 
 	/**
-	*   Deal the Cards in the deck to the players of the game
+	*   Deal the cards in the deck to the players of the game.
+	*   If the cards do not divide up equally, the program
+	*   chooses a player at random to give the extra cards to.
 	*   @param arrayUser - array of the users in the game
 	*/
 		public void dealCards(UserClass[] arrayUser) {
@@ -79,7 +80,7 @@ public class DeckClass {
 		else if (arrayUser.length == 3){
 			int i = 0;
 			while ( i < deck.length){
-				// Selects random player to give the extra card??
+				//Selects random player to give the extra card
 				if (i == deck.length -1){
 					arrayUser[randomPlayer].addCard(deck[i]);
 					break;
@@ -89,7 +90,9 @@ public class DeckClass {
 				}
 				
 			}
-	 	}	
+	 	}
+
+	 	//How cards are dealt out when there are 3 players	
 	 	else if (arrayUser.length ==2){
 	 		
 	 		int i = 0;
@@ -103,16 +106,18 @@ public class DeckClass {
 	 	this.clear();
 	}
 
-	/** Return total number of cards on the communal pile 
-	*   @return total number of cards on the communal pile
+	/**
+	* Returns the total number of cards on the deck 
+	* @return total number of cards on deck
 	*/
 	public int getDeckCount() {
 		return count;
 	}
 
 
-	/** Adds a Card to the communal pile 
-	*	@param crd - card to be added
+	/** 
+	*  Adds a Card to the deck
+	*  @param crd - card object to be added
 	*/
 	public void addCard(CardClass crd) {
 		deck[count] = crd;
@@ -128,8 +133,9 @@ public class DeckClass {
 	 }
 	
 	 /** 
-	  * Splits the category string into an array of single category names 
-	  *	@return array of the category names
+	  * Splits the String category, produced by the read 
+	  * in textfile, into an array of single String category names 
+	  *	@return String array of the category names
 	  */
 	public String [] getCategories(){
 		String [] tokens = categories.split(" ");
@@ -137,15 +143,18 @@ public class DeckClass {
 	}
 
 	/** 
-	 *  Reads the textFile and converts it into the appropriate format 
-	 *  to create Card's and construct the deck
+	 *  Reads the textFile in and converts the information format appriopriately
+	 *  so it may be used to instantiate CardClass objects
+	 *  and construct the deck.
 	 */
 	private void readText() {
 
-		 deck = new CardClass[TOTAL_CARDS];
+		deck = new CardClass[TOTAL_CARDS];
 	
 		String line = "";
-		String [] arrayLine = new String[41];
+		//Text file contains extra line with descriptions 
+		//hence array size of TOTAL_CARDS+1
+		String [] arrayLine = new String[TOTAL_CARDS+1];
 		String s ="";
 
 		int t = 0;
@@ -156,7 +165,6 @@ public class DeckClass {
 			
 			System.out.println("\nTEST 1: READ IN & PRINT CARDS:\n");
 
-		
 			int numCards=0;
 			while (in.hasNextLine())
 			{	
@@ -164,7 +172,6 @@ public class DeckClass {
 
 				//TEST 1
 				System.out.println(s);
-
 
 				arrayLine[numCards] = s;
 				numCards++;
@@ -175,12 +182,13 @@ public class DeckClass {
 
 			
 
-			// first line containing all the categorie names
+			// first line contains all the category names
 			categories = arrayLine[0];
 		
 
-			// Create deck cards array from the string array of cards
-			// skip the first
+			// Create the deck with Card object array
+			// skip the first line of arrayLine as it
+			// holds descriptions and is not a card
 			for (int index = 1; index < 41; index++){
 
 				deck[index-1] = new CardClass(arrayLine[index]);
@@ -206,12 +214,13 @@ public class DeckClass {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "File not found", 
 				"INPUT ERROR", JOptionPane.ERROR_MESSAGE);
-		}
-
-		//Close the scanner
-		
+		}		
 	}
 
+	/**
+	*  Returns all Card objects in the deck
+	*  @param array of all card objects left in the deck
+	*/
 	public CardClass[] getPile(){
 
 		//System.out.println( " this is the pile count " + count);
@@ -219,11 +228,7 @@ public class DeckClass {
 
 		for (int i=0; i< count; i++){
 			pile[i] = deck[i];
-
-
 		}
 		return pile;
 	}
-
-
 }

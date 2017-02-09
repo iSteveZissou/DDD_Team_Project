@@ -1,125 +1,73 @@
-/** UserClass defines a player object, which is either a computer player
-*   or a human player. They share common attributes and conceptual methods,
-*   however they differ in how they execute certain methods.
-*/
 import java.util.*;
-
+/** 
+*   UserClass defines a player in the game.
+*   Hand refers to their cards, which is stored as
+*   a Card object array.
+*/
 public class UserClass {
 
-	/** Class Constants */
+	/** Class Constants*/
+	private static final int TOTAL_CARDS = 40;
 
 	/** Instance Variables */
 	private CardClass [] hand, playerDeck;
-	private int count = 0;
+	private int count;
 
-	/** Default Constructor */
+	/** Constructor */
 	public UserClass() {
-
 		count = 0;
-		//System.out.println("NEW USER CREATED");
-		hand = new CardClass [41];
-
-	}
-
-	/** Non-Default Constructor */
-
-	/** Accessor for hand */
-
-	public UserClass(int n){
-
+		hand = new CardClass [TOTAL_CARDS+1];
 	}
 
 
-	public void getHand() {  // not void
-
-		
-		// int n = hand[0].getHeight();
-		// System.out.println("HERE: " + n);
-		
-	}
-
-	/** Mutator for hand */
-	public void setHand(CardClass [] hand) {
-		this.hand = hand;
-	} 
-
-	/** Adds a Card to a users hand
-	*
-	*  IDEA : 		deck = Arrays.copyOf(deck,(deck.length+1));
-	*	deck[deck.length-1] = crd; 
-	*
-	*	@param card to be added
+	/** 
+	*  Adds a Card to the user's hand. This card always 
+	*  goes to the bottom of the user's hand.
+	*  @param card to be added
 	*/
 	public void addCard(CardClass crd) {
-
-
 		hand[count] = crd;
-		//System.out.println(" CARD ADDED: " + crd);
-
 		count++;
 	}
 
 
-	/** Deletes a Card from the users hand:
-	*   It will always be the 0th index card of the hand array to be deleted
-	*	
-	*	hand = Arrays.copyOf(hand,(hand.length-1));
-	*	hand[hand.length-1] = crd;
-	*
+	/** 
+	*  Deletes a Card from the users hand. It is always the
+	*  top Card of the user's hand that gets deleted.
 	*/
 	public void deleteCard() {
 		CardClass cd = hand[0];
-		//System.out.println("The lost card" +cd);
 		hand[0]= new CardClass();
 		for (int i=0; i<hand.length-1; i++) {
-
 			hand[i] = hand[i+1];
 		}
 		count--;
-	
 	}
 
-	/** Counts the number of cards a user has in 
-	*	their hand
-	*	@return total number of cards in the hand
-	*
-	*/
-	public int totalCards() {
-		return 0;
-
-	}
-
-	/** Player selects the appropriate category 
-	*   to play
-	*/
-	public String testMethod() {
-		return null;
-
-	}
 	/**
-	 * gets the number of cards in the user's deck
+	 * Gets the number of cards in the user's deck
 	 * @return [count] - the number of cards
 	 */
 	public int numberOfCards(){
-
-
-		// int test = hand.length;
-		// return test;
-
 		return count;
 	}
 
 	
 	/**
-	 * method to return the topcard of the player
+	 * Method to return the topcard of the player
 	 * hand[0] will always be the top card
 	 * @return hand[0] 
 	 */
 	public CardClass topCard(){
-
 		return hand[0];
 	}
 
+	/**
+	* Displays content of a particular card
+	* in the user's hand as a string
+	* @param cardNumber - Cards place in the deck 
+	* @return [a] String of the card's details
+	*/
 	public String printCard(int cardNumber){
 		String a = hand[cardNumber].toString();
 		return a;

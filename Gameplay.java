@@ -10,12 +10,15 @@ import java.util.*;
  */
 public class Gameplay extends JFrame implements ActionListener{
 
+	/** Class constants */ 
+	private final int MAX_PLAYERS = 5;
+	private final int PLAYER_ONE = 0, PLAYER_TWO = 1, PLAYER_THREE = 2, PLAYER_FOUR = 3, PLAYER_FIVE = 4;
+
 	/** Instance variables */
 	private JPanel pan;
 	private JButton playButton;
 	private JRadioButton cat1, cat2, cat3, cat4, cat5;
 	private int noPlayers, winningPlayerIndex = 0, highestCategory;
-	private final int MAX_PLAYERS = 5;
 	private JLabel p2, p3, p4, p5, score2, score3, score4, score5, description, inPlay;
 	private JLabel val1,val2, val3, val4, val5, userCardsLabel, cardCount2, result, yourScore;
 	private UserClass []usersInGame;
@@ -24,19 +27,12 @@ public class Gameplay extends JFrame implements ActionListener{
 	private boolean [] playerInOrOut;
 	private String [] cats;
 	private JLabel welcome, communal, cardCount3, cardCount4, cardCount5;
-
-	private final int PLAYER_ONE = 0, PLAYER_TWO = 1, PLAYER_THREE = 2, PLAYER_FOUR = 3, PLAYER_FIVE = 4;
-
-	// counts
 	private int noDraws, overAllWinner, noRounds;
 	private Round round;
 	private int [] playersWinners;
 	private int p1Wins, p2Wins, p3Wins, p4Wins, p5Wins;
 
-	/**
-	 * constructor for GameplayGUI
-	 * [parameters can be added as needed]
-	 */	
+	/** Constructor */
 	public Gameplay(){
 
 		// helper method to get number of players
@@ -136,7 +132,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		eastPan.add(cardCount5);
 
 		for (int i =2; i< noPlayers + 1; i++){
-			if (i == 3){
+			if (i ==3){
 				cardCount3.setText("   Cards: " + usersInGame[i-1].numberOfCards());
 			}
 			if (i ==4){
@@ -298,18 +294,21 @@ public class Gameplay extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * Helper method to selct player to go first
+	 * Helper method which selects a player at random to go first.
+	 * @return the index of the player choosen to go first
 	 */
-	public int getFirstPlayer(){
-
+	private int getFirstPlayer(){
 		Random rand = new Random();
 		winningPlayerIndex = rand.nextInt(noPlayers);
 		return winningPlayerIndex;
-
 	}
 
+	/**
+	* Method which updates the GUI  as the game is in process
+	* @param start if player one's turn to pick category
+	*/
 	private void updateGUI(boolean start){
-
+		
 		communal.setText("Communal cards:  " + deck.getDeckCount());
 
 		if (winningPlayerIndex == 0){
@@ -318,6 +317,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		else{
 			welcome.setText("Player "+ (winningPlayerIndex+1) + "'s turn");
 		}
+
 		if (!start){
 			inPlay.setText("Category Picked: "+ cats[highestCategory]+ " ");
 			// testing
@@ -387,19 +387,20 @@ public class Gameplay extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * 
-	 * @param e [description]
+	 * Listen and act on button press events
+	 * @param e the event
 	 */
 	public void actionPerformed(ActionEvent e){
 
 		if (e.getSource()== playButton){
 
-			//Set player one to false if he is out
+			//Set player one to false if out of game
 			for (int i = 0; i < noPlayers; i++){
 				if (usersInGame[i].numberOfCards() ==0) {
 					playerInOrOut[i] = false;
 				}
 			}
+
 			//Check if player one is still in the game
 			//if not skip to end
 			boolean end = false;
@@ -408,6 +409,7 @@ public class Gameplay extends JFrame implements ActionListener{
 				playButton.setEnabled(false);
 				skipToEnd();
 			}
+
 			if (!end){
 			this.selectCategory(winningPlayerIndex);
 			round(highestCategory);
@@ -443,7 +445,7 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 	}
 	/**
-	 * Users method - makes all the users depending on the Value
+	 * Instantiates all users depending on the amount of players
 	 * selected at the beggining of the game
 	 */
 	public void makeUsers(){
@@ -519,22 +521,22 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 }
 
-	/** Winner chooses a category to play.
-	If the user is a human player, they will manually
-	via the GUI select the category.
-	If the user is a computer player, they will select the highest value category 
-	of their topcard.
-	@param player whose turn it is to select a category
-	@return category that has been choosen 
+	/** 
+	*  Winner chooses a category to play.
+	*  If the user is a human player:
+	*  -They will manually select the category on the GU
+	*  If the user is a computer player:
+	*  -They will select the highest value category (method)
+	*  @param player whose turn it is to select a category.
 	*/
 	private void selectCategory(int player) {
 		highestCategory=0;
 		int [] topCardValues = new int[5];
 
-			playersTopCard = new CardClass[noPlayers];
-			for (int i=0; i<noPlayers; i++) {
-				playersTopCard[i] = usersInGame[i].topCard();		
-			}	
+		playersTopCard = new CardClass[noPlayers];
+		for (int i=0; i<noPlayers; i++) {
+			playersTopCard[i] = usersInGame[i].topCard();		
+		}	
 
 		if (player==0) {
 			
@@ -548,7 +550,7 @@ public class Gameplay extends JFrame implements ActionListener{
 				highestCategory = 3;
 			}
 			else if(cat4.isSelected()){
-				highestCategory =4;
+				highestCategory = 4;
 			}
 			else if (cat5.isSelected()){
 				highestCategory = 5;
@@ -564,24 +566,25 @@ public class Gameplay extends JFrame implements ActionListener{
 	}
 
 
-/**Method for a round
- @param  the index corresponds to the category choosen by the user*/
+	/**
+	* Method for a round:
+	* Instantiated round class and uses method within round class 
+	* to find the possible winner of the round.
+	* @param  the index corresponds to the category choosen by the user
+ 	*/
 	public void round(int index) {
-
 
 		index = highestCategory;
 
-
-
 		round = new Round(highestCategory, noPlayers , usersInGame, deck, cats);
 		int possibleWinner = round.getWinner();
-			if(possibleWinner ==-1) {
-				winningPlayerIndex = winningPlayerIndex;
-				
-			}
-			else {
-				winningPlayerIndex = possibleWinner;
-			}
+
+		if(possibleWinner ==-1) {
+			winningPlayerIndex = winningPlayerIndex;
+		}
+		else {
+			winningPlayerIndex = possibleWinner;
+		}
 
 		//Tests 7
 		if (usersInGame[0].numberOfCards() != 0){
@@ -594,22 +597,19 @@ public class Gameplay extends JFrame implements ActionListener{
 		for (int i=1; i<usersInGame.length; i++) {
 			if (usersInGame[i].numberOfCards() != 0){
 			System.out.println("\n\nTEST 7: Player " + (i+1)+" Cards are: ");
-			for (int j=0; j<usersInGame[i].numberOfCards(); j++) {
-				System.out.println(usersInGame[i].printCard(j));
-			} 
-		
+				for (int j=0; j<usersInGame[i].numberOfCards(); j++) {
+					System.out.println(usersInGame[i].printCard(j));
+				} 
+			}
 		}
-	}
-
-
 	}	
 
 
 
 	/** 
-	 * Plays a round recursively, once player one is 
-	 *   out of the game.
-	 */
+	 * Method for when player one is out of the game.
+	 * Plays game by calling itself recursively until there is a winner.
+	 */ 
 	public void skipToEnd(){
 
 		//Count how many players are left in the game
@@ -625,7 +625,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		//If there are still more than 1 player left
 		//than keep playing the game
 		if (playersLeft>1) {
-
 			this.selectCategory(winningPlayerIndex);
 			round(highestCategory);
 			getStats();
@@ -650,7 +649,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 	/** 
 	*  Helper method to find 
-	*  the overall winner of the game
+	*  the overall winner of the game.
 	*
 	*/
 	private void findOverAllWinner() {
@@ -667,8 +666,9 @@ public class Gameplay extends JFrame implements ActionListener{
 	}
 
 
-	/** Helper method to update the stats which are needed
-	* 	for the report
+	/** 
+	*  Helper method to update the stats which are needed
+	*  for the report
 	*/
 	private void getStats() {
 			noDraws = noDraws + round.getNoDraws();

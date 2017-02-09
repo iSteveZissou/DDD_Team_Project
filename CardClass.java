@@ -1,4 +1,5 @@
 /** Defines an object representing a single card
+ *	in the game TopTrumps
  */
 public class CardClass {
 
