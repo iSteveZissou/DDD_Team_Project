@@ -71,15 +71,16 @@ public class Round{
 		}
 		
 		//TESTS 5
+		System.out.println("\nTEST 5: PRINT CURRENT TOP CARD"); 
 		if (usersInGame[0].numberOfCards()!=0){
-			System.out.println("TEST 5: Player one's cards are " +usersInGame[0].printCard(0));
+			System.out.println("User Player cards are " +usersInGame[0].printCard(0));
 		}
 
 		for (int i=1; i<usersInGame.length; i++) {
 			if (usersInGame[i].numberOfCards()!=0) {
-			System.out.println("TEST 5: Player " + (i+1) +" cards are " +usersInGame[i].printCard(0));
+			System.out.println("Computer Player " + (i+1) +" cards are " +usersInGame[i].printCard(0));
 			}
-		}
+		}System.out.println(""); //used for test formating
 
 		//Tests 6
 		System.out.println("TEST 6: Category in play is " + categoryNames[index]);
@@ -190,12 +191,18 @@ public class Round{
 
 			winningPlayerIndex = -1;
 
+			//TEST PRINT 4: PRINT CONTENTS OF COMMUNAL PILE
+			System.out.println("\nTEST 4: PRINT COMMUNAL PILE:");
+
 			for (int i=0; i<usersInGame.length; i++) {
 				if (usersInGame[i].numberOfCards() != 0){
 					deck.addCard(usersInGame[i].topCard());
+					System.out.println(usersInGame[i].topCard());
 					usersInGame[i].deleteCard();
 				}			
-			}	
+			}
+			System.out.println("");
+	
 		}
 		
 		if (usersInGame[0].numberOfCards() == 0) {
