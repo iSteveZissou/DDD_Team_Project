@@ -80,6 +80,9 @@ public class Report extends JFrame implements ActionListener{
 				}
 			}
 		}
+
+		//TEST 8: PRINT Winner
+		System.out.println("\nTEST 8 : PRINT WINER OF GAME!\n\nWinner of the game is: "+winner);
 	}
 	
 	/**

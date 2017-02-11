@@ -592,8 +592,9 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 
 		//Tests 7
+		System.out.println("TEST 7: PRINT CONTENT OF PLAYERS DECK AFTER EACH ROUND\n");
 		if (usersInGame[0].numberOfCards() != 0){
-			System.out.println("TEST 7: Player Ones Cards are: ");
+			System.out.println("User Player 1 Cards are: ");
 			for (int i=0; i<usersInGame[0].numberOfCards(); i++) {
 				System.out.println(usersInGame[0].printCard(i));
 			} 
@@ -601,7 +602,7 @@ public class Gameplay extends JFrame implements ActionListener{
 
 		for (int i=1; i<usersInGame.length; i++) {
 			if (usersInGame[i].numberOfCards() != 0){
-			System.out.println("\n\nTEST 7: Player " + (i+1)+" Cards are: ");
+			System.out.println("\n\nComputer Player " + (i+1)+" Cards are: ");
 				for (int j=0; j<usersInGame[i].numberOfCards(); j++) {
 					System.out.println(usersInGame[i].printCard(j));
 				} 
@@ -640,8 +641,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		//Stop the game
 		else if (playersLeft==1){
 
-			// System.out.println("The number of DRAWS!!!!!"+noDraws);
-			// System.out.println("The number of ROUNDS" +noRounds);
 			for (int i=0; i<playersWinners.length; i++) {
 				//System.out.println("Array of winning tally " + playersWinners[i]);
 			}
@@ -667,7 +666,6 @@ public class Gameplay extends JFrame implements ActionListener{
 			}
 			increment++;
 		}
-	//	System.out.println("The overall winner is " + overAllWinner);
 	}
 
 
@@ -681,10 +679,10 @@ public class Gameplay extends JFrame implements ActionListener{
 			for (int i=0; i<noPlayers; i++) {
 				playersWinners[i] = playersWinners[i] + round.getPlayerWinners()[i];
 			}
-			//System.out.println("The number of ROUNDS " +noRounds);
-		//	System.out.println("The number of DRAWS"+noDraws);
+
 			for (int i=0; i<playersWinners.length; i++) {
-		//		System.out.println("Array of winning tally " + playersWinners[i]);
+
+
 		}
 	}
 
@@ -710,7 +708,6 @@ public class Gameplay extends JFrame implements ActionListener{
 		}
 		String reportInfo = (noPlayers +"," +noDraws +","+overAllWinner+","+noRounds
 			+ "," +p1Wins+","+p2Wins+","+p3Wins+","+p4Wins+","+p5Wins);
-		//System.out.println(reportInfo);
 
 		Report report = new Report("EndReport", reportInfo);
 	}

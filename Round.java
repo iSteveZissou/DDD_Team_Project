@@ -83,10 +83,11 @@ public class Round{
 		}System.out.println(""); //used for test formating
 
 		//Tests 6
-		System.out.println("TEST 6: Category in play is " + categoryNames[index]);
+
+		System.out.println("TEST 6: PRINT CATEOGRY AND SELECTED VALUES\n\nCategory in play is " + categoryNames[index]);
 		for (int i=0; i<round.length; i++) {
 			System.out.println("Value of category played by player " +(i+1) +" is " +round[i]);
-		}
+		}System.out.println(""); //used for test formting
 	}
 
 	/**
