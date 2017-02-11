@@ -97,7 +97,7 @@ public class DeckClass {
 	 		
 	 		int i = 0;
 			while ( i < deck.length){
-				for (int j=0; j<arrayUser.length; i++) {					
+				for (int j=0; j<arrayUser.length; j++) {					
 					arrayUser[j].addCard(deck[i++]);
 
 				}
