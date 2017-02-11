@@ -432,7 +432,12 @@ public class Gameplay extends JFrame implements ActionListener{
 		System.out.println("\n\nTEST3: PRINT PLAYERS HAND");
 		for (int i = 0; i < noPlayers; i++){
 			int n = usersInGame[i].numberOfCards();
-			System.out.println("\nPlayer "+ playerNumber +" CARDS:" + n);
+
+			if (i==0) {
+				System.out.println("\nUser Player "+ playerNumber +" CARDS:" + n);
+			}else{
+				System.out.println("\nComputer Player "+ playerNumber +" CARDS:" + n);
+			}
 
 			//TEST 3: Print Contents of Users hand
 			for(int j=0;j<n;j++){

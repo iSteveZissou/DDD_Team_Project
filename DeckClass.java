@@ -92,7 +92,7 @@ public class DeckClass {
 			}
 	 	}
 
-	 	//How cards are dealt out when there are 3 players	
+	 	//How cards are dealt out when there are 2 players	
 	 	else if (arrayUser.length ==2){
 	 		
 	 		int i = 0;
