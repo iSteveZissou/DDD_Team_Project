@@ -160,7 +160,8 @@ public class DeckClass {
 		int t = 0;
 		try 
 		{
-			FileReader fr = new FileReader("deck2.txt");
+			FileReader fr = new FileReader("deck.txt"); //replace deck.txt with deck2.txt to use
+														//the custom made deck
 			Scanner in = new Scanner(fr);
 			
 			System.out.println("\nTEST 1: READ IN & PRINT CARDS:\n");
