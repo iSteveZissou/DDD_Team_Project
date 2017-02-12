@@ -333,8 +333,7 @@ public class Report extends JFrame implements ActionListener{
 		
 		if (e.getSource() == ngButton){
 			//launches a new game
-			Gameplay nGame = new Gameplay();
-			this.dispose();
+			this.newGame();
 		}
 		
 		
@@ -352,6 +351,30 @@ public class Report extends JFrame implements ActionListener{
 			TopTrumpsGUI gui = new TopTrumpsGUI();
 			this.dispose();
 		}
+	}
+	/**
+	 * Helper method to start a new game
+	 * user will be shown a JOptionPane with the option to
+	 * choose how many players are in the game
+	 * if user closes then game doesn't go ahead
+	 */
+	public void newGame(){
+		int newPlayers =0;
+		Object[] players = {"2", "3", "4", "5"};
+		String s = (String)JOptionPane.showInputDialog(null, "How many players??",
+                    "Player Select", JOptionPane.PLAIN_MESSAGE,null,players,"");
+
+
+		if ((s != null) && (s.length() > 0)) {
+			System.out.println("IT WORKS");
+			newPlayers = Integer.parseInt(s);
+			Gameplay nGame = new Gameplay(newPlayers);
+			System.out.println("New Game Begins");
+			this.dispose();
+		}
+		else{
+			System.err.println("Player select Dialog closed");
+		} 
 	}	
 	
 	/**

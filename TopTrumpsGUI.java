@@ -11,6 +11,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 
 	/** Instance variable  */
 	private JButton newGame, reportButton, exitButton;
+	private int noPlayers;
 	
 	/**
 	 * Contructor for TopTrumpsGUI
@@ -58,11 +59,28 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 	}
 	/**
 	 * Method to start the main game
+	 * A JOptionPane will retrieve the users Choice of 
+	 * how many players the game will have
+	 * if user closes without making a choice then the game does not start
 	 */
 	public void startGame(){
 
-		Gameplay nGame = new Gameplay();
+		noPlayers =0;
+		Object[] players = {"2", "3", "4", "5"};
+		String s = (String)JOptionPane.showInputDialog(null, "How many players??",
+                    "Player Select", JOptionPane.PLAIN_MESSAGE,null,players,"");
 
+		if ((s != null) && (s.length() > 0)) {
+			System.out.println("IT WORKS");
+			noPlayers = Integer.parseInt(s);
+			Gameplay nGame = new Gameplay(noPlayers);
+			System.out.println("New Game Begins");
+			this.dispose();
+		}
+		else{
+			System.err.println("Player select Dialog closed");
+		} 
+		
 	}
 
 	/**
@@ -82,7 +100,7 @@ public class TopTrumpsGUI extends JFrame implements ActionListener{
 		if (e.getSource()==newGame){
 			//start new Game
 			this.startGame();
-			System.out.println("New Game Begins");
+			
 		}
 
 		else if (e.getSource()==reportButton){

@@ -33,9 +33,11 @@ public class Gameplay extends JFrame implements ActionListener{
 	private int p1Wins, p2Wins, p3Wins, p4Wins, p5Wins;
 
 	/** Constructor */
-	public Gameplay(){
+	public Gameplay(int noPlayers){
 
+		this.noPlayers =noPlayers;
 		// helper method to get number of players
+
 		this.noPlayer();
 
 		this.setSize(700, 400);
@@ -277,13 +279,13 @@ public class Gameplay extends JFrame implements ActionListener{
 	 */
 	private void noPlayer(){
 
-		String[] players = { "2", "3", "4", "5", };
-		JComboBox<String> jBox  = new JComboBox <String>(players);
+		// String[] players = { "2", "3", "4", "5", };
+		// JComboBox<String> jBox  = new JComboBox <String>(players);
 		
-		JOptionPane.showMessageDialog(null, jBox, 
-			"Players", JOptionPane.PLAIN_MESSAGE);
-		String s = ( String) jBox.getSelectedItem();
-		noPlayers = Integer.parseInt(s);
+		// JOptionPane.showMessageDialog(null, jBox, 
+		// 	"Players", JOptionPane.PLAIN_MESSAGE);
+		// String s = ( String) jBox.getSelectedItem();
+		// noPlayers = Integer.parseInt(s);
 	//	System.out.println("Number of players: "+ noPlayers);
 
 		playerInOrOut = new boolean [noPlayers];
