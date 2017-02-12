@@ -279,15 +279,6 @@ public class Gameplay extends JFrame implements ActionListener{
 	 */
 	private void noPlayer(){
 
-		// String[] players = { "2", "3", "4", "5", };
-		// JComboBox<String> jBox  = new JComboBox <String>(players);
-		
-		// JOptionPane.showMessageDialog(null, jBox, 
-		// 	"Players", JOptionPane.PLAIN_MESSAGE);
-		// String s = ( String) jBox.getSelectedItem();
-		// noPlayers = Integer.parseInt(s);
-	//	System.out.println("Number of players: "+ noPlayers);
-
 		playerInOrOut = new boolean [noPlayers];
 		for (int i =0; i < noPlayers; i++){
 			playerInOrOut[i] = true;
